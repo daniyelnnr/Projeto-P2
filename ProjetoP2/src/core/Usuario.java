@@ -2,11 +2,11 @@ package core;
 
 public class Usuario {
 
-	private String emailUsuario;
-	private String senhaUsuario;
-	private String nomeUsuario;
-	private String telContatoUsuario;
-	private String dataNascUsuario;
+	private String email;
+	private String senha;
+	private String nome;
+	private String telefone;
+	private String dataNasc;
 
 	public Usuario(String emailUsuario, String senhaUsuario,
 			String nomeUsuario, String telContatoUsuario, String dataNascUsuario) {
