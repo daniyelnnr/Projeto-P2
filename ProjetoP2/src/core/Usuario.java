@@ -10,24 +10,24 @@ public class Usuario {
 
 	public Usuario(String emailUsuario, String senhaUsuario,
 			String nomeUsuario, String telContatoUsuario, String dataNascUsuario) {
-		this.emailUsuario = emailUsuario;
-		this.senhaUsuario = senhaUsuario;
-		this.nomeUsuario = nomeUsuario;
-		this.telContatoUsuario = telContatoUsuario;
-		this.dataNascUsuario = dataNascUsuario;
+		this.email = emailUsuario;
+		this.senha = senhaUsuario;
+		this.nome = nomeUsuario;
+		this.telefone = telContatoUsuario;
+		this.dataNasc = dataNascUsuario;
 
 	}
 
 	public String getemailUsuario() {
-		return emailUsuario;
+		return email;
 	}
 
 	public String getSenhaUsuario() {
-		return senhaUsuario;
+		return senha;
 	}
 
 	public void setNovaSenha(String novaSenha) {
-		this.senhaUsuario = novaSenha;
+		this.senha = novaSenha;
 	}
 
 }
