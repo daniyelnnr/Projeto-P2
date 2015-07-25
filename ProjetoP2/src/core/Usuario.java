@@ -7,15 +7,25 @@ public class Usuario {
 	private String nome;
 	private String telefone;
 	private String dataNasc;
+	private String imgAvatar;
 
-	public Usuario(String emailUsuario, String senhaUsuario,
-			String nomeUsuario, String telContatoUsuario, String dataNascUsuario) {
-		this.email = emailUsuario;
-		this.senha = senhaUsuario;
-		this.nome = nomeUsuario;
-		this.telefone = telContatoUsuario;
-		this.dataNasc = dataNascUsuario;
-
+	public Usuario(String email, String senha,
+			String nome, String telefone, String dataNasc) {
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.dataNasc = dataNasc;
+	}
+	
+	public Usuario(String email, String senha,
+			String nome, String telefone, String dataNasc, String imgAvatar) {
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.dataNasc = dataNasc;
+		this.imgAvatar = imgAvatar;
 	}
 
 	public String getemailUsuario() {
