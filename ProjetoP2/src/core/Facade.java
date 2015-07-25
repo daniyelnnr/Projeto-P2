@@ -2,7 +2,7 @@ package core;
 
 public class Facade {
 
-	Controller controller = new Controller();
+	Controller controller = new Controller();//modificar privacidade
 
 	public void cadastroUsuarioFacade(String emailUsuario, String senhaUsuario,
 			String nomeUsuario, String dataNasUsuario, String telContatoUsuario) {
