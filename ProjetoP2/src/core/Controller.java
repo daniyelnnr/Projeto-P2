@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
-	boolean logado;
+	boolean logado;//modificar privacidade
 	ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 	ArrayList<Usuario> listaUsuarioLogado = new ArrayList<Usuario>();
 	/* criar construtor do controller? */
@@ -58,5 +58,11 @@ public class Controller {
 		}
 
 	}
+	
+	/*public boolean buscaUsuario(String emailUsuario){
+		for (Usuario usuario : listaUsuario) {
+			
+		}
+	}*/
 
 }
