@@ -28,15 +28,15 @@ public class Usuario {
 		this.imgAvatar = imgAvatar;
 	}
 
-	public String getemailUsuario() {
+	public String getEmail() {
 		return email;
 	}
 
-	public String getSenhaUsuario() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setNovaSenha(String novaSenha) {
+	public void setSenha(String novaSenha) {
 		this.senha = novaSenha;
 	}
 

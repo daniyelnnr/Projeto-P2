@@ -8,7 +8,6 @@ public class Controller {
 	ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 	ArrayList<Usuario> listaUsuarioLogado = new ArrayList<Usuario>();
 	/* criar construtor do controller? */
-	/* criar construtor do controller? */
 			
 	public void cadastraUsuario(String emailUsuario, String senhaUsuario,
 			String nomeUsuario, String dataNasUsuario, String telContatoUsuario) {
@@ -20,8 +19,8 @@ public class Controller {
 
 	public void loginUsuario(String emailUsuario, String senhaUsuario) {
 		for (int i = 0; i < listaUsuario.size(); i++) {
-			if (listaUsuario.get(i).getemailUsuario().equals(emailUsuario)
-					&& listaUsuario.get(i).getSenhaUsuario()
+			if (listaUsuario.get(i).getEmail().equals(emailUsuario)
+					&& listaUsuario.get(i).getSenha()
 							.equals(senhaUsuario)
 					&& listaUsuarioLogado.size() == 0) {
 				this.logado = true;
@@ -34,7 +33,7 @@ public class Controller {
 	public void logout(String emailUsuario) {
 		for (int i = 0; i < listaUsuarioLogado.size(); i++) {
 
-			if (listaUsuarioLogado.get(i).getemailUsuario()
+			if (listaUsuarioLogado.get(i).getEmail()
 					.equals(emailUsuario)
 					&& this.getStatus() == true) {
 				listaUsuarioLogado.remove(0);
@@ -52,9 +51,9 @@ public class Controller {
 	public void atualizaSenhaUsuario(String emailUsuario, String antigaSenha,
 			String novaSenha) {
 		for (int i = 0; i < listaUsuarioLogado.size(); i++) {
-			if (listaUsuarioLogado.get(i).getemailUsuario()
+			if (listaUsuarioLogado.get(i).getEmail()
 					.equals(emailUsuario)) {
-				listaUsuarioLogado.get(i).setNovaSenha(novaSenha);
+				listaUsuarioLogado.get(i).setSenha(novaSenha);
 			}
 		}
 
