@@ -11,16 +11,16 @@ public class Controller {
 
 	/* criar construtor do controller? */
 
-	public void cadastraUsuario(String emailUsuario, String senhaUsuario,
-			String nomeUsuario, String dataNasUsuario, String imgAvatar) {
-		Usuario usuario = new Usuario(emailUsuario, senhaUsuario, nomeUsuario,
+	public void cadastraUsuario(String nomeUsuario, String emailUsuario,
+			String senhaUsuario, String dataNasUsuario, String imgAvatar) {
+		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 		listaUsuario.add(usuario);
 
 	}
 	
-	public void cadastraUsuario(String emailUsuario, String senhaUsuario, String nomeUsuario, String dataNasUsuario){
-		Usuario usuario = new Usuario(emailUsuario, senhaUsuario, nomeUsuario, dataNasUsuario);
+	public void cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario){
+		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
 		listaUsuario.add(usuario);
 		
 	}

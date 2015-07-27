@@ -4,16 +4,16 @@ public class Facade {
 
 	Controller controller = new Controller();//modificar privacidade
 
-	public String cadastraUsuario(String emailUsuario, String senhaUsuario,
-			String nomeUsuario, String dataNasUsuario, String imgAvatar) {
-		controller.cadastraUsuario(emailUsuario, senhaUsuario, nomeUsuario,
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
+			String senhaUsuario, String dataNasUsuario, String imgAvatar) {
+		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 		
 		return emailUsuario;
 	}
 	
-	public String cadastraUsuario (String emailUsuario, String senhaUsuario, String nomeUsuario, String dataNasUsuario){
-		controller.cadastraUsuario(emailUsuario, senhaUsuario, nomeUsuario, dataNasUsuario);
+	public String cadastraUsuario (String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario){
+		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
 		
 		return emailUsuario;
 	}

@@ -9,8 +9,8 @@ public class Usuario {
 	private String dataNasc;
 	private String imgAvatar;
 
-	public Usuario(String email, String senha,
-			String nome, String dataNasc, String imgAvatar) {
+	public Usuario(String nome, String email,
+			String senha, String dataNasc, String imgAvatar) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
@@ -18,8 +18,8 @@ public class Usuario {
 		this.dataNasc = dataNasc;
 	}
 	
-	public Usuario(String email, String senha,
-			String nome,  String dataNasc) {
+	public Usuario(String nome, String email,
+			String senha,  String dataNasc) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
