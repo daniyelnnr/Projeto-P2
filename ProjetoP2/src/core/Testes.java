@@ -26,7 +26,7 @@ public class Testes {
 					.getNome());
 			// buscaUsuario procura um usuario pelo seu email
 			Assert.assertEquals("Madonna", facade.buscaUsuario(id2).getNome());
-			Assert.assertEquals("Jo Soares", facade.buscaUsuario(id2).getNome());
+			Assert.assertEquals("Jo Soares", facade.buscaUsuario(id3).getNome());
 
 			facade.buscaUsuario("alguem@email.com").getNome();
 			// vai gerar um Exception pois nao ha usuario cadastrado com esse

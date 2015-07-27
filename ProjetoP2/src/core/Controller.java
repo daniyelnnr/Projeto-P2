@@ -70,11 +70,15 @@ public class Controller {
 
 	}
 
-	public Usuario buscaUsuario(String emailUsuario) {
+	public Usuario buscaUsuario(String emailUsuario) throws Exception{
 		Usuario user = null;
 		for (Usuario usuario : listaUsuario) {
 			if (usuario.getEmail().equals(emailUsuario))
 				user = usuario;
+		}
+		
+		if (user == null) {
+			throw new Exception("O usuario com email "+emailUsuario+" nao esta cadastrado.");
 		}
 		return user;
 	}
