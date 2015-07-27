@@ -32,7 +32,7 @@ public class Facade {
 		controller.atualizaSenhaUsuario(emailUsuario, antigaSenha, novaSenha);
 	}
 	
-	public Usuario buscaUsuario(String emailUsuario){
+	public Usuario buscaUsuario(String emailUsuario) throws Exception{
 		return controller.buscaUsuario(emailUsuario);
 		
 	}
