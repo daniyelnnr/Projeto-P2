@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Controller {
 
-	boolean logado;//modificar privacidade
+	//boolean logado;//modificar privacidade
+	Usuario usuarioLogado;
 	ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 	ArrayList<Usuario> listaUsuarioLogado = new ArrayList<Usuario>();
 	/* criar construtor do controller? */
@@ -18,7 +19,8 @@ public class Controller {
 	}
 
 	public void loginUsuario(String emailUsuario, String senhaUsuario) {
-		for (int i = 0; i < listaUsuario.size(); i++) {
+		this.buscaUsuario(emailUsuario);
+		/*for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getEmail().equals(emailUsuario)
 					&& listaUsuario.get(i).getSenha()
 							.equals(senhaUsuario)
@@ -26,7 +28,7 @@ public class Controller {
 				this.logado = true;
 				listaUsuarioLogado.add(listaUsuario.get(i));
 			}
-		}
+		}*/
 
 	}
 
@@ -59,10 +61,13 @@ public class Controller {
 
 	}
 	
-	/*public boolean buscaUsuario(String emailUsuario){
+	public Usuario buscaUsuario(String emailUsuario){
+		Usuario user = null;
 		for (Usuario usuario : listaUsuario) {
-			
+			if (usuario.getEmail().equals(emailUsuario))
+				user = usuario;
 		}
-	}*/
+		return user;
+	}
 
 }

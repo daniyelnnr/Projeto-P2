@@ -52,6 +52,7 @@ public class Testes {
 			//internamente vai haver um if com o que ele pode ou nao chamar
 			//ex: "nome" vai retornar o usuario.getNome()
 			
+			Assert.assertEquals("resources/fatima.jpg", facade.getUsuarioLogado("Foto"));
 			
 		} catch (Exception e) {
 			Assert.fail();
