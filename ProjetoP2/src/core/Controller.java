@@ -11,19 +11,22 @@ public class Controller {
 
 	/* criar construtor do controller? */
 
-	public void cadastraUsuario(String nomeUsuario, String emailUsuario,
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar) {
 		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 		listaUsuario.add(usuario);
+		return usuario.getEmail();
 
 	}
 
-	public void cadastraUsuario(String nomeUsuario, String emailUsuario,
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario) {
 		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario);
 		listaUsuario.add(usuario);
+
+		return usuario.getEmail();
 
 	}
 
@@ -35,10 +38,25 @@ public class Controller {
 		}
 	}
 	
-	public String getNome(){
+	public String getInfoUsuarioLogado(String nomeInformacao){
+		String informacaoRequerida = "";
+		if (nomeInformacao.equals("Nome")) {
+			informacaoRequerida = this.usuarioLogado.getNome();
+		}
+		
+		else if (nomeInformacao.equals("Foto")) {
+			informacaoRequerida = this.usuarioLogado.getFoto();
+		} 
+		return informacaoRequerida;	
 		
 	}
-	
+
+	public String getNome(String emailUsuario) throws Exception {
+		String nomeUsuario = "";
+		return this.buscaUsuario(emailUsuario).getNome();
+		//return nomeUsuario;
+
+	}
 
 	public void logout() {
 

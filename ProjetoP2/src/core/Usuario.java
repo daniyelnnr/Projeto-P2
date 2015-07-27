@@ -43,4 +43,8 @@ public class Usuario {
 		this.senha = novaSenha;
 	}
 
+	public String getFoto() {
+		return imgAvatar;
+	}
+
 }

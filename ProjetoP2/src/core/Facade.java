@@ -17,6 +17,11 @@ public class Facade {
 		
 		return emailUsuario;
 	}
+	
+	public String getInfoUsuarioLogado(String nomeInformacao){
+		return controller.getInfoUsuarioLogado(nomeInformacao);
+	
+	}
 
 	public void login(String emailUsuario, String senhaUsuario) throws Exception {
 		controller.login(emailUsuario, senhaUsuario);
