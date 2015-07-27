@@ -11,7 +11,7 @@ public class Testes {
 	public void testCadastroUsuarios() {
 		try {
 			Facade facade = new Facade();
-			// nao sei se eh o facade que sera executado nesse ponto
+			// Rever metodos duplicados para cadastraUsuario;
 			String id1 = facade.cadastraUsuario("Fatima Bernardes",
 					"fatima@email.com.br", "will_S2", "17/09/1962",
 					"resources/fatima.jpg");

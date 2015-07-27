@@ -10,22 +10,21 @@ public class Usuario {
 	private String imgAvatar;
 
 	public Usuario(String email, String senha,
-			String nome, String telefone, String dataNasc) {
+			String nome, String dataNasc, String imgAvatar) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
-		this.telefone = telefone;
+		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
 	}
 	
 	public Usuario(String email, String senha,
-			String nome, String telefone, String dataNasc, String imgAvatar) {
+			String nome,  String dataNasc) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
-		this.telefone = telefone;
 		this.dataNasc = dataNasc;
-		this.imgAvatar = imgAvatar;
+		this.imgAvatar = null;
 	}
 
 	public String getEmail() {
