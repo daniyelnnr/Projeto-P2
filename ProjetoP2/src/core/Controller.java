@@ -18,36 +18,21 @@ public class Controller {
 		listaUsuario.add(usuario);
 
 	}
-	
-	public void cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario){
-		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
+
+	public void cadastraUsuario(String nomeUsuario, String emailUsuario,
+			String senhaUsuario, String dataNasUsuario) {
+		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
+				dataNasUsuario);
 		listaUsuario.add(usuario);
-		
+
 	}
-	
 
 	public void loginUsuario(String emailUsuario, String senhaUsuario)
 			throws Exception {
 		Usuario user = this.buscaUsuario(emailUsuario);
-		if (user == null) {
-			throw new Exception(
-					"O usuario com email alguem@email.com nao esta cadastrado.");
-		} else {
-			if (user.getSenha().equals(senhaUsuario)) {
-				usuarioLogado = user;
-			} else {
-				throw new Exception(
-						"O usuario com email alguem@email.com nao esta cadastrado.");
-			}
+		if (user.getSenha().equals(senhaUsuario)) {
+			usuarioLogado = user;
 		}
-		/*
-		 * for (int i = 0; i < listaUsuario.size(); i++) { if
-		 * (listaUsuario.get(i).getEmail().equals(emailUsuario) &&
-		 * listaUsuario.get(i).getSenha() .equals(senhaUsuario) &&
-		 * listaUsuarioLogado.size() == 0) { this.logado = true;
-		 * listaUsuarioLogado.add(listaUsuario.get(i)); } }
-		 */
-
 	}
 
 	public void logout() {
@@ -59,7 +44,6 @@ public class Controller {
 
 	}
 
-
 	public void atualizaSenhaUsuario(String emailUsuario, String antigaSenha,
 			String novaSenha) {
 		for (int i = 0; i < listaUsuarioLogado.size(); i++) {
@@ -70,15 +54,16 @@ public class Controller {
 
 	}
 
-	public Usuario buscaUsuario(String emailUsuario) throws Exception{
+	public Usuario buscaUsuario(String emailUsuario) throws Exception {
 		Usuario user = null;
 		for (Usuario usuario : listaUsuario) {
 			if (usuario.getEmail().equals(emailUsuario))
 				user = usuario;
 		}
-		
+
 		if (user == null) {
-			throw new Exception("O usuario com email "+emailUsuario+" nao esta cadastrado.");
+			throw new Exception("O usuario com email " + emailUsuario
+					+ " nao esta cadastrado.");
 		}
 		return user;
 	}
