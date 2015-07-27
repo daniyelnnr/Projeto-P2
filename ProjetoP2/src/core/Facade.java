@@ -31,6 +31,11 @@ public class Facade {
 			String antigaSenha, String novaSenha) {
 		controller.atualizaSenhaUsuario(emailUsuario, antigaSenha, novaSenha);
 	}
+	
+	public Usuario buscaUsuario(String emailUsuario){
+		return controller.buscaUsuario(emailUsuario);
+		
+	}
 
 
 }
