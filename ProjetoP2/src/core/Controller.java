@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Controller {
 
 	//boolean logado;//modificar privacidade
-	Usuario usuarioLogado;
+	Usuario usuarioLogado = null;
 	ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 	ArrayList<Usuario> listaUsuarioLogado = new ArrayList<Usuario>();
 	/* criar construtor do controller? */
@@ -18,8 +18,17 @@ public class Controller {
 
 	}
 
-	public void loginUsuario(String emailUsuario, String senhaUsuario) {
-		this.buscaUsuario(emailUsuario);
+	public void loginUsuario(String emailUsuario, String senhaUsuario) throws Exception {
+		Usuario user = this.buscaUsuario(emailUsuario);
+		if (user == null) {
+			throw new Exception("O usuario com email alguem@email.com nao esta cadastrado.");
+		} else {
+			if (user.getSenha().equals(senhaUsuario)) {
+				usuarioLogado = user;
+			} else {
+				throw new Exception("O usuario com email alguem@email.com nao esta cadastrado.");
+			}
+		}
 		/*for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getEmail().equals(emailUsuario)
 					&& listaUsuario.get(i).getSenha()
