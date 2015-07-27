@@ -27,12 +27,16 @@ public class Controller {
 
 	}
 
-	public void loginUsuario(String emailUsuario, String senhaUsuario)
+	public void login(String emailUsuario, String senhaUsuario)
 			throws Exception {
 		Usuario user = this.buscaUsuario(emailUsuario);
 		if (user.getSenha().equals(senhaUsuario)) {
 			usuarioLogado = user;
 		}
+	}
+	
+	public String getInfoUsuarioLogado(String informacao){
+		
 	}
 
 	public void logout() {

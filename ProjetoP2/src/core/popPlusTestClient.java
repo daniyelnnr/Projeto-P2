@@ -1,5 +1,7 @@
 package core;
 
+import easyaccept.EasyAccept;
+
 //import java.util.ArrayList;
 //import java.util.List;
 

@@ -18,8 +18,8 @@ public class Facade {
 		return emailUsuario;
 	}
 
-	public void loginUsuarioFacade(String emailUsuario, String senhaUsuario) {
-		controller.loginUsuario(emailUsuario, senhaUsuario);
+	public void login(String emailUsuario, String senhaUsuario) throws Exception {
+		controller.login(emailUsuario, senhaUsuario);
 	}
 
 	public void logoutFacade(String emailUsuario) {
@@ -36,6 +36,7 @@ public class Facade {
 		return controller.buscaUsuario(emailUsuario);
 		
 	}
+	
 
 
 }
