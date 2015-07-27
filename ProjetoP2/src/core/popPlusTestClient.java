@@ -1,15 +1,17 @@
 package core;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
-import easyaccept.EasyAcceptFacade;
+//import easyaccept.EasyAcceptFacade;
 
 public class popPlusTestClient {
 
 	public static void main(String[] args) {
 
-		List<String> files = new ArrayList<String>();
+		args = new String[] {"core.Facade","tests/use_case_1.txt"};
+		EasyAccept.main(args);
+		/*List<String> files = new ArrayList<String>();
 		// Put the us1.txt file into the "test scripts" list
 		files.add("use_case_1.txt");
 		// Instantiate the Monopoly Game façade
@@ -19,7 +21,7 @@ public class popPlusTestClient {
 		// Execute the tests
 		eaFacade.executeTests();
 		// Print the tests execution results
-		System.out.println(eaFacade.getCompleteResults());
+		System.out.println(eaFacade.getCompleteResults());*/
 	}
 
 }

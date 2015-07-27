@@ -1,0 +1,37 @@
+Caso de Uso 1 (Use Case 1):
+
+
+######################
+#Cadastro de Usuarios#
+######################
+id1=cadastraUsuario nome="Fatima Bernardes" email="fatima@email.com.br" senha="will_S2" dataNasc="17/09/1962" imagem="resources/fatima.jpg"
+id2=cadastraUsuario nome="Madonna" email="madonna@email.com" senha="iamawesome" dataNasc="16/08/1958" imagem="resources/madonna.jpg"
+id3=cadastraUsuario nome="Jo Soares" email="jo@uol.com.br" senha="!soares!" dataNasc="16/01/1938" 
+
+expect "Fatima Bernardes" getNome usuario=${id1}
+expect "Madonna" getNome usuario=${id2}
+expect "Jo Soares" getNome usuario=${id3}
+
+expectError “O usuario com email alguem@email.com nao esta cadastrado.” getNome usuario=”alguem@email.com”
+
+
+#####################
+# Login de Usuarios #
+#####################
+login email="fatima@email.com.br" senha="will_S2"
+expect “Fatima Bernardes” getInfoUsuarioLogado atributo=”Nome”
+expect “resources/fatima.jpg” getUsuarioLogado atributo=”Foto”
+expectError “A senha do usuario eh protegida.” getUsuarioLogado atributo=”Senha”
+expectError “Nao foi possivel realizar login. Um usuario ja esta logado: Fatima Bernardes.” login email=”madonna@email.com” senha=”iamawesome”
+logout
+expectError “Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop.” logout
+
+
+login email=”madona@email.com” senha=”iamawesome”
+expect “Madonna” getInfoUsuarioLogado atributo=”Nome”
+logout
+
+
+expectError "Nao foi possivel realizar login. O usuario com email gal_costa@email.com nao esta cadastrado." login email="gal_costa@email.com.br" senha="vaca_profana"
+expectError "Nao foi possivel realizar login. Senha Invalida." login email="fatima@email.com.br" senha="nada a ver"
+
