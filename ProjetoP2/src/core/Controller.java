@@ -35,9 +35,10 @@ public class Controller {
 		}
 	}
 	
-	public String getInfoUsuarioLogado(String informacao){
+	public String getNome(){
 		
 	}
+	
 
 	public void logout() {
 
