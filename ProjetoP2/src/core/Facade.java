@@ -31,6 +31,10 @@ public class Facade {
 		controller.logout();
 
 	}
+	
+	public String getNome(String email) throws Exception{
+		return controller.getNome(email);
+	}
 
 	public void atualizaSenhaUsuarioFacade(String novaSenha) {
 		controller.atualizaSenhaUsuario( novaSenha);
