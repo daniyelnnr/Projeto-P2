@@ -33,7 +33,12 @@ public class Facade {
 	}
 	
 	public String getNome(String email) throws Exception{
-		return controller.getNome(email);
+		String nomeUsuario = controller.getNome(email);
+		if (nomeUsuario == null){
+			throw new Exception("O usuario com email "+email+" nao esta cadastrado.");
+		} else {
+			return nomeUsuario;
+		}
 	}
 
 	public void atualizaSenhaUsuarioFacade(String novaSenha) {
