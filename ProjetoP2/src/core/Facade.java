@@ -27,7 +27,7 @@ public class Facade {
 		controller.login(emailUsuario, senhaUsuario);
 	}
 
-	public void logout() {
+	public void logout() throws Exception {
 		controller.logout();
 
 	}

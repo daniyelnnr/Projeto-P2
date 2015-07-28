@@ -30,8 +30,9 @@ public class Controller {
 
 	}
 
-	public void login(String emailUsuario, String senhaUsuario)
+	public boolean login(String emailUsuario, String senhaUsuario)
 			throws Exception {
+		if (this.usuarioLogado == null){
 		Usuario user = this.buscaUsuario(emailUsuario);
 		if (user == null) {
 			throw new Exception("Nao foi possivel realizar login. O usuario com email "+ emailUsuario +" nao esta cadastrado.");
@@ -39,10 +40,14 @@ public class Controller {
 		
 		else if (user.getSenha().equals(senhaUsuario)) {
 			usuarioLogado = user;
+			return true;
 		}
 		
 		else{
 			throw new Exception ("Nao foi possivel realizar login. Senha Invalida.");
+		}
+		}else{
+			throw new Exception("Nao foi possivel realizar login. Um usuario ja esta logado: "+this.usuarioLogado.getNome()+".");
 		}
 	}
 	
@@ -90,18 +95,16 @@ public class Controller {
 
 	}
 
-	public void logout() {
+	public void logout() throws Exception {
 
 		if (this.usuarioLogado != null) {
 			this.usuarioLogado = null;
+		} else {
+			throw new Exception("Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop.");
 		}
 
 	}
 	
-	public boolean getLoginStatus(){
-		return this.usuarioLogado == null ? false : true;
-	}
-
 	public void atualizaSenhaUsuario(String novaSenha) {
 		this.usuarioLogado.setSenha(novaSenha);
 	}
