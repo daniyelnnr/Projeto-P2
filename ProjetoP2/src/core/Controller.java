@@ -34,7 +34,7 @@ public class Controller {
 			throws Exception {
 		Usuario user = this.buscaUsuario(emailUsuario);
 		if (user == null) {
-			throw new Exception("<O usuario com email alguem@email.com nao esta cadastrado.");
+			throw new Exception("Nao foi possivel realizar login. O usuario com email "+ emailUsuario +" nao esta cadastrado.");
 		}
 		
 		else if (user.getSenha().equals(senhaUsuario)) {
@@ -121,10 +121,6 @@ public class Controller {
 				user = usuario;
 		}
 
-		if (user == null) {
-			throw new Exception("O usuario com email " + emailUsuario
-					+ " nao esta cadastrado.");
-		}
 		return user;
 	}
 

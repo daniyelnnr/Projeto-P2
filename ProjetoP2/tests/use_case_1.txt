@@ -31,6 +31,6 @@ expect "Madonna" getInfoUsuarioLogado atributo="Nome"
 logout
 
 
-expectError "Nao foi possivel realizar login. O usuario com email gal_costa@email.com nao esta cadastrado." login email="gal_costa@email.com.br" senha="vaca_profana"
+expectError "Nao foi possivel realizar login. O usuario com email gal_costa@email.com.br nao esta cadastrado." login email="gal_costa@email.com.br" senha="vaca_profana"
 expectError "Nao foi possivel realizar login. Senha Invalida." login email="fatima@email.com.br" senha="nada a ver"
 
