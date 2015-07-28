@@ -97,6 +97,10 @@ public class Controller {
 		}
 
 	}
+	
+	public boolean getLoginStatus(){
+		return this.usuarioLogado == null ? false : true;
+	}
 
 	public void atualizaSenhaUsuario(String novaSenha) {
 		this.usuarioLogado.setSenha(novaSenha);
