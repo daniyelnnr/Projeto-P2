@@ -89,7 +89,6 @@ public class Controller {
 
 		if (this.usuarioLogado != null) {
 			this.usuarioLogado = null;
-
 		}
 
 	}
