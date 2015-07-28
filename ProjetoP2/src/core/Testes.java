@@ -34,7 +34,7 @@ public class Testes {
 
 		} catch (Exception e) {
 			Assert.assertEquals(
-					"O usuario com email alguem@email.com nao esta cadastrado.",
+					"Nao foi possivel realizar login. O usuario com email alguem@email.com nao esta cadastrado.",
 					e.getMessage());
 		}
 	}
