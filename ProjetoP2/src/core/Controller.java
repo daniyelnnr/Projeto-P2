@@ -78,9 +78,14 @@ public class Controller {
 	}
 
 
-	public String getNome(String emailUsuario) throws Exception {
-		String nomeUsuario = "";
-		return this.buscaUsuario(emailUsuario).getNome();
+	public String getNome(String emailUsuario){
+		//String nomeUsuario = "";
+		Usuario user = this.buscaUsuario(emailUsuario);
+		if (user == null){
+			return null;
+		} else {
+			return user.getNome();
+		}
 		//return nomeUsuario;
 
 	}
@@ -117,7 +122,7 @@ public class Controller {
 		this.usuarioLogado.setTelefone(novoTelefone);
 	}
 
-	public Usuario buscaUsuario(String emailUsuario) throws Exception {
+	public Usuario buscaUsuario(String emailUsuario){
 		Usuario user = null;
 		for (Usuario usuario : listaUsuario) {
 			if (usuario.getEmail().equals(emailUsuario))
