@@ -20,7 +20,7 @@ expectError "O usuario com email alguem@email.com nao esta cadastrado." getNome 
 login email="fatima@email.com.br" senha="will_S2"
 expect "Fatima Bernardes" getInfoUsuarioLogado atributo="Nome"
 expect "resources/fatima.jpg" getInfoUsuarioLogado atributo="Foto"
-expectError "A senha do usuario eh protegida." getUsuarioLogado atributo="Senha"
+expectError "A senha do usuario eh protegida." getInfoUsuarioLogado atributo="Senha"
 expectError "Nao foi possivel realizar login. Um usuario ja esta logado: Fatima Bernardes." login email="madonna@email.com" senha="iamawesome"
 logout
 expectError "Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop." logout
