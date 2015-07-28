@@ -38,18 +38,37 @@ public class Controller {
 		}
 	}
 	
-	public String getInfoUsuarioLogado(String nomeInformacao){
+	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception{
 		String informacaoRequerida = "";
-		if (nomeInformacao.equals("Nome")) {
+		if (nomeInformacao.equals("Senha") || nomeInformacao.equals("SENHA") || nomeInformacao.equals("senha")) {
+			throw new Exception ("A senha do usuario eh protegida.");
+		}
+		
+		else if (nomeInformacao.equals("Nome") || nomeInformacao.equals("NOME") || nomeInformacao.equals("nome")){
 			informacaoRequerida = this.usuarioLogado.getNome();
 		}
 		
-		else if (nomeInformacao.equals("Foto")) {
+		else if (nomeInformacao.equals("Foto") || nomeInformacao.equals("FOTO") || nomeInformacao.equals("foto")) {
 			informacaoRequerida = this.usuarioLogado.getFoto();
 		} 
+		
+		else if (nomeInformacao.equals("Email") || nomeInformacao.equals("EMAIL") || nomeInformacao.equals("email")){
+			informacaoRequerida = this.usuarioLogado.getEmail();
+		}
+		
+		else if (nomeInformacao.equals("Data") || nomeInformacao.equals("DATA") || nomeInformacao.equals("data")){
+			informacaoRequerida = this.usuarioLogado.getData();
+		}
+		
+		else{ //(nomeInformacao.equals("Telefone") || nomeInformacao.equals("TELEFONE") || nomeInformacao.equals("telefone")){
+			informacaoRequerida = this.usuarioLogado.getTel();
+		}
+		
+		
 		return informacaoRequerida;	
 		
 	}
+
 
 	public String getNome(String emailUsuario) throws Exception {
 		String nomeUsuario = "";
@@ -67,14 +86,28 @@ public class Controller {
 
 	}
 
-	public void atualizaSenhaUsuario(String emailUsuario, String antigaSenha,
-			String novaSenha) {
-		for (int i = 0; i < listaUsuarioLogado.size(); i++) {
-			if (listaUsuarioLogado.get(i).getEmail().equals(emailUsuario)) {
-				listaUsuarioLogado.get(i).setSenha(novaSenha);
-			}
-		}
-
+	public void atualizaSenhaUsuario(String novaSenha) {
+		this.usuarioLogado.setSenha(novaSenha);
+	}
+	
+	public void atualizaNomeUsuario(String novoNome){
+		this.usuarioLogado.setNome(novoNome);
+	}
+	
+	public void atualizaEmail(String novoEmail){
+		this.usuarioLogado.setEmail(novoEmail);
+	}
+	
+	public void atualizaFoto(String novaFoto){
+		this.usuarioLogado.setFoto(novaFoto);
+	}
+	
+	public void ataulizaData(String novaData){
+		this.usuarioLogado.setData(novaData);
+	}
+	
+	public void atualizaTelefone(String novoTelefone){
+		this.usuarioLogado.setTelefone(novoTelefone);
 	}
 
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {

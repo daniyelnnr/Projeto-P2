@@ -18,7 +18,7 @@ public class Facade {
 		return emailUsuario;
 	}
 	
-	public String getInfoUsuarioLogado(String nomeInformacao){
+	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception{
 		return controller.getInfoUsuarioLogado(nomeInformacao);
 	
 	}
@@ -32,9 +32,28 @@ public class Facade {
 
 	}
 
-	public void atualizaSenhaUsuarioFacade(String emailUsuario,
-			String antigaSenha, String novaSenha) {
-		controller.atualizaSenhaUsuario(emailUsuario, antigaSenha, novaSenha);
+	public void atualizaSenhaUsuarioFacade(String novaSenha) {
+		controller.atualizaSenhaUsuario( novaSenha);
+	}
+	
+	public void atualizaNomeUsuario(String novoNome){
+		controller.atualizaNomeUsuario(novoNome);
+	}
+	
+	public void atualizaEmail(String novoEmail){
+		controller.atualizaEmail(novoEmail);
+	}
+	
+	public void atualizaFoto(String novaFoto){
+		controller.atualizaFoto(novaFoto);
+	}
+	
+	public void atualizaData(String novaData){
+		controller.ataulizaData(novaData);
+	}
+	
+	public void atualizadaTel(String novoTelefone){
+		controller.atualizaTelefone(novoTelefone);
 	}
 	
 	public Usuario buscaUsuario(String emailUsuario) throws Exception{

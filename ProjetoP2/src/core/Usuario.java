@@ -38,9 +38,37 @@ public class Usuario {
 	public String getNome() {
 		return nome;
 	}
+	
+	public String getData(){
+		return dataNasc;
+	}
+	
+	public String getTel(){
+		return telefone;
+	}
 
 	public void setSenha(String novaSenha) {
 		this.senha = novaSenha;
+	}
+	
+	public void setNome(String novoNome){
+		this.nome = novoNome;
+	}
+	
+	public void setEmail(String novoEmail){
+		this.email = novoEmail;
+	}
+	
+	public void setFoto(String novaFoto){
+		this.imgAvatar = novaFoto;	
+	}
+	
+	public void setData(String novaData){
+		this.dataNasc = novaData;
+	}
+	
+	public void setTelefone(String novoTelefone){
+		this.telefone = novoTelefone;
 	}
 
 	public String getFoto() {
