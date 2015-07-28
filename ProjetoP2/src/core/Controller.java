@@ -33,7 +33,11 @@ public class Controller {
 	public void login(String emailUsuario, String senhaUsuario)
 			throws Exception {
 		Usuario user = this.buscaUsuario(emailUsuario);
-		if (user.getSenha().equals(senhaUsuario)) {
+		if (user == null) {
+			throw new Exception("<O usuario com email alguem@email.com nao esta cadastrado.");
+		}
+		
+		else if (user.getSenha().equals(senhaUsuario)) {
 			usuarioLogado = user;
 		}
 	}

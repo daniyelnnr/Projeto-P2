@@ -9,17 +9,16 @@ public class Usuario {
 	private String dataNasc;
 	private String imgAvatar;
 
-	public Usuario(String nome, String email,
-			String senha, String dataNasc, String imgAvatar) {
+	public Usuario(String nome, String email, String senha, String dataNasc,
+			String imgAvatar) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
 		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
 	}
-	
-	public Usuario(String nome, String email,
-			String senha,  String dataNasc) {
+
+	public Usuario(String nome, String email, String senha, String dataNasc) {
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
@@ -34,40 +33,40 @@ public class Usuario {
 	public String getSenha() {
 		return senha;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
-	public String getData(){
+
+	public String getData() {
 		return dataNasc;
 	}
-	
-	public String getTel(){
+
+	public String getTel() {
 		return telefone;
 	}
 
 	public void setSenha(String novaSenha) {
 		this.senha = novaSenha;
 	}
-	
-	public void setNome(String novoNome){
+
+	public void setNome(String novoNome) {
 		this.nome = novoNome;
 	}
-	
-	public void setEmail(String novoEmail){
+
+	public void setEmail(String novoEmail) {
 		this.email = novoEmail;
 	}
-	
-	public void setFoto(String novaFoto){
-		this.imgAvatar = novaFoto;	
+
+	public void setFoto(String novaFoto) {
+		this.imgAvatar = novaFoto;
 	}
-	
-	public void setData(String novaData){
+
+	public void setData(String novaData) {
 		this.dataNasc = novaData;
 	}
-	
-	public void setTelefone(String novoTelefone){
+
+	public void setTelefone(String novoTelefone) {
 		this.telefone = novoTelefone;
 	}
 

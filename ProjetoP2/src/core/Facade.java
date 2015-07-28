@@ -27,8 +27,8 @@ public class Facade {
 		controller.login(emailUsuario, senhaUsuario);
 	}
 
-	public void logoutFacade(String emailUsuario) {
-		controller.logout(emailUsuario);
+	public void logout() {
+		controller.logout();
 
 	}
 
