@@ -40,6 +40,10 @@ public class Controller {
 		else if (user.getSenha().equals(senhaUsuario)) {
 			usuarioLogado = user;
 		}
+		
+		else{
+			throw new Exception ("Nao foi possivel realizar login. Senha Invalida.");
+		}
 	}
 	
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception{
