@@ -26,7 +26,7 @@ logout
 expectError "Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop." logout
 
 
-login email="madona@email.com" senha="iamawesome"
+login email="madonna@email.com" senha="iamawesome"
 expect "Madonna" getInfoUsuarioLogado atributo="Nome"
 logout
 
