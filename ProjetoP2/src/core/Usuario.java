@@ -28,7 +28,7 @@ public class Usuario {
 		this.senha = senha;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
-		this.imgAvatar = null;
+		this.imgAvatar = "resources/default.jpg";
 	}
 
 	public String getEmail() {

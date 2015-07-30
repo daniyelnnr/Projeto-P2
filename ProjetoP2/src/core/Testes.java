@@ -48,11 +48,11 @@ public class Testes {
 			//metodo void, nao ha necessidade de retorno
 			
 			//um usuario esta logado no momento
-			Assert.assertEquals("Fatima Bernardes", facade.getInfoUsuarioLogado("Nome"));
+			Assert.assertEquals("Fatima Bernardes", facade.getInfoUsuario("Nome"));
 			//internamente vai haver um if com o que ele pode ou nao chamar
 			//ex: "nome" vai retornar o usuario.getNome()
 			
-			Assert.assertEquals("resources/fatima.jpg", facade.getInfoUsuarioLogado("Foto"));
+			Assert.assertEquals("resources/fatima.jpg", facade.getInfoUsuario("Foto"));
 			
 		} catch (Exception e) {
 			Assert.fail();

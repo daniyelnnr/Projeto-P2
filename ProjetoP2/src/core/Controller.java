@@ -13,33 +13,38 @@ public class Controller {
 	/* criar construtor do controller? */
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception{
-		
-		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
-			throw new Exception ("Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+			String senhaUsuario, String dataNasUsuario, String imgAvatar)
+			throws Exception {
+
+		if (nomeUsuario.equals("") || nomeUsuario == null
+				|| nomeUsuario.equals("  ")) {
+			throw new Exception(
+					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+		} else {
+
+			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
+					senhaUsuario, dataNasUsuario, imgAvatar);
+			listaUsuario.add(usuario);
+			return usuario.getEmail();
 		}
-		else {
-		
-		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
-				dataNasUsuario, imgAvatar);
-		listaUsuario.add(usuario);
-		return usuario.getEmail();}
 
 	}
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) throws Exception{
-		
-		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
-			throw new Exception ("Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
-		}
-		else{
-		
-		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
-				dataNasUsuario);
-		listaUsuario.add(usuario);
+			String senhaUsuario, String dataNasUsuario) throws Exception {
 
-		return usuario.getEmail();}
+		if (nomeUsuario.equals("") || nomeUsuario == null
+				|| nomeUsuario.equals("  ")) {
+			throw new Exception(
+					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+		} else {
+
+			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
+					senhaUsuario, dataNasUsuario);
+			listaUsuario.add(usuario);
+
+			return usuario.getEmail();
+		}
 
 	}
 
@@ -69,37 +74,52 @@ public class Controller {
 		}
 	}
 
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
+			throws Exception {
 		String informacaoRequerida = "";
-		if (nomeInformacao.equals("Senha") || nomeInformacao.equals("SENHA")
+		Usuario usuarioRequerido = this.buscaUsuario(emailUsuario);
+		
+		if (usuarioRequerido == null) {
+
+			throw new Exception("Um usuario com email " + emailUsuario
+					+ " nao esta cadastrado.");
+		}
+
+		else if (nomeInformacao.equals("Senha")
+				|| nomeInformacao.equals("SENHA")
 				|| nomeInformacao.equals("senha")) {
 			throw new Exception("A senha do usuario eh protegida.");
 		}
 
 		else if (nomeInformacao.equals("Nome") || nomeInformacao.equals("NOME")
 				|| nomeInformacao.equals("nome")) {
-			informacaoRequerida = this.buscaUsuario(emailUsuario).getNome();
+			informacaoRequerida = usuarioRequerido.getNome();
 		}
 
 		else if (nomeInformacao.equals("Foto") || nomeInformacao.equals("FOTO")
 				|| nomeInformacao.equals("foto")) {
-			informacaoRequerida = this.buscaUsuario(emailUsuario).getFoto();
+			informacaoRequerida = usuarioRequerido.getFoto();
 		}
 
 		else if (nomeInformacao.equals("Email")
 				|| nomeInformacao.equals("EMAIL")
 				|| nomeInformacao.equals("email")) {
-			informacaoRequerida = this.buscaUsuario(emailUsuario).getEmail();
+			informacaoRequerida = usuarioRequerido.getEmail();
 		}
 
-		else { 
-			informacaoRequerida = this.buscaUsuario(emailUsuario).getData();
+		else { // (nomeInformacao.equals("Data")
+				// || nomeInformacao.equals("DATA")
+				// || nomeInformacao.equals("data"))//
+			informacaoRequerida = usuarioRequerido.getData();
 		}
 
-	
 		return informacaoRequerida;
 
 	}
+	
+	
+	
+	
 
 	public String getNome(String emailUsuario) {
 		// String nomeUsuario = "";
