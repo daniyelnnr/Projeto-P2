@@ -6,23 +6,17 @@ import java.util.ArrayList;
 
 public class Controller {
 
-	// boolean logado;//modificar privacidade
 	private Usuario usuarioLogado = null;
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-	ArrayList<Usuario> listaUsuarioLogado = new ArrayList<Usuario>();
-
-	/* criar construtor do controller? */
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar)
 			throws Exception {
-
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
 		} else {
-
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
 			listaUsuario.add(usuario);
@@ -39,11 +33,9 @@ public class Controller {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
 		} else {
-
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
 			listaUsuario.add(usuario);
-
 			return usuario.getEmail();
 		}
 
@@ -79,7 +71,7 @@ public class Controller {
 			throws Exception {
 		String informacaoRequerida = "";
 		Usuario usuarioRequerido = this.buscaUsuario(emailUsuario);
-		
+
 		if (usuarioRequerido == null) {
 
 			throw new Exception("Um usuario com email " + emailUsuario
@@ -108,7 +100,7 @@ public class Controller {
 			informacaoRequerida = usuarioRequerido.getEmail();
 		}
 
-		else { 
+		else {
 			String data = usuarioRequerido.getData();
 			SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
 			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -119,32 +111,19 @@ public class Controller {
 		return informacaoRequerida;
 
 	}
-	
-	
-	
-	
 
 	public String getNome(String emailUsuario) {
-		// String nomeUsuario = "";
 		Usuario user = this.buscaUsuario(emailUsuario);
-		if (user == null) {
-			return null;
-		} else {
-			return user.getNome();
-		}
-		// return nomeUsuario;
-
+		return user == null ? null : user.getNome();
 	}
 
 	public void logout() throws Exception {
-
 		if (this.usuarioLogado != null) {
 			this.usuarioLogado = null;
 		} else {
 			throw new Exception(
 					"Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop.");
 		}
-
 	}
 
 	public void atualizaSenhaUsuario(String novaSenha) {
@@ -177,7 +156,6 @@ public class Controller {
 			if (usuario.getEmail().equals(emailUsuario))
 				user = usuario;
 		}
-
 		return user;
 	}
 
