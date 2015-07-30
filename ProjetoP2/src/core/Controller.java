@@ -13,21 +13,33 @@ public class Controller {
 	/* criar construtor do controller? */
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar) {
+			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception{
+		
+		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
+			throw new Exception ("Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+		}
+		else {
+		
 		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 		listaUsuario.add(usuario);
-		return usuario.getEmail();
+		return usuario.getEmail();}
 
 	}
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) {
+			String senhaUsuario, String dataNasUsuario) throws Exception{
+		
+		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
+			throw new Exception ("Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+		}
+		else{
+		
 		Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario);
 		listaUsuario.add(usuario);
 
-		return usuario.getEmail();
+		return usuario.getEmail();}
 
 	}
 
@@ -57,7 +69,7 @@ public class Controller {
 		}
 	}
 
-	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
 		String informacaoRequerida = "";
 		if (nomeInformacao.equals("Senha") || nomeInformacao.equals("SENHA")
 				|| nomeInformacao.equals("senha")) {
@@ -66,31 +78,25 @@ public class Controller {
 
 		else if (nomeInformacao.equals("Nome") || nomeInformacao.equals("NOME")
 				|| nomeInformacao.equals("nome")) {
-			informacaoRequerida = this.usuarioLogado.getNome();
+			informacaoRequerida = this.buscaUsuario(emailUsuario).getNome();
 		}
 
 		else if (nomeInformacao.equals("Foto") || nomeInformacao.equals("FOTO")
 				|| nomeInformacao.equals("foto")) {
-			informacaoRequerida = this.usuarioLogado.getFoto();
+			informacaoRequerida = this.buscaUsuario(emailUsuario).getFoto();
 		}
 
 		else if (nomeInformacao.equals("Email")
 				|| nomeInformacao.equals("EMAIL")
 				|| nomeInformacao.equals("email")) {
-			informacaoRequerida = this.usuarioLogado.getEmail();
+			informacaoRequerida = this.buscaUsuario(emailUsuario).getEmail();
 		}
 
-		else if (nomeInformacao.equals("Data") || nomeInformacao.equals("DATA")
-				|| nomeInformacao.equals("data")) {
-			informacaoRequerida = this.usuarioLogado.getData();
+		else { 
+			informacaoRequerida = this.buscaUsuario(emailUsuario).getData();
 		}
 
-		else { // (nomeInformacao.equals("Telefone") ||
-				// nomeInformacao.equals("TELEFONE") ||
-				// nomeInformacao.equals("telefone")){
-			informacaoRequerida = this.usuarioLogado.getTel();
-		}
-
+	
 		return informacaoRequerida;
 
 	}

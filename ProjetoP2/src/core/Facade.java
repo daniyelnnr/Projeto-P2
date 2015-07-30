@@ -5,7 +5,7 @@ public class Facade {
 	Controller controller = new Controller();// modificar privacidade
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar) {
+			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {
 		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 
@@ -13,15 +13,15 @@ public class Facade {
 	}
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) {
+			String senhaUsuario, String dataNasUsuario) throws Exception {
 		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario);
 
 		return emailUsuario;
 	}
 
-	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
-		return controller.getInfoUsuarioLogado(nomeInformacao);
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
+		return controller.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
 
