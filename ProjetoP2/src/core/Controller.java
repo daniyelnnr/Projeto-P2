@@ -1,5 +1,6 @@
 package core;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -107,10 +108,12 @@ public class Controller {
 			informacaoRequerida = usuarioRequerido.getEmail();
 		}
 
-		else { // (nomeInformacao.equals("Data")
-				// || nomeInformacao.equals("DATA")
-				// || nomeInformacao.equals("data"))//
-			informacaoRequerida = usuarioRequerido.getData();
+		else { 
+			String data = usuarioRequerido.getData();
+			SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String output = myFormat.format(input.parse(data));
+			informacaoRequerida = output;
 		}
 
 		return informacaoRequerida;
