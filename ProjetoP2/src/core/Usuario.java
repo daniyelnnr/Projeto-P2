@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
 	private String email;
@@ -8,6 +10,9 @@ public class Usuario {
 	private String telefone;
 	private String dataNasc;
 	private String imgAvatar;
+	ArrayList<Postagem> perfil = new ArrayList<Postagem>();
+	ArrayList<Postagem> mural = new ArrayList<Postagem>();
+	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
@@ -72,6 +77,48 @@ public class Usuario {
 
 	public String getFoto() {
 		return imgAvatar;
+	}
+
+	public void adicionarPostagemAoPerfil(Postagem novaPostagem) {
+		this.perfil.add(novaPostagem);
+	}
+
+	public void adicionarMensagemAoMural(Postagem novaPostagem) {
+		this.perfil.add(novaPostagem);
+	}
+
+	public ArrayList<Postagem> getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(ArrayList<Postagem> perfil) {
+		this.perfil = perfil;
+	}
+
+	public ArrayList<Postagem> getMural() {
+		return mural;
+	}
+
+	public void setMural(ArrayList<Postagem> mural) {
+		this.mural = mural;
+	}
+
+	public ArrayList<Usuario> getAmigos() {
+		return amigos;
+	}
+
+	public void setAmigos(ArrayList<Usuario> amigos) {
+		this.amigos = amigos;
+	}
+
+	public void adicionaAmigo(Usuario amigo) {
+		this.amigos.add(amigo);
+
+	}
+
+	public void removeAmigo(Usuario amigo) {
+		this.amigos.remove(amigo);
+
 	}
 
 }
