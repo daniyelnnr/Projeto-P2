@@ -113,12 +113,10 @@ public class Usuario {
 
 	public void adicionaAmigo(Usuario amigo) {
 		this.amigos.add(amigo);
-
 	}
 
 	public void removeAmigo(Usuario amigo) {
 		this.amigos.remove(amigo);
-
 	}
 
 }
