@@ -159,16 +159,16 @@ public class Controller {
 			this.usuarioLogado.setNome(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			this.usuarioLogado.setFoto(valor);
-		} else if (nomeInformacao.equalsIgnoreCase("email")) {
+		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
 			this.usuarioLogado.setEmail(valor);
-		} else if (nomeInformacao.equalsIgnoreCase("data")) {
+		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
 			this.usuarioLogado.setData(valor);
 		}else{
 			throw new Exception();
 		}
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor, String valorNovo) throws Exception{
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
 		if ((nomeInformacao.equalsIgnoreCase("senha")) || (this.usuarioLogado.getSenha().equals(valor))) {
 				this.usuarioLogado.setSenha(valor);
 		}else{
