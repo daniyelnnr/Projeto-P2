@@ -16,11 +16,14 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
-		} else {
+		} else if (this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
 			listaUsuario.add(usuario);
 			return usuario.getEmail();
+		} else {
+			throw new Exception(
+					"Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
 		}
 
 	}
@@ -32,11 +35,14 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
-		} else {
+		} else if (this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
 			listaUsuario.add(usuario);
 			return usuario.getEmail();
+		} else {
+			throw new Exception(
+					"Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
 		}
 
 	}
@@ -180,6 +186,45 @@ public class Controller {
 	private void enviaPostagemParaAmgios(Postagem novaPostagem) {
 		for (Usuario usuario : usuarioLogado.getAmigos()) {
 			usuario.adicionarMensagemAoMural(novaPostagem);
+		}
+	}
+
+	private boolean validaEmail(String email) {
+		int count = 0;
+		for (char c : email.toCharArray()) {
+			if (c == '@')
+				count++;
+		}
+		if (count == 1) {
+			int atPos = email.lastIndexOf("@");
+			if (atPos != -1) {
+				String subs = email.substring(0, atPos);
+				if (subs.isEmpty()) {
+					return false;
+				}
+				subs = email.substring(atPos + 1, email.length());
+				if (subs.isEmpty()) {
+					return false;
+				} else {
+					if (subs.contains(".")) {
+						String subs1 = subs.substring(0, subs.indexOf('.'));
+						if (subs1.isEmpty()) {
+							return false;
+						}
+						if (subs.endsWith(".com") || subs.endsWith(".com.br")) {
+							return true;
+						} else {
+							return false;
+						}
+					} else {
+						return false;
+					}
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 	}
 
