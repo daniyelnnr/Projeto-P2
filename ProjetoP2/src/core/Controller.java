@@ -17,7 +17,8 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaEmail(emailUsuario)) {
+		} else if (this.validaEmail(emailUsuario) && this.validaData(dataNasUsuario)) {
+			this.validaData(dataNasUsuario);
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
 			listaUsuario.add(usuario);
@@ -36,7 +37,7 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaEmail(emailUsuario)) {
+		} else if (this.validaEmail(emailUsuario) && this.validaData(dataNasUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
 			listaUsuario.add(usuario);
