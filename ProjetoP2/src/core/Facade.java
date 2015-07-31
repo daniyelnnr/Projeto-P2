@@ -75,7 +75,7 @@ public class Facade {
 		sistema.atualizaPerfil(nomeInformacao, valor);
 	}
 	
-	public void ataulizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
 		sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
 	}
 	
