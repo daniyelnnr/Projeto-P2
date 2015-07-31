@@ -2,7 +2,12 @@ package core;
 
 public class Facade {
 
-	Controller controller = new Controller();// modificar privacidade
+	Controller controller = null;
+	
+	public void iniciaSistema(){
+		controller = new Controller();
+	}
+	
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {
