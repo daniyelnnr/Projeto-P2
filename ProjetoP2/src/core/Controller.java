@@ -1,5 +1,6 @@
 package core;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -243,6 +244,35 @@ public class Controller {
 			}
 		} else {
 			return false;
+		}
+	}
+	
+	public boolean validaData(String data) throws Exception{
+		int count = 0;
+		for (char c : data.toCharArray()) {
+			if (c == '/') 
+				count++;
+		}
+		if (count == 2) {
+			String dia = data.substring(0, data.indexOf("/"));
+			String mes = data.substring(data.indexOf("/")+1, data.lastIndexOf("/"));
+			String ano = data.substring(data.lastIndexOf("/")+1, data.length());
+			if (dia.length() == 2 && mes.length() == 2 && ano.length() == 4) {
+				SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
+				input.setLenient(false);
+				try {
+					input.parse(data);
+				} catch (ParseException e) {
+					if (e.getLocalizedMessage().startsWith("Unparseable date")){
+						throw new Exception("Erro no cadastro de Usuarios. Data nao existe.");
+					}
+				}
+				return true;
+			} else {
+				throw new Exception("Erro no cadastro de Usuarios. Formato de data esta invalida.");
+			}
+		} else {
+			throw new Exception("Erro no cadastro de Usuarios. Formato de data esta invalida.");
 		}
 	}
 }
