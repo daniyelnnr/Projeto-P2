@@ -15,7 +15,7 @@ public class Controller {
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
-					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
 		} else if (this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
@@ -34,7 +34,7 @@ public class Controller {
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
-					"Erro no cadastro de Usuarios. Nome do usuario nao pode ser vazio.");
+					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
 		} else if (this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
@@ -53,8 +53,8 @@ public class Controller {
 			Usuario user = this.buscaUsuario(emailUsuario);
 			if (user == null) {
 				throw new Exception(
-						"Nao foi possivel realizar login. O usuario com email "
-								+ emailUsuario + " nao esta cadastrado.");
+						"Nao foi possivel realizar login. O usuarix com email "
+								+ emailUsuario + " nao esta cadastradx.");
 			}
 
 			else if (user.getSenha().equals(senhaUsuario)) {
@@ -64,11 +64,11 @@ public class Controller {
 
 			else {
 				throw new Exception(
-						"Nao foi possivel realizar login. Senha Invalida.");
+						"Nao foi possivel realizar login. Senha invalida.");
 			}
 		} else {
 			throw new Exception(
-					"Nao foi possivel realizar login. Um usuario ja esta logado: "
+					"Nao foi possivel realizar login. Um usuarix ja esta logadx: "
 							+ this.usuarioLogado.getNome() + ".");
 		}
 	}
@@ -87,7 +87,7 @@ public class Controller {
 		else if (nomeInformacao.equals("Senha")
 				|| nomeInformacao.equals("SENHA")
 				|| nomeInformacao.equals("senha")) {
-			throw new Exception("A senha do usuario eh protegida.");
+			throw new Exception("A senha dx usuarix eh protegida.");
 		}
 
 		else if (nomeInformacao.equals("Nome") || nomeInformacao.equals("NOME")
@@ -116,6 +116,11 @@ public class Controller {
 
 		return informacaoRequerida;
 
+	}
+	
+	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception{
+		return this.getInfoUsuario(nomeInformacao, this.usuarioLogado.getEmail());
+		
 	}
 
 	public String getNome(String emailUsuario) {
