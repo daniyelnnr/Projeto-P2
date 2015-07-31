@@ -17,7 +17,8 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaData(dataNasUsuario) && this.validaEmail(emailUsuario)) {
+		} else if (this.validaData(dataNasUsuario)
+				&& this.validaEmail(emailUsuario)) {
 			this.validaData(dataNasUsuario);
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
@@ -37,7 +38,8 @@ public class Controller {
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception(
 					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaData(dataNasUsuario) && this.validaEmail(emailUsuario)) {
+		} else if (this.validaData(dataNasUsuario)
+				&& this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
 			listaUsuario.add(usuario);
@@ -119,10 +121,11 @@ public class Controller {
 		return informacaoRequerida;
 
 	}
-	
-	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception{
-		return this.getInfoUsuario(nomeInformacao, this.usuarioLogado.getEmail());
-		
+
+	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
+		return this.getInfoUsuario(nomeInformacao,
+				this.usuarioLogado.getEmail());
+
 	}
 
 	public String getNome(String emailUsuario) {
@@ -138,41 +141,41 @@ public class Controller {
 					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
 		}
 	}
-	
-	public void removeUsuario(String email){
+
+	public void removeUsuario(String email) {
 		for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getEmail().equals(email)) {
 				listaUsuario.remove(i);
 			}
-			
+
 		}
 	}
 
-	public void atualizaSenhaUsuario(String novaSenha) {
-		this.usuarioLogado.setSenha(novaSenha);
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
+		//aki tem que verificar os erros
+		
+		
+		if (nomeInformacao.equalsIgnoreCase("Nome")) {
+			this.usuarioLogado.setNome(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
+			this.usuarioLogado.setFoto(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("email")) {
+			this.usuarioLogado.setEmail(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("data")) {
+			this.usuarioLogado.setData(valor);
+		}else{
+			throw new Exception();
+		}
 	}
 
-	public void atualizaNomeUsuario(String novoNome) {
-		this.usuarioLogado.setNome(novoNome);
+	public void atualizaPerfil(String nomeInformacao, String valor, String valorNovo) throws Exception{
+		if ((nomeInformacao.equalsIgnoreCase("senha")) || (this.usuarioLogado.getSenha().equals(valor))) {
+				this.usuarioLogado.setSenha(valor);
+		}else{
+			throw new Exception();
+		}
 	}
-
-	public void atualizaEmail(String novoEmail) {
-		this.usuarioLogado.setEmail(novoEmail);
-	}
-
-	public void atualizaFoto(String novaFoto) {
-		this.usuarioLogado.setFoto(novaFoto);
-	}
-
-	public void ataulizaData(String novaData) {
-		this.usuarioLogado.setData(novaData);
-	}
-
-	public void atualizaTelefone(String novoTelefone) {
-		this.usuarioLogado.setTelefone(novoTelefone);
-	}
-	
-	public Usuario getUsuarioLogado(){
+	public Usuario getUsuarioLogado() {
 		return this.usuarioLogado;
 	}
 
@@ -247,33 +250,38 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	public boolean validaData(String data) throws Exception{
+
+	public boolean validaData(String data) throws Exception {
 		int count = 0;
 		for (char c : data.toCharArray()) {
-			if (c == '/') 
+			if (c == '/')
 				count++;
 		}
 		if (count == 2) {
 			String dia = data.substring(0, data.indexOf("/"));
-			String mes = data.substring(data.indexOf("/")+1, data.lastIndexOf("/"));
-			String ano = data.substring(data.lastIndexOf("/")+1, data.length());
+			String mes = data.substring(data.indexOf("/") + 1,
+					data.lastIndexOf("/"));
+			String ano = data.substring(data.lastIndexOf("/") + 1,
+					data.length());
 			if (dia.length() == 2 && mes.length() == 2 && ano.length() == 4) {
 				SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
 				input.setLenient(false);
 				try {
 					input.parse(data);
 				} catch (ParseException e) {
-					if (e.getLocalizedMessage().startsWith("Unparseable date")){
-						throw new Exception("Erro no cadastro de Usuarios. Data nao existe.");
+					if (e.getLocalizedMessage().startsWith("Unparseable date")) {
+						throw new Exception(
+								"Erro no cadastro de Usuarios. Data nao existe.");
 					}
 				}
 				return true;
 			} else {
-				throw new Exception("Erro no cadastro de Usuarios. Formato de data esta invalida.");
+				throw new Exception(
+						"Erro no cadastro de Usuarios. Formato de data esta invalida.");
 			}
 		} else {
-			throw new Exception("Erro no cadastro de Usuarios. Formato de data esta invalida.");
+			throw new Exception(
+					"Erro no cadastro de Usuarios. Formato de data esta invalida.");
 		}
 	}
 }

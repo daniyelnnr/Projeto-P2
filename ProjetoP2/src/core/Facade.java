@@ -2,19 +2,21 @@ package core;
 
 public class Facade {
 
-	Controller controller = null;
+	Controller controle = new Controller(); 
+	Controller sistema = null;
+	
 	
 	public void iniciaSistema(){
-		controller = new Controller();
+		sistema = controle;
 	}
 	
 	public void fechaSistema()throws Exception{
-		if (controller.getUsuarioLogado() != null){
+		if (sistema.getUsuarioLogado() != null){
 			throw new Exception ("Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
 		}
 		
 		else{
-			this.controller = null;
+			this.sistema = null;
 		}
 	}
 
@@ -22,7 +24,7 @@ public class Facade {
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {
-		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
+		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 
 		return emailUsuario;
@@ -30,37 +32,37 @@ public class Facade {
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario) throws Exception {
-		controller.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
+		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario);
 
 		return emailUsuario;
 	}
 
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
-		return controller.getInfoUsuario(nomeInformacao, emailUsuario);
+		return sistema.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
 	
 	public String getInfoUsuario(String nomeInformacao) throws Exception{
-		return controller.getInfoUsuarioLogado(nomeInformacao);
+		return sistema.getInfoUsuarioLogado(nomeInformacao);
 	}
 
 	public void login(String emailUsuario, String senhaUsuario)
 			throws Exception {
-		controller.login(emailUsuario, senhaUsuario);
+		sistema.login(emailUsuario, senhaUsuario);
 	}
 
 	public void logout() throws Exception {
-		controller.logout();
+		sistema.logout();
 
 	}
 	
 	public void removeUsuario(String email){
-		controller.removeUsuario(email);
+		sistema.removeUsuario(email);
 	}
 
 	public String getNome(String email) throws Exception {
-		String nomeUsuario = controller.getNome(email);
+		String nomeUsuario = sistema.getNome(email);
 		if (nomeUsuario == null) {
 			throw new Exception("O usuario com email " + email
 					+ " nao esta cadastrado.");
@@ -70,36 +72,36 @@ public class Facade {
 	}
 
 	public void atualizaSenhaUsuarioFacade(String novaSenha) {
-		controller.atualizaSenhaUsuario(novaSenha);
+		sistema.atualizaSenhaUsuario(novaSenha);
 	}
 
 	public void atualizaNomeUsuario(String novoNome) {
-		controller.atualizaNomeUsuario(novoNome);
+		sistema.atualizaNomeUsuario(novoNome);
 	}
 
 	public void atualizaEmail(String novoEmail) {
-		controller.atualizaEmail(novoEmail);
+		sistema.atualizaEmail(novoEmail);
 	}
 
 	public void atualizaFoto(String novaFoto) {
-		controller.atualizaFoto(novaFoto);
+		sistema.atualizaFoto(novaFoto);
 	}
 
 	public void atualizaData(String novaData) {
-		controller.ataulizaData(novaData);
+		sistema.ataulizaData(novaData);
 	}
 
 	public void atualizadaTel(String novoTelefone) {
-		controller.atualizaTelefone(novoTelefone);
+		sistema.atualizaTelefone(novoTelefone);
 	}
 
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {
-		return controller.buscaUsuario(emailUsuario);
+		return sistema.buscaUsuario(emailUsuario);
 
 	}
 	
 	public void postarMensagem(String conteudo) throws Exception {
-		controller.postarMensagem(conteudo);
+		sistema.postarMensagem(conteudo);
 	}
 	
 }
