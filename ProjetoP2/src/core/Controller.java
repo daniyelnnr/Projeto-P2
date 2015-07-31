@@ -53,7 +53,7 @@ public class Controller {
 			Usuario user = this.buscaUsuario(emailUsuario);
 			if (user == null) {
 				throw new Exception(
-						"Nao foi possivel realizar login. O usuarix com email "
+						"Nao foi possivel realizar login. Um usuarix com email "
 								+ emailUsuario + " nao esta cadastradx.");
 			}
 
@@ -133,7 +133,16 @@ public class Controller {
 			this.usuarioLogado = null;
 		} else {
 			throw new Exception(
-					"Nao eh possivel realizar logout. Nenhum usuario esta logado no +pop.");
+					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
+		}
+	}
+	
+	public void removeUsuario(String email){
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getEmail().equals(email)) {
+				listaUsuario.remove(i);
+			}
+			
 		}
 	}
 

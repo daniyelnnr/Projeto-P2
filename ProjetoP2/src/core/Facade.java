@@ -38,6 +38,10 @@ public class Facade {
 		controller.logout();
 
 	}
+	
+	public void removeUsuario(String email){
+		controller.removeUsuario(email);
+	}
 
 	public String getNome(String email) throws Exception {
 		String nomeUsuario = controller.getNome(email);
