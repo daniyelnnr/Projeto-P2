@@ -15,16 +15,24 @@ public class Usuario {
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 
 	public Usuario(String nome, String email, String senha, String dataNasc,
-			String imgAvatar) {
-		this.email = email;
+			String imgAvatar) throws Exception {
+		if (this.validaEmail(email)) {
+			this.email = email;
+		} else {
+			throw new Exception("Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
+		}
 		this.senha = senha;
 		this.nome = nome;
 		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
 	}
 
-	public Usuario(String nome, String email, String senha, String dataNasc) {
-		this.email = email;
+	public Usuario(String nome, String email, String senha, String dataNasc) throws Exception {
+		if (this.validaEmail(email)) {
+			this.email = email;
+		} else {
+			throw new Exception("Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
+		}
 		this.senha = senha;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
@@ -119,4 +127,42 @@ public class Usuario {
 		this.amigos.remove(amigo);
 	}
 
+	private boolean validaEmail(String email) {
+		int count = 0;
+		for (char c : email.toCharArray()) {
+			if (c == '@')
+				count++;
+		}
+		if (count == 1) {
+			int atPos = email.lastIndexOf("@");
+			if (atPos != -1) {
+				String subs = email.substring(0, atPos);
+				if (subs.isEmpty()) {
+					return false;
+				}
+				subs = email.substring(atPos + 1, email.length());
+				if (subs.isEmpty()) {
+					return false;
+				} else {
+					if (subs.contains(".")) {
+						String subs1 = subs.substring(0, subs.indexOf('.'));
+						if (subs1.isEmpty()) {
+							return false;
+						}
+						if (subs.endsWith(".com") || subs.endsWith(".com.br")) {
+							return true;
+						} else {
+							return false;
+						}
+					} else {
+						return false;
+					}
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 }
