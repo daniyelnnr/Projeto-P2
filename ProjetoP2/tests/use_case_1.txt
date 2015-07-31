@@ -51,11 +51,11 @@ expectError "Nao foi possivel realizar login. Um usuarix ja esta logadx: Fatima 
 logout
 expectError "Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop." logout
 
-login email="madona@email.com" senha="iamawesome"
+login email="madonna@email.com" senha="iamawesome"
 expect "Madonna" getInfoUsuario atributo="Nome"
 logout
 
-expectError "Nao foi possivel realizar login. Um usuarix com email gal_costa@email.com nao esta cadastradx." login email="gal_costa@email.com.br" senha="vaca_profana"
+expectError "Nao foi possivel realizar login. Um usuarix com email gal_costa@email.com.br nao esta cadastradx." login email="gal_costa@email.com.br" senha="vaca_profana"
 expectError "Nao foi possivel realizar login. Senha invalida." login email="fatima@email.com.br" senha="nada a ver"
 
 login email="fatima@email.com.br" senha="will_S2"
