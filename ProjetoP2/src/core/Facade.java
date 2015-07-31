@@ -8,6 +8,17 @@ public class Facade {
 		controller = new Controller();
 	}
 	
+	public void fechaSistema()throws Exception{
+		if (controller.getUsuarioLogado() != null){
+			throw new Exception ("Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
+		}
+		
+		else{
+			this.controller = null;
+		}
+	}
+
+	
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {

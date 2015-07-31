@@ -169,6 +169,10 @@ public class Controller {
 	public void atualizaTelefone(String novoTelefone) {
 		this.usuarioLogado.setTelefone(novoTelefone);
 	}
+	
+	public Usuario getUsuarioLogado(){
+		return this.usuarioLogado;
+	}
 
 	public Usuario buscaUsuario(String emailUsuario) {
 		Usuario user = null;
