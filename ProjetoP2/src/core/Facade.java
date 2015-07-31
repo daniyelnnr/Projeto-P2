@@ -71,29 +71,14 @@ public class Facade {
 		}
 	}
 
-	public void atualizaSenhaUsuarioFacade(String novaSenha) {
-		sistema.atualizaSenhaUsuario(novaSenha);
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception{
+		sistema.atualizaPerfil(nomeInformacao, valor);
 	}
-
-	public void atualizaNomeUsuario(String novoNome) {
-		sistema.atualizaNomeUsuario(novoNome);
+	
+	public void ataulizaPerfil(String nomeInformacao, String valor, String valorNovo) throws Exception{
+		sistema.atualizaPerfil(nomeInformacao, valor, valorNovo);
 	}
-
-	public void atualizaEmail(String novoEmail) {
-		sistema.atualizaEmail(novoEmail);
-	}
-
-	public void atualizaFoto(String novaFoto) {
-		sistema.atualizaFoto(novaFoto);
-	}
-
-	public void atualizaData(String novaData) {
-		sistema.ataulizaData(novaData);
-	}
-
-	public void atualizadaTel(String novoTelefone) {
-		sistema.atualizaTelefone(novoTelefone);
-	}
+	
 
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {
 		return sistema.buscaUsuario(emailUsuario);
