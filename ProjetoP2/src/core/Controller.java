@@ -82,8 +82,8 @@ public class Controller {
 
 		if (usuarioRequerido == null) {
 
-			throw new Exception("Um usuario com email " + emailUsuario
-					+ " nao esta cadastrado.");
+			throw new Exception("Um usuarix com email " + emailUsuario
+					+ " nao esta cadastradx.");
 		}
 
 		else if (nomeInformacao.equals("Senha")
