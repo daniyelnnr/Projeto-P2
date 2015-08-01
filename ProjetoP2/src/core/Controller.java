@@ -152,16 +152,27 @@ public class Controller {
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
-		//aki tem que verificar os erros
-		
+	
+		if(usuarioLogado == null){
+			throw new Exception("Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+		}
 		
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
+			if(valor.equals("")){
+				throw new Exception("Erro na atualizacao de perfil. Nome dx usuarix nao pode ser vazio.");
+			}
 			this.usuarioLogado.setNome(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			this.usuarioLogado.setFoto(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
+			if(validaEmail(valor) == false){
+				throw new Exception("Erro na atualizacao de perfil. Formato de e-mail esta invalido.");
+			}
 			this.usuarioLogado.setEmail(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
+			if(this.validaData(valor) == false){
+				throw new Exception("Erro na atualizacao de perfil. Formato de data esta invalida.");
+			}
 			this.usuarioLogado.setData(valor);
 		}else{
 			throw new Exception();
@@ -169,10 +180,13 @@ public class Controller {
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
-		if ((nomeInformacao.equalsIgnoreCase("senha")) || (this.usuarioLogado.getSenha().equals(valor))) {
+		if(usuarioLogado == null){
+			throw new Exception("Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+		}
+		if ((nomeInformacao.equalsIgnoreCase("Senha")) && (this.usuarioLogado.getSenha().equals(velhaSenha))) {
 				this.usuarioLogado.setSenha(valor);
 		}else{
-			throw new Exception();
+			throw new Exception("Erro na atualizacao de perfil. A senha fornecida esta incorreta.");
 		}
 	}
 	public Usuario getUsuarioLogado() {
