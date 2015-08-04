@@ -151,44 +151,54 @@ public class Controller {
 		}
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
-	
-		if(usuarioLogado == null){
-			throw new Exception("Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+	public void atualizaPerfil(String nomeInformacao, String valor)
+			throws Exception {
+
+		if (usuarioLogado == null) {
+			throw new Exception(
+					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
 		}
-		
+
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
-			if(valor.equals("")){
-				throw new Exception("Erro na atualizacao de perfil. Nome dx usuarix nao pode ser vazio.");
+			if (valor.equals("")) {
+				throw new Exception(
+						"Erro na atualizacao de perfil. Nome dx usuarix nao pode ser vazio.");
 			}
 			this.usuarioLogado.setNome(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			this.usuarioLogado.setFoto(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
-			if(validaEmail(valor) == false){
-				throw new Exception("Erro na atualizacao de perfil. Formato de e-mail esta invalido.");
+			if (validaEmail(valor) == false) {
+				throw new Exception(
+						"Erro na atualizacao de perfil. Formato de e-mail esta invalido.");
 			}
 			this.usuarioLogado.setEmail(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
-			if(this.validaData(valor) == false){
-				throw new Exception("Erro na atualizacao de perfil. Formato de data esta invalida.");
+			if (this.validaData(valor) == false) {
+				throw new Exception(
+						"Erro na atualizacao de perfil. Formato de data esta invalida.");
 			}
 			this.usuarioLogado.setData(valor);
-		}else{
+		} else {
 			throw new Exception();
 		}
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
-		if(usuarioLogado == null){
-			throw new Exception("Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+	public void atualizaPerfil(String nomeInformacao, String valor,
+			String velhaSenha) throws Exception {
+		if (usuarioLogado == null) {
+			throw new Exception(
+					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
 		}
-		if ((nomeInformacao.equalsIgnoreCase("Senha")) && (this.usuarioLogado.getSenha().equals(velhaSenha))) {
-				this.usuarioLogado.setSenha(valor);
-		}else{
-			throw new Exception("Erro na atualizacao de perfil. A senha fornecida esta incorreta.");
+		if ((nomeInformacao.equalsIgnoreCase("Senha"))
+				&& (this.usuarioLogado.getSenha().equals(velhaSenha))) {
+			this.usuarioLogado.setSenha(valor);
+		} else {
+			throw new Exception(
+					"Erro na atualizacao de perfil. A senha fornecida esta incorreta.");
 		}
 	}
+
 	public Usuario getUsuarioLogado() {
 		return this.usuarioLogado;
 	}
@@ -210,11 +220,11 @@ public class Controller {
 
 		if (this.verificaTamanho(conteudo) == true) {
 			Postagem novaPostagem = new Postagem(conteudo, data);
-			this.usuarioLogado.adicionarPostagemAoPerfil(novaPostagem);
-			enviaPostagemParaAmgios(novaPostagem);
+			this.usuarioLogado.mural.add(novaPostagem);
 
 		} else {
-			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
+			throw new Exception(
+					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		}
 
 	}
@@ -224,18 +234,34 @@ public class Controller {
 			usuario.adicionarMensagemAoMural(novaPostagem);
 		}
 	}
-	
-	private boolean verificaTamanho(String mensagem){
-			if (mensagem.indexOf("#") <= 200){
-				return true;
-			}
-			
-			else{
-				return false;
-			}
+
+	private boolean verificaTamanho(String mensagem) {
+		if (mensagem.indexOf("#") <= 200) {
+			return true;
 		}
+
+		else {
+			return false;
+		}
+	}
 	
+	public String getPost(int indice){
+		return this.usuarioLogado.mural.get(indice).getConteudo()+"( "+this.usuarioLogado.mural.get(indice).getData()+ " )";
+	}
 	
+	public String getPost(String atributo, int indice){
+		String mensagemRequerida = "";
+		
+		if (atributo.equalsIgnoreCase("conteudo")) {
+			mensagemRequerida = this.usuarioLogado.mural.get(indice).getConteudo();
+		}
+		
+		else{
+			mensagemRequerida = this.usuarioLogado.mural.get(indice).getData();
+		}
+		
+		return mensagemRequerida;
+	}
 
 	private boolean validaEmail(String email) {
 		int count = 0;

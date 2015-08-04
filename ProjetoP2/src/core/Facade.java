@@ -89,6 +89,14 @@ public class Facade {
 		sistema.postarMensagem(conteudo,data);
 	}
 	
+	public void getPost(int indice){
+		sistema.getPost(indice);
+	}
+	
+	public void getPost(String atributo, int indice){
+		sistema.getPost(atributo, indice);
+	}
+	
 	
 	
 }

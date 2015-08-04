@@ -24,4 +24,12 @@ public class Postagem {
 		return hastags;
 		// num sei
 	}
+	
+	public String getConteudo(){
+		return conteudo;
+	}
+	
+	public String getData(){
+		return dataDePostagem;
+	}
 }
