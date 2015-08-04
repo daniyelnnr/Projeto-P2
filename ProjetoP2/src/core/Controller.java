@@ -202,20 +202,19 @@ public class Controller {
 		return user;
 	}
 
-	public void postarMensagem(String conteudo) throws Exception {
-		LocalDate horaAtual = LocalDate.now();
+	public void postarMensagem(String conteudo, String data) throws Exception {
 		if (this.usuarioLogado == null) {
 			throw new Exception(
 					"Nao eh possivel postar mensagem. Nenhum usuario esta logado no +pop.");
 		}
 
-		if (conteudo.length() <= 200) {
-			Postagem novaPostagem = new Postagem(conteudo, horaAtual.toString());
+		if (this.verificaTamanho(conteudo) == true) {
+			Postagem novaPostagem = new Postagem(conteudo, data);
 			this.usuarioLogado.adicionarPostagemAoPerfil(novaPostagem);
 			enviaPostagemParaAmgios(novaPostagem);
 
 		} else {
-			throw new Exception("Apenas 200 caracteres seu cego");
+			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		}
 
 	}
@@ -225,6 +224,18 @@ public class Controller {
 			usuario.adicionarMensagemAoMural(novaPostagem);
 		}
 	}
+	
+	private boolean verificaTamanho(String mensagem){
+			if (mensagem.indexOf("#") <= 200){
+				return true;
+			}
+			
+			else{
+				return false;
+			}
+		}
+	
+	
 
 	private boolean validaEmail(String email) {
 		int count = 0;

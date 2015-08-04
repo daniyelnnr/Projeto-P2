@@ -85,8 +85,10 @@ public class Facade {
 
 	}
 	
-	public void postarMensagem(String conteudo) throws Exception {
-		sistema.postarMensagem(conteudo);
+	public void criaPost(String conteudo,String data) throws Exception {
+		sistema.postarMensagem(conteudo,data);
 	}
+	
+	
 	
 }
