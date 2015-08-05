@@ -1,4 +1,4 @@
-inciaSistema
+iniciaSistema
 login email="naza_foguete@hotmail.com" senha="belzinha"
 adicionaAmigo usuario="fafa_bernardes@email.com.br"
 
