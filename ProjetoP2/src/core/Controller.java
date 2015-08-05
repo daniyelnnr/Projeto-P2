@@ -216,16 +216,6 @@ public class Controller {
 		this.usuarioLogado.mural.add(novaPostagem);
 	}
 
-	private boolean verificaTamanho(String mensagem) {
-		if (mensagem.indexOf("#") <= 200) {
-			return true;
-		}
-
-		else {
-			return false;
-		}
-	}
-
 	public String getPost(int indice) throws Exception {
 		return this.usuarioLogado.getMural().get(indice).getMensagem() + " "
 				+ this.usuarioLogado.getMural().get(indice).getTags() + " ("
