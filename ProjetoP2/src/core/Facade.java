@@ -1,8 +1,8 @@
 package core;
 
-import Exceptions.ErroAtualizacao;
-import Exceptions.ErroCadastro;
-import Exceptions.ErroLogin;
+import exceptions.ErroAtualizacao;
+import exceptions.ErroCadastro;
+import exceptions.ErroLogin;
 
 public class Facade {
 
