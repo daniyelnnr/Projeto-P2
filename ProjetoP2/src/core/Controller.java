@@ -103,7 +103,7 @@ public class Controller {
 			String output = myFormat.format(input.parse(data));
 			informacaoRequerida = output;
 		}
-		
+
 		return informacaoRequerida;
 	}
 
@@ -112,8 +112,8 @@ public class Controller {
 				this.usuarioLogado.getEmail());
 
 	}
-	
-	public void adicionaAmigo(String emailUsuarioAmigo){
+
+	public void adicionaAmigo(String emailUsuarioAmigo) {
 		for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getEmail().equals(emailUsuarioAmigo)) {
 				this.usuarioLogado.amigos.add(listaUsuario.get(i));
@@ -195,22 +195,25 @@ public class Controller {
 	}
 
 	public void postarMensagem(String conteudo, String data) throws Exception {
-		//olhar isso mais tarde de usuarioLogado
+		// olhar isso mais tarde de usuarioLogado
 		if (this.usuarioLogado == null) {
 			throw new Exception(
 					"Nao eh possivel postar mensagem. Nenhum usuario esta logado no +pop.");
 		}
-		//asdf
-
-		if (this.verificaTamanho(conteudo) == true) {
-			Postagem novaPostagem = new Postagem(conteudo, data);
-			this.usuarioLogado.mural.add(novaPostagem);
-
-		} else {
+		int index = conteudo.indexOf("#");
+		String msg = conteudo.substring(0, index - 1);
+		if (msg.length() >= 200)
 			throw new Exception(
 					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
+		String resto = conteudo.substring(index, conteudo.length());
+		ArrayList<String> hashtags = new ArrayList<String>();
+		resto = resto.replaceAll(" ", "");
+		for (String hashtag : resto.split("#")) {
+			hashtags.add(hashtag);
 		}
-
+		hashtags.remove(0);
+		Postagem novaPostagem = new Postagem(msg, hashtags, data);
+		this.usuarioLogado.mural.add(novaPostagem);
 	}
 
 	private boolean verificaTamanho(String mensagem) {
@@ -224,9 +227,10 @@ public class Controller {
 	}
 
 	public String getPost(int indice) throws Exception {
-		return ((((this.usuarioLogado.getMural()).get(indice)).getConteudo())
-				+ " ("
-				+ (((this.usuarioLogado.getMural()).get(indice)).getData()) + ")");
+		return this.usuarioLogado.getMural().get(indice).getMensagem() + " "
+				+ this.usuarioLogado.getMural().get(indice).getTags() + " ("
+				+ this.usuarioLogado.getMural().get(indice).getData() + ")";
+
 	}
 
 	public String getPost(String atributo, int indice) throws Exception {
@@ -234,7 +238,7 @@ public class Controller {
 
 		if (atributo.equalsIgnoreCase("conteudo")) {
 			mensagemRequerida = this.usuarioLogado.mural.get(indice)
-					.getConteudo();
+					.getMensagem();
 		}
 
 		else {
@@ -316,6 +320,5 @@ public class Controller {
 			throw new Exception("Formato de data esta invalida.");
 		}
 	}
-	
-	
+
 }

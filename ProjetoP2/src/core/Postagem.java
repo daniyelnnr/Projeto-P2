@@ -21,8 +21,16 @@ public class Postagem {
 		this.tags = hashtags;
 	}
 	
-	public String getConteudo(){
+	public String getMensagem(){
 		return mensagem;
+	}
+	
+	public String getTags(){
+		String txt = "";
+		for (String tag : tags) {
+			txt += "#" + tag + " ";
+		}
+		return txt.substring(0, txt.length()-1);
 	}
 	
 	public String getData() throws Exception{
