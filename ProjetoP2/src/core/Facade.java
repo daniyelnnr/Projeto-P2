@@ -50,8 +50,8 @@ public class Facade {
 
 	}
 	
-	public void adicionaAmigo(String emailUsuarioAmigo){
-		sistema.adicionaAmigo(emailUsuarioAmigo);
+	public void adicionaAmigo(String email){
+		sistema.adicionaAmigo(email);
 	}
 
 	public String getInfoUsuario(String nomeInformacao) throws Exception {
