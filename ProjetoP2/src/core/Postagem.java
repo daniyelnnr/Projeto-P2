@@ -2,7 +2,6 @@ package core;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Postagem {
 	private String mensagem;
