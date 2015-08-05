@@ -40,7 +40,7 @@ expect "Fatima Bernardes Bonner rejeitou sua amizade." getNextNotificacao
 criaPost mensagem="Tem gente que se acha! #SouMaisEu" data="07/08/2015 16:10:00"
 logout
 
-login email"madonna@email.com" senha="iamawesome"
+login email="madonna@email.com" senha="iamawesome"
 removeAmigo usuario="fafa_bernardes@email.com.br"
 expect 0 getQtdAmigos
 logout

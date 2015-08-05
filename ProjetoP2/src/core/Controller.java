@@ -148,6 +148,7 @@ public class Controller {
 				usuario.notificacoes.add(this.usuarioLogado.getNome() + " rejeitou sua amizade.");
 			}
 		}
+		throw new Exception("O usuario " + email + " nao esta cadastrado no +pop.");
 	}
 	
 	public int getNotificacao() {
