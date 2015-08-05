@@ -80,25 +80,19 @@ public class Controller {
 					+ " nao esta cadastradx.");
 		}
 
-		else if (nomeInformacao.equals("Senha")
-				|| nomeInformacao.equals("SENHA")
-				|| nomeInformacao.equals("senha")) {
+		else if (nomeInformacao.equalsIgnoreCase("Senha")) {
 			throw new Exception("A senha dx usuarix eh protegida.");
 		}
 
-		else if (nomeInformacao.equals("Nome") || nomeInformacao.equals("NOME")
-				|| nomeInformacao.equals("nome")) {
+		else if (nomeInformacao.equalsIgnoreCase("Nome")) {
 			informacaoRequerida = usuarioRequerido.getNome();
 		}
 
-		else if (nomeInformacao.equals("Foto") || nomeInformacao.equals("FOTO")
-				|| nomeInformacao.equals("foto")) {
+		else if (nomeInformacao.equalsIgnoreCase("Foto")) {
 			informacaoRequerida = usuarioRequerido.getFoto();
 		}
 
-		else if (nomeInformacao.equals("Email")
-				|| nomeInformacao.equals("EMAIL")
-				|| nomeInformacao.equals("email")) {
+		else if (nomeInformacao.equalsIgnoreCase("Email")) {
 			informacaoRequerida = usuarioRequerido.getEmail();
 		}
 
@@ -109,9 +103,8 @@ public class Controller {
 			String output = myFormat.format(input.parse(data));
 			informacaoRequerida = output;
 		}
-
+		
 		return informacaoRequerida;
-
 	}
 
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
