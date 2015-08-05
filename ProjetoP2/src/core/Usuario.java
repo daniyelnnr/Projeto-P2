@@ -105,7 +105,7 @@ public class Usuario {
 				
 			}
 		}
-		throw new Exception(amigo.getNome() + "nao lhe enviou solicitacoes de amizade");
+		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade");
 	}
 
 	public boolean removeAmigo(Usuario amigo) throws Exception {
@@ -116,7 +116,7 @@ public class Usuario {
 				
 			}
 		}
-		throw new Exception(amigo.getNome() + "nao lhe enviou solicitacoes de amizade");
+		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade");
 	}
 
 }
