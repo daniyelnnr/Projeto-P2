@@ -12,13 +12,13 @@ public class Postagem {
 	private int likes;
 	private int deslikes;
 
-	public Postagem(String mensagem, String data, String ... hashtags){
+	public Postagem(String mensagem, ArrayList<String> hashtags, String data){
 		this.mensagem = mensagem;
 		this.data = data;
 		this.pontosPopularidade = 0;
 		this.likes = 0;
 		this.deslikes = 0;
-		Collections.addAll(this.tags, hashtags);
+		this.tags = hashtags;
 	}
 	
 	public String getConteudo(){
