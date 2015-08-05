@@ -1,9 +1,8 @@
 package core;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 
 public class Postagem {
 	private String mensagem;
@@ -13,18 +12,13 @@ public class Postagem {
 	private int likes;
 	private int deslikes;
 
-	public Postagem(String conteudo, String data) {
-		this.mensagem = conteudo;
+	public Postagem(String mensagem, String data, String ... hashtags){
+		this.mensagem = mensagem;
 		this.data = data;
 		this.pontosPopularidade = 0;
 		this.likes = 0;
 		this.deslikes = 0;
-		this.tags.addAll(procuraHastags(conteudo));
-	}
-
-	private Collection<? extends String> procuraHastags(String conteudo2) {
-		return tags;
-		// num sei
+		Collections.addAll(this.tags, hashtags);
 	}
 	
 	public String getConteudo(){
