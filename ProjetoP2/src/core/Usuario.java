@@ -10,7 +10,6 @@ public class Usuario {
 	private String telefone;
 	private String dataNasc;
 	private String imgAvatar;
-	ArrayList<Postagem> perfil = new ArrayList<Postagem>();
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 
@@ -80,21 +79,6 @@ public class Usuario {
 		return imgAvatar;
 	}
 
-	public void adicionarPostagemAoPerfil(Postagem novaPostagem) {
-		this.perfil.add(novaPostagem);
-	}
-
-	public void adicionarMensagemAoMural(Postagem novaPostagem) {
-		this.perfil.add(novaPostagem);
-	}
-
-	public ArrayList<Postagem> getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(ArrayList<Postagem> perfil) {
-		this.perfil = perfil;
-	}
 
 	public ArrayList<Postagem> getMural() {
 		return mural;

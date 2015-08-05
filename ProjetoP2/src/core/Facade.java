@@ -1,29 +1,32 @@
 package core;
 
+import Exceptions.ErroAtualizacao;
+import Exceptions.ErroCadastro;
+import Exceptions.ErroLogin;
+
 public class Facade {
 
-	Controller controle = new Controller(); 
+	Controller controle = new Controller();
 	Controller sistema = null;
-	
-	
-	public void iniciaSistema(){
+
+	public void iniciaSistema() {
 		sistema = controle;
 	}
-	
-	public void fechaSistema()throws Exception{
-		if (sistema.getUsuarioLogado() != null){
-			throw new Exception ("Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
+
+	public void fechaSistema() throws Exception {
+		if (sistema.getUsuarioLogado() != null) {
+			throw new Exception(
+					"Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
 		}
-		
-		else{
+
+		else {
 			this.sistema = null;
 		}
 	}
 
-	
-
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {
+			String senhaUsuario, String dataNasUsuario, String imgAvatar)
+			throws Exception {
 		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
 				dataNasUsuario, imgAvatar);
 
@@ -32,32 +35,40 @@ public class Facade {
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario) throws Exception {
-		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
-				dataNasUsuario);
-
-		return emailUsuario;
+		try {
+			sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
+					dataNasUsuario);
+			return emailUsuario;
+		} catch (Exception e) {
+			throw new ErroCadastro(e.getMessage());
+		}
 	}
 
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
+			throws Exception {
 		return sistema.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
-	
-	public String getInfoUsuario(String nomeInformacao) throws Exception{
+
+	public String getInfoUsuario(String nomeInformacao) throws Exception {
 		return sistema.getInfoUsuarioLogado(nomeInformacao);
 	}
 
 	public void login(String emailUsuario, String senhaUsuario)
 			throws Exception {
+		try{
 		sistema.login(emailUsuario, senhaUsuario);
+	} catch (Exception e) {
+		throw new ErroLogin(e.getMessage());
+	}
 	}
 
 	public void logout() throws Exception {
 		sistema.logout();
 
 	}
-	
-	public void removeUsuario(String email){
+
+	public void removeUsuario(String email) {
 		sistema.removeUsuario(email);
 	}
 
@@ -71,32 +82,47 @@ public class Facade {
 		}
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception{
-		sistema.atualizaPerfil(nomeInformacao, valor);
+	public void atualizaPerfil(String nomeInformacao, String valor)
+			throws Exception {
+		if (sistema.getUsuarioLogado() == null) {
+			throw new Exception(
+					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+		}
+		try {
+			sistema.atualizaPerfil(nomeInformacao, valor);
+		} catch (Exception e) {
+			throw new ErroAtualizacao(e.getMessage());
+		}
 	}
-	
-	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception{
-		sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
+
+	public void atualizaPerfil(String nomeInformacao, String valor,
+			String velhaSenha) throws Exception {
+		if (sistema.getUsuarioLogado() == null) {
+			throw new Exception(
+					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+		}
+		try {
+			sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
+		} catch (Exception e) {
+			throw new ErroAtualizacao(e.getMessage());
+		}
 	}
-	
 
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {
 		return sistema.buscaUsuario(emailUsuario);
 
 	}
-	
-	public void criaPost(String conteudo,String data) throws Exception {
-		sistema.postarMensagem(conteudo,data);
+
+	public void criaPost(String conteudo, String data) throws Exception {
+		sistema.postarMensagem(conteudo, data);
 	}
-	
-	public void getPost(int indice){
-		sistema.getPost(indice);
+
+	public String getPost(int indice) throws Exception {
+		return sistema.getPost(indice);
 	}
-	
-	public void getPost(String atributo, int indice){
-		sistema.getPost(atributo, indice);
+
+	public String getPost(String atributo, int indice) throws Exception {
+		return sistema.getPost(atributo, indice);
 	}
-	
-	
-	
+
 }

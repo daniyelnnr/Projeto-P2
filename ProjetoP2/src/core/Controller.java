@@ -2,7 +2,6 @@ package core;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
@@ -15,8 +14,7 @@ public class Controller {
 			throws Exception {
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
-			throw new Exception(
-					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
+			throw new Exception("Nome dx usuarix nao pode ser vazio.");
 		} else if (this.validaData(dataNasUsuario)
 				&& this.validaEmail(emailUsuario)) {
 			this.validaData(dataNasUsuario);
@@ -25,8 +23,7 @@ public class Controller {
 			listaUsuario.add(usuario);
 			return usuario.getEmail();
 		} else {
-			throw new Exception(
-					"Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
+			throw new Exception("Formato de e-mail esta invalido.");
 		}
 
 	}
@@ -36,8 +33,7 @@ public class Controller {
 
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
-			throw new Exception(
-					"Erro no cadastro de Usuarios. Nome dx usuarix nao pode ser vazio.");
+			throw new Exception("Nome dx usuarix nao pode ser vazio.");
 		} else if (this.validaData(dataNasUsuario)
 				&& this.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
@@ -45,8 +41,7 @@ public class Controller {
 			listaUsuario.add(usuario);
 			return usuario.getEmail();
 		} else {
-			throw new Exception(
-					"Erro no cadastro de Usuarios. Formato de e-mail esta invalido.");
+			throw new Exception("Formato de e-mail esta invalido.");
 		}
 
 	}
@@ -56,9 +51,8 @@ public class Controller {
 		if (this.usuarioLogado == null) {
 			Usuario user = this.buscaUsuario(emailUsuario);
 			if (user == null) {
-				throw new Exception(
-						"Nao foi possivel realizar login. Um usuarix com email "
-								+ emailUsuario + " nao esta cadastradx.");
+				throw new Exception("Um usuarix com email " + emailUsuario
+						+ " nao esta cadastradx.");
 			}
 
 			else if (user.getSenha().equals(senhaUsuario)) {
@@ -67,13 +61,11 @@ public class Controller {
 			}
 
 			else {
-				throw new Exception(
-						"Nao foi possivel realizar login. Senha invalida.");
+				throw new Exception("Senha invalida.");
 			}
 		} else {
-			throw new Exception(
-					"Nao foi possivel realizar login. Um usuarix ja esta logadx: "
-							+ this.usuarioLogado.getNome() + ".");
+			throw new Exception("Um usuarix ja esta logadx: "
+					+ this.usuarioLogado.getNome() + ".");
 		}
 	}
 
@@ -155,29 +147,23 @@ public class Controller {
 			throws Exception {
 
 		if (usuarioLogado == null) {
-			throw new Exception(
-					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+			throw new Exception("Nenhum usuarix esta logadx no +pop.");
 		}
 
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
 			if (valor.equals("")) {
-				throw new Exception(
-						"Erro na atualizacao de perfil. Nome dx usuarix nao pode ser vazio.");
+				throw new Exception("Nome dx usuarix nao pode ser vazio.");
 			}
 			this.usuarioLogado.setNome(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			this.usuarioLogado.setFoto(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
 			if (validaEmail(valor) == false) {
-				throw new Exception(
-						"Erro na atualizacao de perfil. Formato de e-mail esta invalido.");
+				throw new Exception("Formato de e-mail esta invalido.");
 			}
 			this.usuarioLogado.setEmail(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
-			if (this.validaData(valor) == false) {
-				throw new Exception(
-						"Erro na atualizacao de perfil. Formato de data esta invalida.");
-			}
+			this.validaData(valor);
 			this.usuarioLogado.setData(valor);
 		} else {
 			throw new Exception();
@@ -186,16 +172,11 @@ public class Controller {
 
 	public void atualizaPerfil(String nomeInformacao, String valor,
 			String velhaSenha) throws Exception {
-		if (usuarioLogado == null) {
-			throw new Exception(
-					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
-		}
 		if ((nomeInformacao.equalsIgnoreCase("Senha"))
 				&& (this.usuarioLogado.getSenha().equals(velhaSenha))) {
 			this.usuarioLogado.setSenha(valor);
 		} else {
-			throw new Exception(
-					"Erro na atualizacao de perfil. A senha fornecida esta incorreta.");
+			throw new Exception("A senha fornecida esta incorreta.");
 		}
 	}
 
@@ -229,12 +210,6 @@ public class Controller {
 
 	}
 
-	private void enviaPostagemParaAmgios(Postagem novaPostagem) {
-		for (Usuario usuario : usuarioLogado.getAmigos()) {
-			usuario.adicionarMensagemAoMural(novaPostagem);
-		}
-	}
-
 	private boolean verificaTamanho(String mensagem) {
 		if (mensagem.indexOf("#") <= 200) {
 			return true;
@@ -244,22 +219,25 @@ public class Controller {
 			return false;
 		}
 	}
-	
-	public String getPost(int indice){
-		return this.usuarioLogado.mural.get(indice).getConteudo()+"( "+this.usuarioLogado.mural.get(indice).getData()+ " )";
+
+	public String getPost(int indice) throws Exception {
+		return ((((this.usuarioLogado.getMural()).get(indice)).getConteudo())
+				+ " ("
+				+ (((this.usuarioLogado.getMural()).get(indice)).getData()) + ")");
 	}
-	
-	public String getPost(String atributo, int indice){
+
+	public String getPost(String atributo, int indice) throws Exception {
 		String mensagemRequerida = "";
-		
+
 		if (atributo.equalsIgnoreCase("conteudo")) {
-			mensagemRequerida = this.usuarioLogado.mural.get(indice).getConteudo();
+			mensagemRequerida = this.usuarioLogado.mural.get(indice)
+					.getConteudo();
 		}
-		
-		else{
+
+		else {
 			mensagemRequerida = this.usuarioLogado.mural.get(indice).getData();
 		}
-		
+
 		return mensagemRequerida;
 	}
 
@@ -307,6 +285,9 @@ public class Controller {
 		for (char c : data.toCharArray()) {
 			if (c == '/')
 				count++;
+			if (Character.isLetter(c)) {
+				throw new Exception("Formato de data esta invalida.");
+			}
 		}
 		if (count == 2) {
 			String dia = data.substring(0, data.indexOf("/"));
@@ -321,18 +302,15 @@ public class Controller {
 					input.parse(data);
 				} catch (ParseException e) {
 					if (e.getLocalizedMessage().startsWith("Unparseable date")) {
-						throw new Exception(
-								"Erro no cadastro de Usuarios. Data nao existe.");
+						throw new Exception("Data nao existe.");
 					}
 				}
 				return true;
 			} else {
-				throw new Exception(
-						"Erro no cadastro de Usuarios. Formato de data esta invalida.");
+				throw new Exception("Formato de data esta invalida.");
 			}
 		} else {
-			throw new Exception(
-					"Erro no cadastro de Usuarios. Formato de data esta invalida.");
+			throw new Exception("Formato de data esta invalida.");
 		}
 	}
 }

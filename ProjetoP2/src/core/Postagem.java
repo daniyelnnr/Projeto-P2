@@ -1,5 +1,7 @@
 package core;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -29,7 +31,11 @@ public class Postagem {
 		return conteudo;
 	}
 	
-	public String getData(){
-		return dataDePostagem;
+	public String getData() throws Exception{
+		String data = this.dataDePostagem;
+		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String output = myFormat.format(input.parse(data));
+		return output;
 	}
 }
