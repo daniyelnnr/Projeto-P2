@@ -28,7 +28,7 @@ public class Postagem {
 	public String getTags(){
 		String txt = "";
 		for (String tag : tags) {
-			txt += "#" + tag + " ";
+			txt += tag + " ";
 		}
 		return txt.substring(0, txt.length()-1);
 	}

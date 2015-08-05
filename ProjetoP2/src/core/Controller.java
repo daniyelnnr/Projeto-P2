@@ -207,11 +207,11 @@ public class Controller {
 					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		String resto = conteudo.substring(index, conteudo.length());
 		ArrayList<String> hashtags = new ArrayList<String>();
-		resto = resto.replaceAll(" ", "");
-		for (String hashtag : resto.split("#")) {
+		for (String hashtag : resto.split(" ")) {
+			if (!hashtag.startsWith("#"))
+				throw new Exception("Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"+hashtag+"'.");
 			hashtags.add(hashtag);
 		}
-		hashtags.remove(0);
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		this.usuarioLogado.mural.add(novaPostagem);
 	}
