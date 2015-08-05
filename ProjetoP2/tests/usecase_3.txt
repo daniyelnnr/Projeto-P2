@@ -4,7 +4,7 @@ id1=cadastraUsuario nome="Nazare Tedesco" email="naza_foguete@hotmail.com" senha
 
 login email="naza_foguete@hotmail.com" senha="belzinha"
 criaPost mensagem="Eu nao sou preconceituosa, mais aqui esta cheio de anta nordestina. #anta #separa" data="01/08/2015 12:00:00"
-criaPost mensagem="Esse frio esta mim deixando doida. #alucicrazy #CGDaDepressao" data="01/08/2015 21:35:00"
+criaPost mensagem="Esse frio esta mim deixando doida. #alucicrazy #CGDaDepressao" data="03/08/2015 21:35:00"
 criaPost mensagem="Nao sei porque tanto recalque, o que eh bonito eh pra se mostrar. <audio>musicas/poderosas.mp3</audio> #soulinda #naza" data="03/08/2015 08:21:00"
 logout
 
@@ -36,11 +36,11 @@ logout
 login email="naza_foguete@hotmail.com" senha="belzinha"
 expect "Nao sei porque tanto recalque, o que eh bonito eh pra se mostrar. <audio>musicas/poderosas.mp3</audio> #soulinda #naza (2015-08-03 08:21:00)" getPost post=2
 expect "Nao sei porque tanto recalque, o que eh bonito eh pra se mostrar. <audio>musicas/poderosas.mp3</audio>" getPost atributo="Conteudo" post=2
-expect "#soulinda,#naza" getPost atributo="Hashtags" post=1
-expect "2015-08-03 08:21:00" getPost atributo="Data" post=1
+expect "#soulinda,#naza" getPost atributo="Hashtags" post=2
+expect "2015-08-03 08:21:00" getPost atributo="Data" post=2
 
 expect "Nao sei porque tanto recalque, o que eh bonito eh pra se mostrar." getConteudoPost indice=0 post=2
 expect "$arquivo_audio:musicas/poderosas.mp3" getConteudoPost indice=1 post=1
 
 logout
-fecharSistema
+fechaSistema
