@@ -113,12 +113,49 @@ public class Controller {
 
 	}
 
-	public void adicionaAmigo(String emailUsuarioAmigo) {
-		for (int i = 0; i < listaUsuario.size(); i++) {
-			if (listaUsuario.get(i).getEmail().equals(emailUsuarioAmigo)) {
-				this.usuarioLogado.amigos.add(listaUsuario.get(i));
+	
+	public void aceitaAmizade(String email) throws Exception{
+		for (Usuario usuario : listaUsuario) {
+			if(usuario.getEmail() == email){
+				this.usuarioLogado.adicionaAmigo(usuario);
+				usuario.notificacoes.add(this.usuarioLogado.getNome() + " aceitou sua amizade.");
 			}
 		}
+	}
+	
+	public void adicionaAmigo(String email) {
+		for (Usuario usuario : listaUsuario) {
+			if(usuario.getEmail() == email){
+				usuario.notificacoes.add(this.usuarioLogado.getNome() + " quer sua amizade.");
+				usuario.pedidosAmizade.add(this.usuarioLogado);
+			}
+		}
+	}
+	
+	public void removeAmigo(String email){
+		for (Usuario usuario : listaUsuario) {
+			if(usuario.getEmail() == email){
+				usuario.notificacoes.add(this.usuarioLogado.getNome() + " removeu a sua amizade.");
+				usuario.amigos.remove(usuario);
+			}
+		}
+	}
+	
+	public void rejeitaAmizade(String email) throws Exception{
+		for (Usuario usuario : listaUsuario) {
+			if(usuario.getEmail() == email){
+				this.usuarioLogado.removeAmigo(usuario);
+				usuario.notificacoes.add(this.usuarioLogado.getNome() + " rejeitou sua amizade.");
+			}
+		}
+	}
+	
+	public int getNotificacao() {
+		return this.usuarioLogado.notificacoes.getNotificacoes();
+	}
+
+	public String getNextInformacao() throws Exception {
+		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 
 	public String getNome(String emailUsuario) {
@@ -313,5 +350,7 @@ public class Controller {
 			throw new Exception("Formato de data esta invalida.");
 		}
 	}
+
+
 
 }

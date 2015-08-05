@@ -22,4 +22,11 @@ public String getNextNotificacao() throws Exception{
 		
 	
 }
+
+public void add(String string) {
+	this.notificacoes.add(string);
+	
 }
+
+}
+

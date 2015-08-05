@@ -12,8 +12,9 @@ public class Usuario {
 	private String imgAvatar;
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
-	ArrayList<Notificacoes> notificacoes = new ArrayList<Notificacoes>();
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
+	Notificacoes notificacoes = new Notificacoes();
+	
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
 		this.email = email;

@@ -53,7 +53,28 @@ public class Facade {
 	public void adicionaAmigo(String email){
 		sistema.adicionaAmigo(email);
 	}
+	
+	public void removeAmigo(String email){
+		sistema.removeAmigo(email);
+	}
 
+	public void aceitaAmizade(String email) throws Exception{
+		sistema.aceitaAmizade(email);
+	}
+
+	public void rejeitaAmizade(String email) throws Exception{
+		sistema.rejeitaAmizade(email);
+	}
+	
+	public int getNotificacoes(){
+		return sistema.getNotificacao();
+		
+	}
+	
+	public String getNextNotificacao() throws Exception{
+		return sistema.getNextInformacao();
+	}
+	
 	public String getInfoUsuario(String nomeInformacao) throws Exception {
 		return sistema.getInfoUsuarioLogado(nomeInformacao);
 	}
