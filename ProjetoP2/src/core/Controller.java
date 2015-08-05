@@ -231,10 +231,13 @@ public class Controller {
 					.getMensagem();
 		}
 
-		else {
+		else if (atributo.equalsIgnoreCase("data")){
 			mensagemRequerida = this.usuarioLogado.mural.get(indice).getData();
-		}
+		} else {
+			mensagemRequerida = this.usuarioLogado.mural.get(indice).getTagsToString();
 
+		}
+		
 		return mensagemRequerida;
 	}
 

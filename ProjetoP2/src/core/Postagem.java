@@ -33,6 +33,14 @@ public class Postagem {
 		return txt.substring(0, txt.length()-1);
 	}
 	
+	public String getTagsToString(){
+		String txt = "";
+		for (String tag : tags) {
+			txt += tag + ",";
+		}
+		return txt.substring(0, txt.length()-1);
+	}
+	
 	public String getData() throws Exception{
 		String data = this.data;
 		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
