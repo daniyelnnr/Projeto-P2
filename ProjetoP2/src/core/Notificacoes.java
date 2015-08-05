@@ -9,7 +9,7 @@ public class Notificacoes {
 	Usuario usuarioRemetente;
 	
 public int getNotificacoes(){
-	return tamanho;
+	return this.notificacoes.size();
 }
 
 public String getNextNotificacao() throws Exception{

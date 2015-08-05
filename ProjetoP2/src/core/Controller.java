@@ -116,7 +116,7 @@ public class Controller {
 	
 	public void aceitaAmizade(String email) throws Exception{
 		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail() == email){
+			if(usuario.getEmail().equals(email)){
 				this.usuarioLogado.adicionaAmigo(usuario);
 				usuario.notificacoes.add(this.usuarioLogado.getNome() + " aceitou sua amizade.");
 			}
@@ -125,7 +125,7 @@ public class Controller {
 	
 	public void adicionaAmigo(String email) {
 		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail() == email){
+			if(usuario.getEmail().equals(email)){
 				usuario.notificacoes.add(this.usuarioLogado.getNome() + " quer sua amizade.");
 				usuario.pedidosAmizade.add(this.usuarioLogado);
 			}
@@ -134,7 +134,7 @@ public class Controller {
 	
 	public void removeAmigo(String email){
 		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail() == email){
+			if(usuario.getEmail().equals(email)){
 				usuario.notificacoes.add(this.usuarioLogado.getNome() + " removeu a sua amizade.");
 				usuario.amigos.remove(usuario);
 			}
@@ -143,7 +143,7 @@ public class Controller {
 	
 	public void rejeitaAmizade(String email) throws Exception{
 		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail() == email){
+			if(usuario.getEmail().equals(email)){
 				this.usuarioLogado.removeAmigo(usuario);
 				usuario.notificacoes.add(this.usuarioLogado.getNome() + " rejeitou sua amizade.");
 			}
