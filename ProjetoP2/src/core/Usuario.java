@@ -12,7 +12,8 @@ public class Usuario {
 	private String imgAvatar;
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
-
+	ArrayList<Notificacoes> notificacoes = new ArrayList<Notificacoes>();
+	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
 		this.email = email;
@@ -96,12 +97,26 @@ public class Usuario {
 		this.amigos = amigos;
 	}
 
-	public void adicionaAmigo(Usuario amigo) {
-		this.amigos.add(amigo);
+	public boolean adicionaAmigo(Usuario amigo) throws Exception {
+		for (Usuario usuario : pedidosAmizade) {
+			if(usuario.getEmail() == amigo.getEmail()){
+				this.amigos.add(usuario);
+				return true;
+				
+			}
+		}
+		throw new Exception(amigo.getNome() + "nao lhe enviou solicitacoes de amizade");
 	}
 
-	public void removeAmigo(Usuario amigo) {
-		this.amigos.remove(amigo);
+	public boolean removeAmigo(Usuario amigo) throws Exception {
+		for (Usuario usuario : pedidosAmizade) {
+			if(usuario.getEmail() == amigo.getEmail()){
+				this.amigos.remove(usuario);
+				return true;
+				
+			}
+		}
+		throw new Exception(amigo.getNome() + "nao lhe enviou solicitacoes de amizade");
 	}
 
 }
