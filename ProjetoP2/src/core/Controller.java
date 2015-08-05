@@ -187,6 +187,7 @@ public class Controller {
 	}
 
 	public void postarMensagem(String conteudo, String data) throws Exception {
+		//olhar isso mais tarde de usuarioLogado
 		if (this.usuarioLogado == null) {
 			throw new Exception(
 					"Nao eh possivel postar mensagem. Nenhum usuario esta logado no +pop.");
