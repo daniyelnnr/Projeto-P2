@@ -112,6 +112,14 @@ public class Controller {
 				this.usuarioLogado.getEmail());
 
 	}
+	
+	public void adicionaAmigo(String emailUsuarioAmigo){
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getEmail().equals(emailUsuarioAmigo)) {
+				this.usuarioLogado.amigos.add(listaUsuario.get(i));
+			}
+		}
+	}
 
 	public String getNome(String emailUsuario) {
 		Usuario user = this.buscaUsuario(emailUsuario);

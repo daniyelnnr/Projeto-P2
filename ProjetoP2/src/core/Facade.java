@@ -49,6 +49,10 @@ public class Facade {
 		return sistema.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
+	
+	public void adicionaAmigo(String emailUsuarioAmigo){
+		sistema.adicionaAmigo(emailUsuarioAmigo);
+	}
 
 	public String getInfoUsuario(String nomeInformacao) throws Exception {
 		return sistema.getInfoUsuarioLogado(nomeInformacao);
