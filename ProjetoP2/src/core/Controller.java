@@ -192,6 +192,7 @@ public class Controller {
 			throw new Exception(
 					"Nao eh possivel postar mensagem. Nenhum usuario esta logado no +pop.");
 		}
+		//asdf
 
 		if (this.verificaTamanho(conteudo) == true) {
 			Postagem novaPostagem = new Postagem(conteudo, data);
