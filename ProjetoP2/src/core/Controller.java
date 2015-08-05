@@ -113,44 +113,39 @@ public class Controller {
 
 	}
 
-	
-	public void aceitaAmizade(String email) throws Exception{
-		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail().equals(email)){
-				this.usuarioLogado.adicionaAmigo(usuario);
-				usuario.notificacoes.add(this.usuarioLogado.getNome() + " aceitou sua amizade.");
-			}
-		}
+	public void aceitaAmizade(String email) throws Exception {
+		Usuario usuario = this.buscaUsuario(email);
+		this.usuarioLogado.adicionaAmigo(usuario);
+		usuario.notificacoes.add(this.usuarioLogado.getNome()
+				+ " aceitou sua amizade.");
 	}
-	
+
 	public void adicionaAmigo(String email) {
-		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail().equals(email)){
-				usuario.notificacoes.add(this.usuarioLogado.getNome() + " quer sua amizade.");
-				usuario.pedidosAmizade.add(this.usuarioLogado);
-			}
-		}
+		Usuario usuario = this.buscaUsuario(email);
+		usuario.notificacoes.add(this.usuarioLogado.getNome()
+				+ " quer sua amizade.");
+		usuario.pedidosAmizade.add(this.usuarioLogado);
 	}
-	
-	public void removeAmigo(String email){
-		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail().equals(email)){
-				usuario.notificacoes.add(this.usuarioLogado.getNome() + " removeu a sua amizade.");
-				usuario.amigos.remove(usuario);
-			}
-		}
+
+	public void removeAmigo(String email) {
+		Usuario usuario = this.buscaUsuario(email);
+		usuario.notificacoes.add(this.usuarioLogado.getNome()
+				+ " removeu a sua amizade.");
+		usuario.amigos.remove(usuario);
 	}
-	
-	public void rejeitaAmizade(String email) throws Exception{
-		for (Usuario usuario : listaUsuario) {
-			if(usuario.getEmail().equals(email)){
-				this.usuarioLogado.removeAmigo(usuario);
-				usuario.notificacoes.add(this.usuarioLogado.getNome() + " rejeitou sua amizade.");
-			}
+
+	public void rejeitaAmizade(String email) throws Exception {
+		Usuario usuario = this.buscaUsuario(email);
+		if (usuario == null) {
+			throw new Exception("O usuario " + email
+					+ " nao esta cadastrado no +pop.");
 		}
-		throw new Exception("O usuario " + email + " nao esta cadastrado no +pop.");
+		this.usuarioLogado.removeAmigo(usuario);
+		usuario.notificacoes.add(this.usuarioLogado.getNome()
+				+ " rejeitou sua amizade.");
+
 	}
-	
+
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
@@ -247,7 +242,9 @@ public class Controller {
 		ArrayList<String> hashtags = new ArrayList<String>();
 		for (String hashtag : resto.split(" ")) {
 			if (!hashtag.startsWith("#"))
-				throw new Exception("Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"+hashtag+"'.");
+				throw new Exception(
+						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
+								+ hashtag + "'.");
 			hashtags.add(hashtag);
 		}
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
@@ -269,13 +266,14 @@ public class Controller {
 					.getMensagem();
 		}
 
-		else if (atributo.equalsIgnoreCase("data")){
+		else if (atributo.equalsIgnoreCase("data")) {
 			mensagemRequerida = this.usuarioLogado.mural.get(indice).getData();
 		} else {
-			mensagemRequerida = this.usuarioLogado.mural.get(indice).getTagsToString();
+			mensagemRequerida = this.usuarioLogado.mural.get(indice)
+					.getTagsToString();
 
 		}
-		
+
 		return mensagemRequerida;
 	}
 
@@ -355,7 +353,5 @@ public class Controller {
 	public int getQtdAmigos() {
 		return this.usuarioLogado.getQtdAmigos();
 	}
-
-
 
 }
