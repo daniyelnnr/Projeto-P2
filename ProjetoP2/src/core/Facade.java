@@ -71,6 +71,10 @@ public class Facade {
 		
 	}
 	
+	public int getQtdAmigos(){
+		return sistema.getQtdAmigos();
+	}
+	
 	public String getNextNotificacao() throws Exception{
 		return sistema.getNextInformacao();
 	}

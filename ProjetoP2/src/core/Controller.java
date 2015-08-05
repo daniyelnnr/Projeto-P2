@@ -351,6 +351,10 @@ public class Controller {
 		}
 	}
 
+	public int getQtdAmigos() {
+		return this.usuarioLogado.getQtdAmigos();
+	}
+
 
 
 }

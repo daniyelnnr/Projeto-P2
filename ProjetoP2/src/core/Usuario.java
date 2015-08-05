@@ -120,4 +120,8 @@ public class Usuario {
 		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade.");
 	}
 
+	public int getQtdAmigos() {
+		return this.amigos.size();
+	}
+
 }
