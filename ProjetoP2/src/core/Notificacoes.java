@@ -13,7 +13,7 @@ public int getNotificacoes(){
 }
 
 public String getNextNotificacao() throws Exception{
-	if(tamanho > 0){
+	if(tamanho == 0){
 		throw new Exception("Nao ha mais notificacoes.");
 	}
 	String saida = this.notificacoes.get(0);
