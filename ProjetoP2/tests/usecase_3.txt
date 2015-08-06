@@ -40,7 +40,7 @@ expect "#soulinda,#naza" getPost atributo="Hashtags" post=2
 expect "2015-08-03 08:21:00" getPost atributo="Data" post=2
 
 expect "Nao sei porque tanto recalque, o que eh bonito eh pra se mostrar." getConteudoPost indice=0 post=2
-expect "$arquivo_audio:musicas/poderosas.mp3" getConteudoPost indice=1 post=1
+expect "$arquivo_audio:musicas/poderosas.mp3" getConteudoPost indice=1 post=2
 
 logout
 fechaSistema

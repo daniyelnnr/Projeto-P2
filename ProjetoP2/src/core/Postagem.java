@@ -2,6 +2,8 @@ package core;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.*;
 
 public class Postagem {
 	private String mensagem;
@@ -10,6 +12,9 @@ public class Postagem {
 	private ArrayList<String> tags = new ArrayList<String>();
 	private int likes;
 	private int deslikes;
+	private ArrayList<String> conteudo = new ArrayList<String>();
+
+
 
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
 		this.mensagem = mensagem;
@@ -18,8 +23,46 @@ public class Postagem {
 		this.likes = 0;
 		this.deslikes = 0;
 		this.tags = hashtags;
+		this.refinaMensagem(this.mensagem);
+
 	}
 
+	public void refinaMensagem(String mensagem){
+		if(mensagem.contains(" <imagem>")){
+			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <imagem>")));	
+		}
+		if(mensagem.contains(" <audio>")){
+			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <audio>")));
+		}
+		
+		Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");  
+		List<String> list1 = new ArrayList<String>();
+		Matcher m1 = padrao1.matcher(mensagem);
+
+			while (m1.find()) {
+			    list1.add("$arquivo_audio:" + m1.group());
+			}
+			this.conteudo.addAll(list1);
+		Pattern padrao2 = Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");  
+		List<String> list2 = new ArrayList<String>();
+		Matcher m2 = padrao2.matcher(mensagem);
+
+			while (m2.find()) {
+			    list2.add("$arquivo_imagem:" + m2.group());
+			}
+			this.conteudo.addAll(list2);
+	}
+	
+	public String getConteudo(int index) throws Exception {
+		if(index < 0){
+			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
+		}
+		if((this.conteudo.size()) < index+1){
+			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size() + " itens distintos.");
+		}
+		return conteudo.get(index);
+	}
+	
 	public String getMensagem() {
 		return mensagem;
 	}

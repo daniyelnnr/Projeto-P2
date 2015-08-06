@@ -158,4 +158,7 @@ public class Facade {
 		sistema.curtirPost(emailAmigo, indicePost);
 	}
 
+	public String getConteudoPost(int indice, int post) throws Exception{
+		return sistema.getConteudo(indice, post);
+	}
 }

@@ -372,4 +372,8 @@ public class Controller {
 		return this.usuarioLogado.getQtdAmigos();
 	}
 
+	public String getConteudo(int indice, int post) throws Exception {
+		return this.usuarioLogado.getMural().get(post).getConteudo(indice);
+	}
+
 }
