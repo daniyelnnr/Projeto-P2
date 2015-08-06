@@ -168,10 +168,15 @@ public class Controller {
 		}
 	}
 	
-	public void curtirPost(String emailAmigo, int indicePost){
+	public void curtirPost(String emailAmigo, int indicePost) throws Exception{
 		for (int i = 0; i < this.usuarioLogado.amigos.size(); i++) {
+			Postagem postagem = this.usuarioLogado.amigos.get(i).mural.get(indicePost);
+			
 			if (this.usuarioLogado.amigos.get(i).getEmail().equals(emailAmigo)) {
-				this.usuarioLogado.amigos.get(i).mural.get(indicePost).setNewLikes();
+				postagem.setNewLikes();
+				this.usuarioLogado.amigos.get(i).notificacoes.add(this.usuarioLogado.getNome()
+						+ " curtiu seu post de " + postagem.getData()+".");
+			
 			}
 		}
 	}
