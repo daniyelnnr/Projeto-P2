@@ -167,6 +167,14 @@ public class Controller {
 					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
 		}
 	}
+	
+	public void curtirPost(String emailAmigo, int indicePost){
+		for (int i = 0; i < this.usuarioLogado.amigos.size(); i++) {
+			if (this.usuarioLogado.amigos.get(i).getEmail().equals(emailAmigo)) {
+				this.usuarioLogado.amigos.get(i).mural.get(indicePost).setNewLikes();
+			}
+		}
+	}
 
 	public void removeUsuario(String email) {
 		for (int i = 0; i < listaUsuario.size(); i++) {

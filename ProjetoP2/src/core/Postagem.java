@@ -40,6 +40,14 @@ public class Postagem {
 		return txt.substring(0, txt.length()-1);
 	}
 	
+	public int getLikes(){
+		return likes;
+	}
+	
+	public void setNewLikes(){
+		this.likes += 1;
+	}
+	
 	public String getData() throws Exception{
 		String data = this.data;
 		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

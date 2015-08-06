@@ -153,5 +153,9 @@ public class Facade {
 	public String getPost(String atributo, int indice) throws Exception {
 		return sistema.getPost(atributo, indice);
 	}
+	
+	public void curtirPost(String emailAmigo, int indicePost){
+		sistema.curtirPost(emailAmigo, indicePost);
+	}
 
 }
