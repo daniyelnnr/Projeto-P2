@@ -115,8 +115,8 @@ public class Controller {
 
 	public void aceitaAmizade(String email) throws Exception {
 		Usuario usuario = this.buscaUsuario(email);
-		this.usuarioLogado.adicionaAmigo(usuario);
-		usuario.amigos.add(usuarioLogado);
+		this.usuarioLogado.aceitaAmizade(usuario);
+		usuario.adicionaAmigo(usuarioLogado);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " aceitou sua amizade.");
 	}
@@ -133,7 +133,7 @@ public class Controller {
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " removeu a sua amizade.");
 		usuario.amigos.remove(this.usuarioLogado);
-		this.usuarioLogado.amigos.remove(usuario);
+		this.usuarioLogado.removeAmigo(usuario);
 	}
 
 	public void rejeitaAmizade(String email) throws Exception {
@@ -142,7 +142,7 @@ public class Controller {
 			throw new Exception("O usuario " + email
 					+ " nao esta cadastrado no +pop.");
 		}
-		this.usuarioLogado.removeAmigo(usuario);
+		this.usuarioLogado.rejeitaAmizade(usuario);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " rejeitou sua amizade.");
 
@@ -169,16 +169,19 @@ public class Controller {
 					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
 		}
 	}
-	
-	public void curtirPost(String emailAmigo, int indicePost) throws Exception{
+
+	public void curtirPost(String emailAmigo, int indicePost) throws Exception {
 		for (int i = 0; i < this.usuarioLogado.amigos.size(); i++) {
-			Postagem postagem = this.usuarioLogado.amigos.get(i).mural.get(indicePost);
-			
+			Postagem postagem = this.usuarioLogado.amigos.get(i).mural
+					.get(indicePost);
+
 			if (this.usuarioLogado.amigos.get(i).getEmail().equals(emailAmigo)) {
 				postagem.setNewLikes();
-				this.usuarioLogado.amigos.get(i).notificacoes.add(this.usuarioLogado.getNome()
-						+ " curtiu seu post de " + postagem.getData()+".");
-			
+				this.usuarioLogado.amigos.get(i).notificacoes
+						.add(this.usuarioLogado.getNome()
+								+ " curtiu seu post de " + postagem.getData()
+								+ ".");
+
 			}
 		}
 	}

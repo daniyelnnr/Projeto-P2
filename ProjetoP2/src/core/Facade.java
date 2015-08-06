@@ -49,47 +49,47 @@ public class Facade {
 		return sistema.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
-	
-	public void adicionaAmigo(String email){
+
+	public void adicionaAmigo(String email) {
 		sistema.adicionaAmigo(email);
 	}
-	
-	public void removeAmigo(String email){
+
+	public void removeAmigo(String email) {
 		sistema.removeAmigo(email);
 	}
 
-	public void aceitaAmizade(String email) throws Exception{
+	public void aceitaAmizade(String email) throws Exception {
 		sistema.aceitaAmizade(email);
 	}
 
-	public void rejeitaAmizade(String email) throws Exception{
+	public void rejeitaAmizade(String email) throws Exception {
 		sistema.rejeitaAmizade(email);
 	}
-	
-	public int getNotificacoes(){
+
+	public int getNotificacoes() {
 		return sistema.getNotificacao();
-		
+
 	}
-	
-	public int getQtdAmigos(){
+
+	public int getQtdAmigos() {
 		return sistema.getQtdAmigos();
 	}
-	
-	public String getNextNotificacao() throws Exception{
+
+	public String getNextNotificacao() throws Exception {
 		return sistema.getNextInformacao();
 	}
-	
+
 	public String getInfoUsuario(String nomeInformacao) throws Exception {
 		return sistema.getInfoUsuarioLogado(nomeInformacao);
 	}
 
 	public void login(String emailUsuario, String senhaUsuario)
 			throws Exception {
-		try{
-		sistema.login(emailUsuario, senhaUsuario);
-	} catch (Exception e) {
-		throw new ErroLogin(e.getMessage());
-	}
+		try {
+			sistema.login(emailUsuario, senhaUsuario);
+		} catch (Exception e) {
+			throw new ErroLogin(e.getMessage());
+		}
 	}
 
 	public void logout() throws Exception {
@@ -153,8 +153,8 @@ public class Facade {
 	public String getPost(String atributo, int indice) throws Exception {
 		return sistema.getPost(atributo, indice);
 	}
-	
-	public void curtirPost(String emailAmigo, int indicePost) throws Exception{
+
+	public void curtirPost(String emailAmigo, int indicePost) throws Exception {
 		sistema.curtirPost(emailAmigo, indicePost);
 	}
 

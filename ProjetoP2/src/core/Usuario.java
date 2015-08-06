@@ -14,7 +14,7 @@ public class Usuario {
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
 	Notificacoes notificacoes = new Notificacoes();
-	
+
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
 		this.email = email;
@@ -81,7 +81,6 @@ public class Usuario {
 		return imgAvatar;
 	}
 
-
 	public ArrayList<Postagem> getMural() {
 		return mural;
 	}
@@ -98,26 +97,36 @@ public class Usuario {
 		this.amigos = amigos;
 	}
 
-	public boolean adicionaAmigo(Usuario amigo) throws Exception {
-		for (Usuario usuario : pedidosAmizade) {
-			if(usuario.getEmail() == amigo.getEmail()){
-				this.amigos.add(usuario);
-				return true;
-				
-			}
-		}
-		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade.");
+	public void adicionaAmigo(Usuario amigo) {
+		this.amigos.add(amigo);
 	}
 
-	public boolean removeAmigo(Usuario amigo) throws Exception {
+	public void removeAmigo(Usuario amigo) {
+		this.amigos.remove(amigo);
+	}
+
+	public boolean aceitaAmizade(Usuario amigo) throws Exception {
 		for (Usuario usuario : pedidosAmizade) {
-			if(usuario.getEmail() == amigo.getEmail()){
-				this.amigos.remove(usuario);
+			if (usuario.getEmail() == amigo.getEmail()) {
+				this.amigos.add(usuario);
 				return true;
-				
+
 			}
 		}
-		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade.");
+		throw new Exception(amigo.getNome()
+				+ " nao lhe enviou solicitacoes de amizade.");
+	}
+
+	public boolean rejeitaAmizade(Usuario amigo) throws Exception {
+		for (Usuario usuario : pedidosAmizade) {
+			if (usuario.getEmail() == amigo.getEmail()) {
+				this.amigos.remove(usuario);
+				return true;
+
+			}
+		}
+		throw new Exception(amigo.getNome()
+				+ " nao lhe enviou solicitacoes de amizade.");
 	}
 
 	public int getQtdAmigos() {

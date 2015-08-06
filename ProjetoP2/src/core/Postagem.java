@@ -11,7 +11,7 @@ public class Postagem {
 	private int likes;
 	private int deslikes;
 
-	public Postagem(String mensagem, ArrayList<String> hashtags, String data){
+	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
 		this.mensagem = mensagem;
 		this.data = data;
 		this.pontosPopularidade = 0;
@@ -19,36 +19,36 @@ public class Postagem {
 		this.deslikes = 0;
 		this.tags = hashtags;
 	}
-	
-	public String getMensagem(){
+
+	public String getMensagem() {
 		return mensagem;
 	}
-	
-	public String getTags(){
+
+	public String getTags() {
 		String txt = "";
 		for (String tag : tags) {
 			txt += tag + " ";
 		}
-		return txt.substring(0, txt.length()-1);
+		return txt.substring(0, txt.length() - 1);
 	}
-	
-	public String getTagsToString(){
+
+	public String getTagsToString() {
 		String txt = "";
 		for (String tag : tags) {
 			txt += tag + ",";
 		}
-		return txt.substring(0, txt.length()-1);
+		return txt.substring(0, txt.length() - 1);
 	}
-	
-	public int getLikes(){
+
+	public int getLikes() {
 		return likes;
 	}
-	
-	public void setNewLikes(){
+
+	public void setNewLikes() {
 		this.likes += 1;
 	}
-	
-	public String getData() throws Exception{
+
+	public String getData() throws Exception {
 		String data = this.data;
 		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
