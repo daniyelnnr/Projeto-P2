@@ -116,6 +116,7 @@ public class Controller {
 	public void aceitaAmizade(String email) throws Exception {
 		Usuario usuario = this.buscaUsuario(email);
 		this.usuarioLogado.adicionaAmigo(usuario);
+		usuario.amigos.add(usuarioLogado);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " aceitou sua amizade.");
 	}
@@ -131,7 +132,8 @@ public class Controller {
 		Usuario usuario = this.buscaUsuario(email);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " removeu a sua amizade.");
-		usuario.amigos.remove(usuario);
+		usuario.amigos.remove(this.usuarioLogado);
+		this.usuarioLogado.amigos.remove(usuario);
 	}
 
 	public void rejeitaAmizade(String email) throws Exception {
