@@ -5,28 +5,25 @@ import java.util.ArrayList;
 public class Notificacoes {
 
 	ArrayList<String> notificacoes = new ArrayList<String>();
-	private int tamanho = this.notificacoes.size();
 	Usuario usuarioRemetente;
-	
-public int getNotificacoes(){
-	return this.notificacoes.size();
-}
 
-public String getNextNotificacao() throws Exception{
-	if(tamanho == 0){
-		throw new Exception("Nao ha mais notificacoes.");
+	public int getNotificacoes() {
+		return this.notificacoes.size();
 	}
-	String saida = this.notificacoes.get(0);
-	this.notificacoes.remove(0);
-	return saida;
-		
-	
-}
 
-public void add(String string) {
-	this.notificacoes.add(string);
-	
-}
+	public String getNextNotificacao() throws Exception {
+		if (this.notificacoes.size() == 0) {
+			throw new Exception("Nao ha mais notificacoes.");
+		}
+		String saida = this.notificacoes.get(0);
+		this.notificacoes.remove(0);
+		return saida;
+
+	}
+
+	public void add(String string) {
+		this.notificacoes.add(string);
+
+	}
 
 }
-
