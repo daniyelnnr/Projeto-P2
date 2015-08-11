@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
+	private Validadores validadores = new Validadores();
 	private Usuario usuarioLogado = null;
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 
@@ -15,9 +16,9 @@ public class Controller {
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception("Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaData(dataNasUsuario)
-				&& this.validaEmail(emailUsuario)) {
-			this.validaData(dataNasUsuario);
+		} else if (validadores.validaData(dataNasUsuario)
+				&& validadores.validaEmail(emailUsuario)) {
+			validadores.validaData(dataNasUsuario);
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
 			listaUsuario.add(usuario);
@@ -34,8 +35,8 @@ public class Controller {
 		if (nomeUsuario.equals("") || nomeUsuario == null
 				|| nomeUsuario.equals("  ")) {
 			throw new Exception("Nome dx usuarix nao pode ser vazio.");
-		} else if (this.validaData(dataNasUsuario)
-				&& this.validaEmail(emailUsuario)) {
+		} else if (validadores.validaData(dataNasUsuario)
+				&& validadores.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
 			listaUsuario.add(usuario);
@@ -210,12 +211,12 @@ public class Controller {
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			this.usuarioLogado.setFoto(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
-			if (validaEmail(valor) == false) {
+			if (validadores.validaEmail(valor) == false) {
 				throw new Exception("Formato de e-mail esta invalido.");
 			}
 			this.usuarioLogado.setEmail(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
-			this.validaData(valor);
+			validadores.validaData(valor);
 			this.usuarioLogado.setData(valor);
 		} else {
 			throw new Exception();
@@ -293,79 +294,6 @@ public class Controller {
 		}
 
 		return mensagemRequerida;
-	}
-
-	private boolean validaEmail(String email) {
-		int count = 0;
-		for (char c : email.toCharArray()) {
-			if (c == '@')
-				count++;
-		}
-		if (count == 1) {
-			int atPos = email.lastIndexOf("@");
-			if (atPos != -1) {
-				String subs = email.substring(0, atPos);
-				if (subs.isEmpty()) {
-					return false;
-				}
-				subs = email.substring(atPos + 1, email.length());
-				if (subs.isEmpty()) {
-					return false;
-				} else {
-					if (subs.contains(".")) {
-						String subs1 = subs.substring(0, subs.indexOf('.'));
-						if (subs1.isEmpty()) {
-							return false;
-						}
-						if (subs.endsWith(".com") || subs.endsWith(".com.br")) {
-							return true;
-						} else {
-							return false;
-						}
-					} else {
-						return false;
-					}
-				}
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	public boolean validaData(String data) throws Exception {
-		int count = 0;
-		for (char c : data.toCharArray()) {
-			if (c == '/')
-				count++;
-			if (Character.isLetter(c)) {
-				throw new Exception("Formato de data esta invalida.");
-			}
-		}
-		if (count == 2) {
-			String dia = data.substring(0, data.indexOf("/"));
-			String mes = data.substring(data.indexOf("/") + 1,
-					data.lastIndexOf("/"));
-			String ano = data.substring(data.lastIndexOf("/") + 1,
-					data.length());
-			if (dia.length() == 2 && mes.length() == 2 && ano.length() == 4) {
-				SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
-				input.setLenient(false);
-				try {
-					input.parse(data);
-				} catch (ParseException e) {
-					if (e.getLocalizedMessage().startsWith("Unparseable date")) {
-						throw new Exception("Data nao existe.");
-					}
-				}
-				return true;
-			} else {
-				throw new Exception("Formato de data esta invalida.");
-			}
-		} else {
-			throw new Exception("Formato de data esta invalida.");
-		}
 	}
 
 	public int getQtdAmigos() {
