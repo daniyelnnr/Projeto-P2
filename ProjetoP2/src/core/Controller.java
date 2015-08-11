@@ -157,7 +157,6 @@ public class Controller {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 
-
 	public void logout() throws Exception {
 		if (this.usuarioLogado != null) {
 			this.usuarioLogado = null;
@@ -167,20 +166,16 @@ public class Controller {
 		}
 	}
 
-	public void curtirPost(String emailAmigo, int indicePost) throws Exception {
-		for (int i = 0; i < this.usuarioLogado.amigos.size(); i++) {
-			Postagem postagem = this.usuarioLogado.amigos.get(i).mural
-					.get(indicePost);
+	public void curtirPost(String emailAmigo, int indice) throws Exception {
+		Postagem postagem = this.usuarioLogado.getPostagemAmigo(emailAmigo,
+				indice);
+		postagem.setNewLikes();
 
-			if (this.usuarioLogado.amigos.get(i).getEmail().equals(emailAmigo)) {
-				postagem.setNewLikes();
-				this.usuarioLogado.amigos.get(i).notificacoes
-						.add(this.usuarioLogado.getNome()
-								+ " curtiu seu post de " + postagem.getData()
-								+ ".");
+		Usuario usuarioAmigo = this.buscaUsuario(emailAmigo);
 
-			}
-		}
+		usuarioAmigo.notificacoes.add(this.usuarioLogado.getNome()
+				+ " curtiu seu post de " + postagem.getData() + ".");
+
 	}
 
 	public void removeUsuario(String email) {

@@ -132,5 +132,22 @@ public class Usuario {
 	public int getQtdAmigos() {
 		return this.amigos.size();
 	}
+	
+	public Postagem getPostagemAmigo(String emailAmigo, int indicePost){
+		Postagem postagemRequerida = null;
+		
+		for (Usuario usuario : amigos) {
+			if (usuario.getEmail().equals(emailAmigo)) {
+				postagemRequerida = usuario.mural.get(indicePost);
+			}	
+		}
+		
+		return postagemRequerida;
+		
+	}
+	
+	public Usuario getAmigo(int indice){
+		return amigos.get(indice);
+	}
 
 }
