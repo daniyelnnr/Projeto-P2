@@ -157,10 +157,6 @@ public class Controller {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 
-	public String getNome(String emailUsuario) {
-		Usuario user = this.buscaUsuario(emailUsuario);
-		return user == null ? null : user.getNome();
-	}
 
 	public void logout() throws Exception {
 		if (this.usuarioLogado != null) {

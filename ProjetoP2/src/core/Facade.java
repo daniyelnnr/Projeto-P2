@@ -101,15 +101,7 @@ public class Facade {
 		sistema.removeUsuario(email);
 	}
 
-	public String getNome(String email) throws Exception {
-		String nomeUsuario = sistema.getNome(email);
-		if (nomeUsuario == null) {
-			throw new Exception("O usuario com email " + email
-					+ " nao esta cadastrado.");
-		} else {
-			return nomeUsuario;
-		}
-	}
+
 
 	public void atualizaPerfil(String nomeInformacao, String valor)
 			throws Exception {
