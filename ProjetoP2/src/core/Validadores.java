@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Validadores {
-	
+
 	public boolean validaEmail(String email) {
 		int count = 0;
 		for (char c : email.toCharArray()) {
@@ -43,7 +43,7 @@ public class Validadores {
 			return false;
 		}
 	}
-	
+
 	public boolean validaData(String data) throws Exception {
 		int count = 0;
 		for (char c : data.toCharArray()) {
@@ -77,7 +77,5 @@ public class Validadores {
 			throw new Exception("Formato de data esta invalida.");
 		}
 	}
-
-
 
 }
