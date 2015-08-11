@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Controller {
 
+	private UsuarioLogado usuarioLogado = new UsuarioLogado();
 	private Validadores validadores = new Validadores();
-	private Usuario usuarioLogado = null;
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
@@ -49,25 +49,8 @@ public class Controller {
 
 	public boolean login(String emailUsuario, String senhaUsuario)
 			throws Exception {
-		if (this.usuarioLogado == null) {
-			Usuario user = this.buscaUsuario(emailUsuario);
-			if (user == null) {
-				throw new Exception("Um usuarix com email " + emailUsuario
-						+ " nao esta cadastradx.");
-			}
 
-			else if (user.getSenha().equals(senhaUsuario)) {
-				usuarioLogado = user;
-				return true;
-			}
-
-			else {
-				throw new Exception("Senha invalida.");
-			}
-		} else {
-			throw new Exception("Um usuarix ja esta logadx: "
-					+ this.usuarioLogado.getNome() + ".");
-		}
+		return usuarioLogado.login(emailUsuario, senhaUsuario);
 	}
 
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
