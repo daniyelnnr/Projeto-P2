@@ -3,7 +3,7 @@ package core;
 import exceptions.ErroUsuarioOffline;
 
 public class Operacoes {
-	
+	//Validadores validadores, BancoDeDados bancodedados, Usuario usuarioLogado
 	public String cadastraUsuario(Validadores validadores, BancoDeDados bancodedados, String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario, String imgAvatar)
 			throws Exception {
 		if (nomeUsuario.equals("") || nomeUsuario == null
@@ -39,17 +39,17 @@ public class Operacoes {
 	
 	}
 
-	public boolean login(BancoDeDados bancodedados, Usuario usuarioLogado, String emailUsuario, String senhaUsuario)
+	public boolean login(Controller controller, String emailUsuario, String senhaUsuario)
 			throws Exception {
-		if (usuarioLogado == null) {
-			Usuario user = bancodedados.buscaUsuario(emailUsuario);
+		if (controller.usuarioLogado == null) {
+			Usuario user = controller.bancodedados.buscaUsuario(emailUsuario);
 			if (user == null) {
 				throw new Exception("Um usuarix com email " + emailUsuario
 						+ " nao esta cadastradx.");
 			}
 	
 			else if (user.getSenha().equals(senhaUsuario)) {
-				usuarioLogado = user;
+				controller.usuarioLogado = user;
 				return true;
 			}
 	
@@ -58,13 +58,13 @@ public class Operacoes {
 			}
 		} else {
 			throw new Exception("Um usuarix ja esta logadx: "
-					+ usuarioLogado.getNome() + ".");
+					+ controller.usuarioLogado.getNome() + ".");
 		}
 	}
 
-	public void logout(Usuario usuarioLogado) throws Exception {
-		if (usuarioLogado != null) {
-			usuarioLogado = null;
+	public void logout(Controller controller) throws Exception {
+		if (controller.usuarioLogado != null) {
+			controller.usuarioLogado = null;
 		} else {
 			throw new ErroUsuarioOffline("Nao eh possivel realizar logout. ");
 		}

@@ -12,7 +12,7 @@ public class Controller {
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 	String senhaUsuario, String dataNasUsuario, String imgAvatar)
 	throws Exception {
-		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario,
+		return operacoes.cadastraUsuario( getValidadores(), getBancodedados(), nomeUsuario,
 				emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
 	}
 
@@ -28,11 +28,11 @@ public class Controller {
 
 	public boolean login(String emailUsuario, String senhaUsuario)
 	throws Exception {
-		return operacoes.login(getBancodedados(), getUsuarioLogado(), emailUsuario, senhaUsuario);
+		return operacoes.login(this, emailUsuario, senhaUsuario);
 	}
 
 	public void logout() throws Exception {
-		operacoes.logout(getUsuarioLogado());
+		operacoes.logout(this);
 	}
 
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
