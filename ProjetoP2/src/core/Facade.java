@@ -46,7 +46,7 @@ public class Facade {
 
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
 			throws Exception {
-		return sistema.getInfoUsuario(nomeInformacao, emailUsuario);
+		return sistema.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
 
@@ -130,7 +130,7 @@ public class Facade {
 	}
 
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {
-		return sistema.buscaUsuario(emailUsuario);
+		return sistema.bancodedados.buscaUsuario(emailUsuario);
 
 	}
 

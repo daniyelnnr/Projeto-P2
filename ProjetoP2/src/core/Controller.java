@@ -1,14 +1,12 @@
 package core;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Controller {
 
 	private Validadores validadores = new Validadores();
 	private Usuario usuarioLogado = null;
-	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+	BancoDeDados bancodedados = new BancoDeDados();
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 			String senhaUsuario, String dataNasUsuario, String imgAvatar)
@@ -21,7 +19,7 @@ public class Controller {
 			validadores.validaData(dataNasUsuario);
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario, imgAvatar);
-			listaUsuario.add(usuario);
+			bancodedados.getListaUsuario().add(usuario);
 			return usuario.getEmail();
 		} else {
 			throw new Exception("Formato de e-mail esta invalido.");
@@ -39,7 +37,7 @@ public class Controller {
 				&& validadores.validaEmail(emailUsuario)) {
 			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
 					senhaUsuario, dataNasUsuario);
-			listaUsuario.add(usuario);
+			bancodedados.getListaUsuario().add(usuario);
 			return usuario.getEmail();
 		} else {
 			throw new Exception("Formato de e-mail esta invalido.");
@@ -50,7 +48,7 @@ public class Controller {
 	public boolean login(String emailUsuario, String senhaUsuario)
 			throws Exception {
 		if (this.usuarioLogado == null) {
-			Usuario user = this.buscaUsuario(emailUsuario);
+			Usuario user = this.bancodedados.buscaUsuario(emailUsuario);
 			if (user == null) {
 				throw new Exception("Um usuarix com email " + emailUsuario
 						+ " nao esta cadastradx.");
@@ -69,53 +67,21 @@ public class Controller {
 					+ this.usuarioLogado.getNome() + ".");
 		}
 	}
+	
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
+		return this.bancodedados.getInfoUsuario( nomeInformacao,
+				emailUsuario);
 
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
-			throws Exception {
-		String informacaoRequerida = "";
-		Usuario usuarioRequerido = this.buscaUsuario(emailUsuario);
-
-		if (usuarioRequerido == null) {
-
-			throw new Exception("Um usuarix com email " + emailUsuario
-					+ " nao esta cadastradx.");
-		}
-
-		else if (nomeInformacao.equalsIgnoreCase("Senha")) {
-			throw new Exception("A senha dx usuarix eh protegida.");
-		}
-
-		else if (nomeInformacao.equalsIgnoreCase("Nome")) {
-			informacaoRequerida = usuarioRequerido.getNome();
-		}
-
-		else if (nomeInformacao.equalsIgnoreCase("Foto")) {
-			informacaoRequerida = usuarioRequerido.getFoto();
-		}
-
-		else if (nomeInformacao.equalsIgnoreCase("Email")) {
-			informacaoRequerida = usuarioRequerido.getEmail();
-		}
-
-		else {
-			String data = usuarioRequerido.getData();
-			SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
-			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String output = myFormat.format(input.parse(data));
-			informacaoRequerida = output;
-		}
-
-		return informacaoRequerida;
 	}
 
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
-		return this.getInfoUsuario(nomeInformacao,
+		return this.bancodedados.getInfoUsuario( nomeInformacao,
 				this.usuarioLogado.getEmail());
 
 	}
 
 	public void aceitaAmizade(String email) throws Exception {
-		Usuario usuario = this.buscaUsuario(email);
+		Usuario usuario = this.bancodedados.buscaUsuario(email);
 		this.usuarioLogado.aceitaAmizade(usuario);
 		usuario.adicionaAmigo(usuarioLogado);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
@@ -123,14 +89,14 @@ public class Controller {
 	}
 
 	public void adicionaAmigo(String email) {
-		Usuario usuario = this.buscaUsuario(email);
+		Usuario usuario = this.bancodedados.buscaUsuario(email);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " quer sua amizade.");
 		usuario.pedidosAmizade.add(this.usuarioLogado);
 	}
 
 	public void removeAmigo(String email) {
-		Usuario usuario = this.buscaUsuario(email);
+		Usuario usuario = this.bancodedados.buscaUsuario(email);
 		usuario.notificacoes.add(this.usuarioLogado.getNome()
 				+ " removeu a sua amizade.");
 		usuario.amigos.remove(this.usuarioLogado);
@@ -138,7 +104,7 @@ public class Controller {
 	}
 
 	public void rejeitaAmizade(String email) throws Exception {
-		Usuario usuario = this.buscaUsuario(email);
+		Usuario usuario = this.bancodedados.buscaUsuario(email);
 		if (usuario == null) {
 			throw new Exception("O usuario " + email
 					+ " nao esta cadastrado no +pop.");
@@ -171,7 +137,7 @@ public class Controller {
 				indice);
 		postagem.setNewLikes();
 
-		Usuario usuarioAmigo = this.buscaUsuario(emailAmigo);
+		Usuario usuarioAmigo = this.bancodedados.buscaUsuario(emailAmigo);
 
 		usuarioAmigo.notificacoes.add(this.usuarioLogado.getNome()
 				+ " curtiu seu post de " + postagem.getData() + ".");
@@ -179,9 +145,9 @@ public class Controller {
 	}
 
 	public void removeUsuario(String email) {
-		for (int i = 0; i < listaUsuario.size(); i++) {
-			if (listaUsuario.get(i).getEmail().equals(email)) {
-				listaUsuario.remove(i);
+		for (int i = 0; i < bancodedados.size(); i++) {
+			if (bancodedados.get(i).getEmail().equals(email)) {
+				bancodedados.remove(i);
 			}
 
 		}
@@ -226,15 +192,6 @@ public class Controller {
 
 	public Usuario getUsuarioLogado() {
 		return this.usuarioLogado;
-	}
-
-	public Usuario buscaUsuario(String emailUsuario) {
-		Usuario user = null;
-		for (Usuario usuario : listaUsuario) {
-			if (usuario.getEmail().equals(emailUsuario))
-				user = usuario;
-		}
-		return user;
 	}
 
 	public void postarMensagem(String conteudo, String data) throws Exception {

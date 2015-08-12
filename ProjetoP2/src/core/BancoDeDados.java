@@ -1,0 +1,77 @@
+package core;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+public class BancoDeDados {
+
+	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+
+	public Usuario get(int i) {
+		return getListaUsuario().get(i);
+	}
+
+	public int size() {
+		return getListaUsuario().size();
+	}
+
+	public void remove(int i) {
+		getListaUsuario().remove(i);
+	}
+
+	public ArrayList<Usuario> getListaUsuario() {
+		return listaUsuario;
+	}
+
+	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
+		this.listaUsuario = listaUsuario;
+	}
+
+	public Usuario buscaUsuario(String emailUsuario) {
+		Usuario user = null;
+		for (Usuario usuario : getListaUsuario()) {
+			if (usuario.getEmail().equals(emailUsuario))
+				user = usuario;
+		}
+		return user;
+	}
+
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
+			throws Exception {
+		String informacaoRequerida = "";
+		Usuario usuarioRequerido = buscaUsuario(emailUsuario);
+	
+		if (usuarioRequerido == null) {
+	
+			throw new Exception("Um usuarix com email " + emailUsuario
+					+ " nao esta cadastradx.");
+		}
+	
+		else if (nomeInformacao.equalsIgnoreCase("Senha")) {
+			throw new Exception("A senha dx usuarix eh protegida.");
+		}
+	
+		else if (nomeInformacao.equalsIgnoreCase("Nome")) {
+			informacaoRequerida = usuarioRequerido.getNome();
+		}
+	
+		else if (nomeInformacao.equalsIgnoreCase("Foto")) {
+			informacaoRequerida = usuarioRequerido.getFoto();
+		}
+	
+		else if (nomeInformacao.equalsIgnoreCase("Email")) {
+			informacaoRequerida = usuarioRequerido.getEmail();
+		}
+	
+		else {
+			String data = usuarioRequerido.getData();
+			SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String output = myFormat.format(input.parse(data));
+			informacaoRequerida = output;
+		}
+	
+		return informacaoRequerida;
+	}
+	
+}
