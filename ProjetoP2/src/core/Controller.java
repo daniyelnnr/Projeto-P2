@@ -52,15 +52,15 @@ public class Controller {
 	}
 
 	public void adicionaAmigo(String email) {
-		amizade.adicionaAmigo(this, email);
+		amizade.adicionaAmigo(getUsuarioLogado(), getBancodedados(),  email);
 	}
 
 	public void removeAmigo(String email) {
-		amizade.removeAmigo(this, email);
+		amizade.removeAmigo(getUsuarioLogado(), getBancodedados(),  email);
 	}
 
 	public void rejeitaAmizade(String email) throws Exception {
-		amizade.rejeitaAmizade(this, email);
+		amizade.rejeitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
 	}
 
 	public int getNotificacao() {

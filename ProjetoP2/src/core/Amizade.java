@@ -10,29 +10,29 @@ public class Amizade {
 				+ " aceitou sua amizade.");
 	}
 
-	public void adicionaAmigo(Controller controller, String email) {
-		Usuario usuario = controller.bancodedados.buscaUsuario(email);
-		usuario.notificacoes.add(controller.usuarioLogado.getNome()
+	public void adicionaAmigo(Usuario usuario2, BancoDeDados bancoDeDados, String email) {
+		Usuario usuario = bancoDeDados.buscaUsuario(email);
+		usuario.notificacoes.add(usuario2.getNome()
 				+ " quer sua amizade.");
-		usuario.pedidosAmizade.add(controller.usuarioLogado);
+		usuario.pedidosAmizade.add(usuario2);
 	}
 
-	public void removeAmigo(Controller controller, String email) {
-		Usuario usuario = controller.bancodedados.buscaUsuario(email);
-		usuario.notificacoes.add(controller.usuarioLogado.getNome()
+	public void removeAmigo(Usuario usuario2, BancoDeDados bancoDeDados, String email) {
+		Usuario usuario = bancoDeDados.buscaUsuario(email);
+		usuario.notificacoes.add(usuario2.getNome()
 				+ " removeu a sua amizade.");
-		usuario.amigos.remove(controller.usuarioLogado);
-		controller.usuarioLogado.removeAmigo(usuario);
+		usuario.amigos.remove(usuario2);
+		usuario2.removeAmigo(usuario);
 	}
 
-	public void rejeitaAmizade(Controller controller, String email) throws Exception {
-		Usuario usuario = controller.bancodedados.buscaUsuario(email);
+	public void rejeitaAmizade(Usuario usuario2, BancoDeDados bancoDeDados, String email) throws Exception {
+		Usuario usuario = bancoDeDados.buscaUsuario(email);
 		if (usuario == null) {
 			throw new Exception("O usuario " + email
 					+ " nao esta cadastrado no +pop.");
 		}
-		controller.usuarioLogado.rejeitaAmizade(usuario);
-		usuario.notificacoes.add(controller.usuarioLogado.getNome()
+		usuario2.rejeitaAmizade(usuario);
+		usuario.notificacoes.add(usuario2.getNome()
 				+ " rejeitou sua amizade.");
 	
 	}
