@@ -3,6 +3,8 @@ package core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import exceptions.ErroUsuarioOffline;
+
 public class Validadores {
 
 	public boolean validaEmail(String email) {
@@ -75,6 +77,12 @@ public class Validadores {
 			}
 		} else {
 			throw new Exception("Formato de data esta invalida.");
+		}
+	}
+
+	public void validarUsuarioLogado(Object usuarioLogado, String menssagem) throws ErroUsuarioOffline{
+		if (usuarioLogado == null) {
+			throw new ErroUsuarioOffline(menssagem);
 		}
 	}
 

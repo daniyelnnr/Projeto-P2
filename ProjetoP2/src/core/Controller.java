@@ -2,10 +2,12 @@ package core;
 
 import java.util.ArrayList;
 
+import exceptions.ErroUsuarioOffline;
+
 public class Controller {
 
-	private Validadores validadores = new Validadores();
-	private Usuario usuarioLogado = null;
+	Validadores validadores = new Validadores();
+	Usuario usuarioLogado = null;
 	BancoDeDados bancodedados = new BancoDeDados();
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
@@ -76,8 +78,7 @@ public class Controller {
 		if (this.usuarioLogado != null) {
 			this.usuarioLogado = null;
 		} else {
-			throw new Exception(
-					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
+			throw new ErroUsuarioOffline("Nao eh possivel realizar logout. ");
 		}
 	}
 
@@ -150,10 +151,7 @@ public class Controller {
 
 	public void atualizaPerfil(String nomeInformacao, String valor)
 			throws Exception {
-
-		if (usuarioLogado == null) {
-			throw new Exception("Nenhum usuarix esta logadx no +pop.");
-		}
+		this.validadores.validarUsuarioLogado(this.usuarioLogado, "");
 
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
 			if (valor.equals("")) {
@@ -190,11 +188,7 @@ public class Controller {
 	}
 
 	public void postarMensagem(String conteudo, String data) throws Exception {
-		// olhar isso mais tarde de usuarioLogado
-		if (this.usuarioLogado == null) {
-			throw new Exception(
-					"Nao eh possivel postar mensagem. Nenhum usuario esta logado no +pop.");
-		}
+		this.validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
 		int index = conteudo.indexOf("#");
 		String msg = conteudo.substring(0, index - 1);
 		if (msg.length() >= 200)
