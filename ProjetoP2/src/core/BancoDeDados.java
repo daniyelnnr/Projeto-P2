@@ -80,4 +80,28 @@ public class BancoDeDados {
 
 	}
 
+	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor)
+			throws Exception {
+		controller.validadores.validarUsuarioLogado(controller.usuarioLogado, "");
+	
+		if (nomeInformacao.equalsIgnoreCase("Nome")) {
+			if (valor.equals("")) {
+				throw new Exception("Nome dx usuarix nao pode ser vazio.");
+			}
+			controller.usuarioLogado.setNome(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
+			controller.usuarioLogado.setFoto(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
+			if (controller.validadores.validaEmail(valor) == false) {
+				throw new Exception("Formato de e-mail esta invalido.");
+			}
+			controller.usuarioLogado.setEmail(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
+			controller.validadores.validaData(valor);
+			controller.usuarioLogado.setData(valor);
+		} else {
+			throw new Exception();
+		}
+	}
+
 }

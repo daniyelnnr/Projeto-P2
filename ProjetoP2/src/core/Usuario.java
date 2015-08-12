@@ -150,4 +150,95 @@ public class Usuario {
 		return amigos.get(indice);
 	}
 
+	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor)
+			throws Exception {
+		controller.validadores.validarUsuarioLogado(this, "");
+	
+		if (nomeInformacao.equalsIgnoreCase("Nome")) {
+			if (valor.equals("")) {
+				throw new Exception("Nome dx usuarix nao pode ser vazio.");
+			}
+			setNome(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
+			setFoto(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
+			if (controller.validadores.validaEmail(valor) == false) {
+				throw new Exception("Formato de e-mail esta invalido.");
+			}
+			setEmail(valor);
+		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
+			controller.validadores.validaData(valor);
+			setData(valor);
+		} else {
+			throw new Exception();
+		}
+	}
+
+	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor, String velhaSenha) throws Exception {
+		if ((nomeInformacao.equalsIgnoreCase("Senha"))
+				&& (getSenha().equals(velhaSenha))) {
+			setSenha(valor);
+		} else {
+			throw new Exception("A senha fornecida esta incorreta.");
+		}
+	}
+
+	public void postarMensagem(Controller controller, String conteudo, String data) throws Exception {
+		controller.validadores.validarUsuarioLogado(this, "Nao eh possivel postar mensagem. ");
+		int index = conteudo.indexOf("#");
+		String msg = conteudo.substring(0, index - 1);
+		if (msg.length() >= 200)
+			throw new Exception(
+					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
+		String resto = conteudo.substring(index, conteudo.length());
+		ArrayList<String> hashtags = new ArrayList<String>();
+		for (String hashtag : resto.split(" ")) {
+			if (!hashtag.startsWith("#"))
+				throw new Exception(
+						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
+								+ hashtag + "'.");
+			hashtags.add(hashtag);
+		}
+		Postagem novaPostagem = new Postagem(msg, hashtags, data);
+		mural.add(novaPostagem);
+	}
+
+	public String getPost(Controller controller, int indice) throws Exception {
+		return getMural().get(indice).getMensagem() + " "
+				+ getMural().get(indice).getTags() + " ("
+				+ getMural().get(indice).getData() + ")";
+	
+	}
+
+	public String getPost(Controller controller, String atributo, int indice) throws Exception {
+		String mensagemRequerida = "";
+	
+		if (atributo.equalsIgnoreCase("conteudo")) {
+			mensagemRequerida = mural.get(indice)
+					.getMensagem();
+		}
+	
+		else if (atributo.equalsIgnoreCase("data")) {
+			mensagemRequerida = mural.get(indice).getData();
+		} else {
+			mensagemRequerida = mural.get(indice)
+					.getTagsToString();
+	
+		}
+	
+		return mensagemRequerida;
+	}
+
+	public void curtirPost(Controller controller, String emailAmigo, int indice) throws Exception {
+		Postagem postagem = getPostagemAmigo(emailAmigo,
+				indice);
+		postagem.setNewLikes();
+	
+		Usuario usuarioAmigo = controller.bancodedados.buscaUsuario(emailAmigo);
+	
+		usuarioAmigo.notificacoes.add(getNome()
+				+ " curtiu seu post de " + postagem.getData() + ".");
+	
+	}
+
 }
