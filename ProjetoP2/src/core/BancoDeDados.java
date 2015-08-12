@@ -40,29 +40,29 @@ public class BancoDeDados {
 			throws Exception {
 		String informacaoRequerida = "";
 		Usuario usuarioRequerido = buscaUsuario(emailUsuario);
-	
+
 		if (usuarioRequerido == null) {
-	
+
 			throw new Exception("Um usuarix com email " + emailUsuario
 					+ " nao esta cadastradx.");
 		}
-	
+
 		else if (nomeInformacao.equalsIgnoreCase("Senha")) {
 			throw new Exception("A senha dx usuarix eh protegida.");
 		}
-	
+
 		else if (nomeInformacao.equalsIgnoreCase("Nome")) {
 			informacaoRequerida = usuarioRequerido.getNome();
 		}
-	
+
 		else if (nomeInformacao.equalsIgnoreCase("Foto")) {
 			informacaoRequerida = usuarioRequerido.getFoto();
 		}
-	
+
 		else if (nomeInformacao.equalsIgnoreCase("Email")) {
 			informacaoRequerida = usuarioRequerido.getEmail();
 		}
-	
+
 		else {
 			String data = usuarioRequerido.getData();
 			SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
@@ -70,8 +70,14 @@ public class BancoDeDados {
 			String output = myFormat.format(input.parse(data));
 			informacaoRequerida = output;
 		}
-	
+
 		return informacaoRequerida;
 	}
-	
+
+	public void removeUsuario(String email) {
+		Usuario user = this.buscaUsuario(email);
+		this.listaUsuario.remove(user);
+
+	}
+
 }

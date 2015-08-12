@@ -45,6 +45,10 @@ public class Controller {
 
 	}
 
+	public void removeUsuario(String email) {
+		this.bancodedados.removeUsuario(email);
+	}
+
 	public boolean login(String emailUsuario, String senhaUsuario)
 			throws Exception {
 		if (this.usuarioLogado == null) {
@@ -67,15 +71,24 @@ public class Controller {
 					+ this.usuarioLogado.getNome() + ".");
 		}
 	}
-	
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
-		return this.bancodedados.getInfoUsuario( nomeInformacao,
-				emailUsuario);
+
+	public void logout() throws Exception {
+		if (this.usuarioLogado != null) {
+			this.usuarioLogado = null;
+		} else {
+			throw new Exception(
+					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
+		}
+	}
+
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
+			throws Exception {
+		return this.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
 
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
-		return this.bancodedados.getInfoUsuario( nomeInformacao,
+		return this.bancodedados.getInfoUsuario(nomeInformacao,
 				this.usuarioLogado.getEmail());
 
 	}
@@ -123,15 +136,6 @@ public class Controller {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 
-	public void logout() throws Exception {
-		if (this.usuarioLogado != null) {
-			this.usuarioLogado = null;
-		} else {
-			throw new Exception(
-					"Nao eh possivel realizar logout. Nenhum usuarix esta logadx no +pop.");
-		}
-	}
-
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
 		Postagem postagem = this.usuarioLogado.getPostagemAmigo(emailAmigo,
 				indice);
@@ -142,15 +146,6 @@ public class Controller {
 		usuarioAmigo.notificacoes.add(this.usuarioLogado.getNome()
 				+ " curtiu seu post de " + postagem.getData() + ".");
 
-	}
-
-	public void removeUsuario(String email) {
-		for (int i = 0; i < bancodedados.size(); i++) {
-			if (bancodedados.get(i).getEmail().equals(email)) {
-				bancodedados.remove(i);
-			}
-
-		}
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor)
