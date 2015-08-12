@@ -2,11 +2,11 @@ package core;
 
 public class Amizade {
 
-	public void aceitaAmizade(Controller controller, String email) throws Exception {
-		Usuario usuario = controller.bancodedados.buscaUsuario(email);
-		controller.usuarioLogado.aceitaAmizade(usuario);
-		usuario.adicionaAmigo(controller.usuarioLogado);
-		usuario.notificacoes.add(controller.usuarioLogado.getNome()
+	public void aceitaAmizade(Usuario usuario2, BancoDeDados bancoDeDados, String email) throws Exception {
+		Usuario usuario = bancoDeDados.buscaUsuario(email);
+		usuario2.aceitaAmizade(usuario);
+		usuario.adicionaAmigo(usuario2);
+		usuario.notificacoes.add(usuario2.getNome()
 				+ " aceitou sua amizade.");
 	}
 

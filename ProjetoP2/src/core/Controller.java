@@ -48,7 +48,7 @@ public class Controller {
 	}
 
 	public void aceitaAmizade(String email) throws Exception {
-		amizade.aceitaAmizade(this, email);
+		amizade.aceitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
 	}
 
 	public void adicionaAmigo(String email) {
@@ -86,9 +86,6 @@ public class Controller {
 				velhaSenha);
 	}
 
-	public Usuario getUsuarioLogado() {
-		return this.usuarioLogado;
-	}
 	
 	public void postarMensagem(String conteudo, String data) throws Exception {
 		usuarioLogado.postarMensagem(this, conteudo, data);
@@ -110,4 +107,11 @@ public class Controller {
 		return this.usuarioLogado.getMural().get(post).getConteudo(indice);
 	}
 
+	public Usuario getUsuarioLogado() {
+		return this.usuarioLogado;
+	}
+	
+	public BancoDeDados getBancodedados() {
+		return bancodedados;
+	}
 }
