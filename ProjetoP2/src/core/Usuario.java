@@ -150,9 +150,9 @@ public class Usuario {
 		return amigos.get(indice);
 	}
 
-	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor)
+	public void atualizaPerfil(Validadores validadores, String nomeInformacao, String valor)
 			throws Exception {
-		controller.validadores.validarUsuarioLogado(this, "");
+		validadores.validarUsuarioLogado(this, "");
 	
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
 			if (valor.equals("")) {
@@ -162,19 +162,19 @@ public class Usuario {
 		} else if (nomeInformacao.equalsIgnoreCase("foto")) {
 			setFoto(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("E-mail")) {
-			if (controller.validadores.validaEmail(valor) == false) {
+			if (validadores.validaEmail(valor) == false) {
 				throw new Exception("Formato de e-mail esta invalido.");
 			}
 			setEmail(valor);
 		} else if (nomeInformacao.equalsIgnoreCase("Data de Nascimento")) {
-			controller.validadores.validaData(valor);
+			validadores.validaData(valor);
 			setData(valor);
 		} else {
 			throw new Exception();
 		}
 	}
 
-	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor, String velhaSenha) throws Exception {
+	public void atualizaPerfil( String nomeInformacao, String valor, String velhaSenha) throws Exception {
 		if ((nomeInformacao.equalsIgnoreCase("Senha"))
 				&& (getSenha().equals(velhaSenha))) {
 			setSenha(valor);
@@ -183,8 +183,8 @@ public class Usuario {
 		}
 	}
 
-	public void postarMensagem(Controller controller, String conteudo, String data) throws Exception {
-		controller.validadores.validarUsuarioLogado(this, "Nao eh possivel postar mensagem. ");
+	public void postarMensagem(Validadores validadores, String conteudo, String data) throws Exception {
+		validadores.validarUsuarioLogado(this, "Nao eh possivel postar mensagem. ");
 		int index = conteudo.indexOf("#");
 		String msg = conteudo.substring(0, index - 1);
 		if (msg.length() >= 200)
@@ -203,14 +203,14 @@ public class Usuario {
 		mural.add(novaPostagem);
 	}
 
-	public String getPost(Controller controller, int indice) throws Exception {
+	public String getPost(int indice) throws Exception {
 		return getMural().get(indice).getMensagem() + " "
 				+ getMural().get(indice).getTags() + " ("
 				+ getMural().get(indice).getData() + ")";
 	
 	}
 
-	public String getPost(Controller controller, String atributo, int indice) throws Exception {
+	public String getPost(String atributo, int indice) throws Exception {
 		String mensagemRequerida = "";
 	
 		if (atributo.equalsIgnoreCase("conteudo")) {
@@ -229,12 +229,12 @@ public class Usuario {
 		return mensagemRequerida;
 	}
 
-	public void curtirPost(Controller controller, String emailAmigo, int indice) throws Exception {
+	public void curtirPost(BancoDeDados bancodedados, String emailAmigo, int indice) throws Exception {
 		Postagem postagem = getPostagemAmigo(emailAmigo,
 				indice);
 		postagem.setNewLikes();
 	
-		Usuario usuarioAmigo = controller.bancodedados.buscaUsuario(emailAmigo);
+		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
 	
 		usuarioAmigo.notificacoes.add(getNome()
 				+ " curtiu seu post de " + postagem.getData() + ".");

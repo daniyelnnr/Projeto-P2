@@ -12,13 +12,13 @@ public class Controller {
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 	String senhaUsuario, String dataNasUsuario, String imgAvatar)
 	throws Exception {
-		return operacoes.cadastraUsuario(this, nomeUsuario,
+		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario,
 				emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
 	}
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 	String senhaUsuario, String dataNasUsuario) throws Exception {
-		return operacoes.cadastraUsuario(this, nomeUsuario,
+		return operacoes.cadastraUsuario( getValidadores(), getBancodedados(), nomeUsuario,
 				emailUsuario, senhaUsuario, dataNasUsuario);
 	}
 
@@ -28,11 +28,11 @@ public class Controller {
 
 	public boolean login(String emailUsuario, String senhaUsuario)
 	throws Exception {
-		return operacoes.login(this, emailUsuario, senhaUsuario);
+		return operacoes.login(getBancodedados(), getUsuarioLogado(), emailUsuario, senhaUsuario);
 	}
 
 	public void logout() throws Exception {
-		operacoes.logout(this);
+		operacoes.logout(getUsuarioLogado());
 	}
 
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
@@ -72,31 +72,31 @@ public class Controller {
 	}
 
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
-		usuarioLogado.curtirPost(this, emailAmigo, indice);
+		usuarioLogado.curtirPost(getBancodedados(), emailAmigo, indice);
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor)
 	throws Exception {
-		usuarioLogado.atualizaPerfil(this, nomeInformacao, valor);
+		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor,
 	String velhaSenha) throws Exception {
-		usuarioLogado.atualizaPerfil(this, nomeInformacao, valor,
+		usuarioLogado.atualizaPerfil(nomeInformacao, valor,
 				velhaSenha);
 	}
 
 	
 	public void postarMensagem(String conteudo, String data) throws Exception {
-		usuarioLogado.postarMensagem(this, conteudo, data);
+		usuarioLogado.postarMensagem(getValidadores(), conteudo, data);
 	}
 
 	public String getPost(int indice) throws Exception {
-		return usuarioLogado.getPost(this, indice);
+		return usuarioLogado.getPost(indice);
 	}
 
 	public String getPost(String atributo, int indice) throws Exception {
-		return usuarioLogado.getPost(this, atributo, indice);
+		return usuarioLogado.getPost(atributo, indice);
 	}
 
 	public int getQtdAmigos() {
@@ -114,4 +114,10 @@ public class Controller {
 	public BancoDeDados getBancodedados() {
 		return bancodedados;
 	}
+	
+	public Validadores getValidadores() {
+		return validadores;
+	}
+
+	
 }
