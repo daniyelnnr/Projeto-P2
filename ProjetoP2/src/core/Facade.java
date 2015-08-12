@@ -3,6 +3,7 @@ package core;
 import exceptions.ErroAtualizacao;
 import exceptions.ErroCadastro;
 import exceptions.ErroLogin;
+import exceptions.ErroUsuarioOffline;
 
 public class Facade {
 
@@ -106,8 +107,8 @@ public class Facade {
 	public void atualizaPerfil(String nomeInformacao, String valor)
 			throws Exception {
 		if (sistema.getUsuarioLogado() == null) {
-			throw new Exception(
-					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+			throw new ErroUsuarioOffline(
+					"Nao eh possivel atualizar um perfil. ");
 		}
 		try {
 			sistema.atualizaPerfil(nomeInformacao, valor);
@@ -119,8 +120,8 @@ public class Facade {
 	public void atualizaPerfil(String nomeInformacao, String valor,
 			String velhaSenha) throws Exception {
 		if (sistema.getUsuarioLogado() == null) {
-			throw new Exception(
-					"Nao eh possivel atualizar um perfil. Nenhum usuarix esta logadx no +pop.");
+			throw new ErroUsuarioOffline(
+					"Nao eh possivel atualizar um perfil. ");
 		}
 		try {
 			sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
