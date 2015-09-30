@@ -73,6 +73,7 @@ public class Controller {
 
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
 		usuarioLogado.curtirPost(this, emailAmigo, indice);
+		
 	}
 
 	public void atualizaPerfil(String nomeInformacao, String valor)
@@ -113,5 +114,12 @@ public class Controller {
 	
 	public BancoDeDados getBancodedados() {
 		return bancodedados;
+	}
+
+	public String atualizaRanking() {
+		// TODO Auto-generated method stub
+		String var1 = bancodedados.ordenaUsuario();
+		String var2 = bancodedados.ordenaHashtags();
+		return null;
 	}
 }
