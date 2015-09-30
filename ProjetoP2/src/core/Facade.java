@@ -154,4 +154,8 @@ public class Facade {
 	public String getConteudoPost(int indice, int post) throws Exception{
 		return sistema.getConteudo(indice, post);
 	}
+	
+	public String atualizaRanking(){
+		return sistema.atualizaRanking();
+	}
 }

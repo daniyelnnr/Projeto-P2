@@ -120,4 +120,11 @@ public class Controller {
 	}
 
 	
+
+	public String atualizaRanking() {
+		// TODO Auto-generated method stub
+		String var1 = bancodedados.ordenaUsuario();
+		String var2 = bancodedados.ordenaHashtags();
+		return null;
+	}
 }

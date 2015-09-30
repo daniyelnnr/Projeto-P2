@@ -2,7 +2,9 @@ package core;
 
 import java.util.ArrayList;
 
-public class Usuario {
+import javax.swing.plaf.metal.MetalIconFactory.FolderIcon16;
+
+public class Usuario implements Comparable{
 
 	private String email;
 	private String senha;
@@ -10,6 +12,8 @@ public class Usuario {
 	private String telefone;
 	private String dataNasc;
 	private String imgAvatar;
+	private int pops;
+	FeedNoticias feedNoticias = new FeedNoticias();
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
@@ -52,6 +56,10 @@ public class Usuario {
 	public String getTel() {
 		return telefone;
 	}
+	
+	public int getPops(){
+		return pops;
+	}
 
 	public void setSenha(String novaSenha) {
 		this.senha = novaSenha;
@@ -75,6 +83,10 @@ public class Usuario {
 
 	public void setTelefone(String novoTelefone) {
 		this.telefone = novoTelefone;
+	}
+	
+	public void atribuirPontos(int valor){
+		pops += valor;
 	}
 
 	public String getFoto() {
@@ -201,6 +213,17 @@ public class Usuario {
 		}
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
+		
+		//this.adicionaFeedAmigo(postagem);
+		
+	}
+	
+	public void adicionaFeedAmigo(Postagem postagem){
+		//for (Usuario amigo : this.amigos) {
+		//	feedatualizado.add(novaPostagem);
+		//}
+		
+		//PS- O ADD DESSE FOR SERÁ SOBRESCRITO.
 	}
 
 	public String getPost(int indice) throws Exception {
@@ -238,7 +261,26 @@ public class Usuario {
 	
 		usuarioAmigo.notificacoes.add(getNome()
 				+ " curtiu seu post de " + postagem.getData() + ".");
+		
+		this.atribuirPontos(this.getPontos());
 	
 	}
+	
+	//Necessario por enquanto apenas para a UML ! Seus Lixo !
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public int getPontos(){
+		return 1;
+	}
+	
+	enum claseUsuario {
+		NORMAL, CELEBRIDADEPOP, ICONEPOP;
+	}
+	
+	
 
 }

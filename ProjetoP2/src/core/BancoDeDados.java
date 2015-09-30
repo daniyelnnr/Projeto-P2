@@ -103,5 +103,18 @@ public class BancoDeDados {
 			throw new Exception();
 		}
 	}
+	
+	// implementar depois
+	public String ordenaUsuario(){
+		//aqui tem que fazer um for em lista de usuario e ordenalos de acordo com popularidade
+		return "cú preto";
+	}
+	
+	public String ordenaHashtags(){
+		//aqui tem que fazer um for na lista "tags" e ordenalas por ordem de frequencia
+		return "cú branco";
+	}
+
+	
 
 }
