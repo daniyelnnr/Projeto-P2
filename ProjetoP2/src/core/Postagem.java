@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
 
-public class Postagem {
+public class Postagem implements Comparable<Postagem> {
 	private String mensagem;
 	private String data;
 	private int pontosPopularidade;
@@ -97,5 +97,12 @@ public class Postagem {
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String output = myFormat.format(input.parse(data));
 		return output;
+	}
+
+
+	@Override
+	public int compareTo(Postagem postagem) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
