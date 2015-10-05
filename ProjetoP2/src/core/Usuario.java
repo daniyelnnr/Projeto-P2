@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.plaf.metal.MetalIconFactory.FolderIcon16;
 
@@ -18,6 +19,8 @@ public class Usuario implements Comparable{
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
 	Notificacoes notificacoes = new Notificacoes();
+	HashMap<String, String> HistoricoUsuario  = new HashMap<>();
+
 
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
@@ -215,6 +218,11 @@ public class Usuario implements Comparable{
 		mural.add(novaPostagem);
 		
 		//this.adicionaFeedAmigo(postagem);
+		//this.postagemEmHistorico(postagem);
+	}
+	
+	public void postagemEmHistorico(Postagem postagem){
+		//vai pegar a postagem transformar em historico e adicionala ao dicionario
 		
 	}
 	
