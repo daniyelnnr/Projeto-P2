@@ -6,7 +6,8 @@ public class FeedNoticias {
 	
 	ArrayList<Postagem> feedExibido = new ArrayList<Postagem>();
 	ArrayList<Postagem> feedAtualizado = new ArrayList<Postagem>();
-
+	DataComparator comparator1 = new DataComparator();
+	PopsComparator comparator2 = new PopsComparator();
 	
 	public void atualizaFeed(){	
 	//alterar o feed exibido
