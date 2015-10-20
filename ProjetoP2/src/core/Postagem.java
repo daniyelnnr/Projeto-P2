@@ -19,9 +19,9 @@ public class Postagem implements Comparable<Postagem> {
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
 		this.mensagem = mensagem;
 		this.data = data;
-		this.pontosPopularidade = 0;
+		this.setPontosPopularidade(0);
 		this.likes = 0;
-		this.deslikes = 0;
+		this.setDeslikes(0);
 		this.tags = hashtags;
 		this.refinaMensagem(this.mensagem);
 
@@ -62,6 +62,8 @@ public class Postagem implements Comparable<Postagem> {
 		}
 		return conteudo.get(index);
 	}
+	
+	
 	
 	public String getMensagem() {
 		return mensagem;
@@ -105,4 +107,21 @@ public class Postagem implements Comparable<Postagem> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public int getPontosPopularidade() {
+		return pontosPopularidade;
+	}
+
+	public void setPontosPopularidade(int pontosPopularidade) {
+		this.pontosPopularidade = pontosPopularidade;
+	}
+
+	public int getDeslikes() {
+		return deslikes;
+	}
+
+	public void setDeslikes(int deslikes) {
+		this.deslikes = deslikes;
+	}
+	
 }

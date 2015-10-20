@@ -3,9 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.plaf.metal.MetalIconFactory.FolderIcon16;
-
-public class Usuario implements Comparable{
+public class Usuario implements Comparable<Object>{
 
 	private String email;
 	private String senha;
@@ -274,7 +272,7 @@ public class Usuario implements Comparable{
 	
 	}
 	
-	//Necessario por enquanto apenas para a UML ! Seus Lixo !
+	//Necessario por enquanto apenas para a UML!
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
