@@ -19,14 +19,17 @@ public class Usuario implements Comparable<Object>{
 	Notificacoes notificacoes = new Notificacoes();
 	HashMap<String, String> HistoricoUsuario  = new HashMap<>();
 
+	private TipoDeUsuario tiposStrategy;
 
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
+		
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
 		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
+		this.tiposStrategy = new UsuarioNormal();
 	}
 
 	public Usuario(String nome, String email, String senha, String dataNasc)
@@ -229,7 +232,7 @@ public class Usuario implements Comparable<Object>{
 		//	feedatualizado.add(novaPostagem);
 		//}
 		
-		//PS- O ADD DESSE FOR SERÁ SOBRESCRITO.
+		//PS- O ADD DESSE FOR SERA SOBRESCRITO.
 	}
 
 	public String getPost(int indice) throws Exception {
@@ -268,24 +271,18 @@ public class Usuario implements Comparable<Object>{
 		usuarioAmigo.notificacoes.add(getNome()
 				+ " curtiu seu post de " + postagem.getData() + ".");
 		
-		this.atribuirPontos(this.getPontos());
+		this.atribuirPontos(this.tiposStrategy.getPontos());
 	
 	}
-	
+
+
 	//Necessario por enquanto apenas para a UML!
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	public int getPontos(){
-		return 1;
-	}
-	
-	enum claseUsuario {
-		NORMAL, CELEBRIDADEPOP, ICONEPOP;
-	}
+
 	
 	
 
