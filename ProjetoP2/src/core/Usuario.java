@@ -19,7 +19,7 @@ public class Usuario implements Comparable<Object>{
 	Notificacoes notificacoes = new Notificacoes();
 	HashMap<String, String> HistoricoUsuario  = new HashMap<>();
 
-	private TipoDeUsuario tiposStrategy;
+	private ITipoDeUsuario tiposStrategy;
 
 	public Usuario(String nome, String email, String senha, String dataNasc,
 			String imgAvatar) {
@@ -262,17 +262,12 @@ public class Usuario implements Comparable<Object>{
 	}
 
 	public void curtirPost(BancoDeDados bancodedados, String emailAmigo, int indice) throws Exception {
-		Postagem postagem = getPostagemAmigo(emailAmigo,
-				indice);
+		Postagem postagem = getPostagemAmigo(emailAmigo,indice);
 		postagem.setNewLikes();
-	
 		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
-	
-		usuarioAmigo.notificacoes.add(getNome()
-				+ " curtiu seu post de " + postagem.getData() + ".");
+		usuarioAmigo.notificacoes.add(getNome() + " curtiu seu post de " + postagem.getData() + ".");
+		this.tiposStrategy.curtir(usuarioAmigo, postagem);
 		
-		this.atribuirPontos(this.tiposStrategy.getPontos());
-	
 	}
 
 

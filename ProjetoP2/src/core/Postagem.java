@@ -13,7 +13,7 @@ public class Postagem implements Comparable<Postagem> {
 	private int likes;
 	private int deslikes;
 	private ArrayList<String> conteudo = new ArrayList<String>();
-
+	public SimpleDateFormat dataBasico;
 
 
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
@@ -98,6 +98,7 @@ public class Postagem implements Comparable<Postagem> {
 		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String output = myFormat.format(input.parse(data));
+		this.dataBasico = input;
 		return output;
 	}
 

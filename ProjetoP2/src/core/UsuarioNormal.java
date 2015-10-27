@@ -1,11 +1,13 @@
 package core;
 
-public class UsuarioNormal implements TipoDeUsuario{
+public class UsuarioNormal implements ITipoDeUsuario{
+
 
 
 	@Override
-	public int getPontos() {
-		return 10;
+	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
+		usuarioAmigo.atribuirPontos(10);
+		
 	}
 
 }
