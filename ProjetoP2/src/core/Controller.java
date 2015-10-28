@@ -9,6 +9,8 @@ public class Controller {
 	Amizade amizade = new Amizade();
 	Operacoes operacoes = new Operacoes();
 
+	
+	//LOGIN, SINGUP, LOGOUT
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
 	String senhaUsuario, String dataNasUsuario, String imgAvatar)
 	throws Exception {
@@ -35,6 +37,7 @@ public class Controller {
 		operacoes.logout(this);
 	}
 
+	//BANCO DE DADOS
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
 			throws Exception {
 		return this.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
@@ -46,7 +49,19 @@ public class Controller {
 				this.usuarioLogado.getEmail());
 
 	}
+	
+	public void atualizaPerfil(String nomeInformacao, String valor)
+	throws Exception {
+		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
+	}
 
+	public void atualizaPerfil(String nomeInformacao, String valor,
+	String velhaSenha) throws Exception {
+		usuarioLogado.atualizaPerfil(nomeInformacao, valor,
+				velhaSenha);
+	}
+
+	//AMIZADE
 	public void aceitaAmizade(String email) throws Exception {
 		amizade.aceitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
 	}
@@ -63,10 +78,12 @@ public class Controller {
 		amizade.rejeitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
 	}
 
+	//NOTIFICAÇÔES
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
 
+	//USUARIO LOGADO
 	public String getNextInformacao() throws Exception {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
@@ -74,18 +91,6 @@ public class Controller {
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
 		usuarioLogado.curtirPost(getBancodedados(), emailAmigo, indice);
 	}
-
-	public void atualizaPerfil(String nomeInformacao, String valor)
-	throws Exception {
-		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
-	}
-
-	public void atualizaPerfil(String nomeInformacao, String valor,
-	String velhaSenha) throws Exception {
-		usuarioLogado.atualizaPerfil(nomeInformacao, valor,
-				velhaSenha);
-	}
-
 	
 	public void postarMensagem(String conteudo, String data) throws Exception {
 		usuarioLogado.postarMensagem(getValidadores(), conteudo, data);
@@ -111,6 +116,7 @@ public class Controller {
 		return this.usuarioLogado;
 	}
 	
+	//GETTERS SETTERS
 	public BancoDeDados getBancodedados() {
 		return bancodedados;
 	}

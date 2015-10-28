@@ -10,4 +10,10 @@ public class UsuarioNormal implements ITipoDeUsuario{
 		
 	}
 
+	@Override
+	public void descurtir(Usuario usuarioAmigom, Postagem postagem) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

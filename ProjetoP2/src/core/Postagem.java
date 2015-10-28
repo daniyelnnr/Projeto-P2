@@ -108,6 +108,10 @@ public class Postagem implements Comparable<Postagem> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void addTag(String tag){
+		this.tags.add(tag);
+	}
 
 	public int getPontosPopularidade() {
 		return pontosPopularidade;
