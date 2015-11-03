@@ -50,6 +50,8 @@ expect 1 getNotificacoes
 expect "Madonna removeu a sua amizade." getNextNotificacao
 
 expect 0 getQtdAmigos
+
+
 logout
 
 fechaSistema

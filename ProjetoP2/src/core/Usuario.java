@@ -200,24 +200,15 @@ public class Usuario implements Comparable<Usuario>{
 		}
 	}
 
-	public void postarMensagem(Validadores validadores, String conteudo, String data) throws Exception {
-		//Mudar o catar hastags para Postagem
-		validadores.validarUsuarioLogado(this, "Nao eh possivel postar mensagem. ");
+	public void postarMensagem(String conteudo, String data, ArrayList<String> hashtags) throws Exception {
+		//Mudar o catar hastags para Banco De Dados
 		int index = conteudo.indexOf("#");
 		String msg = conteudo.substring(0, index - 1);
 		if (msg.length() >= 200)
 			throw new Exception(
 					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
-		String resto = conteudo.substring(index, conteudo.length());
 		
-		ArrayList<String> hashtags = new ArrayList<String>();
-		for (String hashtag : resto.split(" ")) {
-			if (!hashtag.startsWith("#"))
-				throw new Exception(
-						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
-								+ hashtag + "'.");
-			hashtags.add(hashtag);
-		}
+
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
 		

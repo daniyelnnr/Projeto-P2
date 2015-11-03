@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -93,7 +94,9 @@ public class Controller {
 	}
 	
 	public void postarMensagem(String conteudo, String data) throws Exception {
-		usuarioLogado.postarMensagem(getValidadores(), conteudo, data);
+		ArrayList<String> hashtags = this.bancodedados.pegaHastags(conteudo);
+		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
+		usuarioLogado.postarMensagem(conteudo, data, hashtags);
 	}
 
 	public String getPost(int indice) throws Exception {

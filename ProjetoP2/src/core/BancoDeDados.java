@@ -3,12 +3,16 @@ package core;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 public class BancoDeDados {
 
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
 	private ArrayList<String> usuariosMenosPop = new ArrayList<String>();
-	private Usuario[] trendHastags = new Usuario[3];
+	private ArrayList<String> hashtagsAll = new ArrayList<String>();
+	private ArrayList<String> trendHastags = new ArrayList<String>();
 	private ArrayList<String> usuariosMaisPop = new ArrayList<String>();
 	
 	
@@ -123,6 +127,38 @@ public class BancoDeDados {
 	
 	public void ordenaHashtags(){
 		//aqui tem que fazer um for na lista "tags" e ordenalas por ordem de frequencia
+		HashMap<String, Integer> hashtagsFrequencia = new HashMap();
+		for (String string : hashtagsAll) {
+			if(hashtagsFrequencia.containsKey(string)){
+				int frequenciaAtual = hashtagsFrequencia.get(string);
+				frequenciaAtual++;
+				hashtagsFrequencia.replace(string, frequenciaAtual);
+			}else{
+				hashtagsFrequencia.put(string, 1);
+			}
+		}
+		List<String> list = new ArrayList<String>(hashtagsFrequencia.keySet());
+		Collections.sort(list, new Comparator<String>() {
+		    @Override
+		    public int compare(String x, String y) {
+		        return hashtagsFrequencia.get(y) - hashtagsFrequencia.get(x);
+		    }
+		});
+	}
+
+	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
+		int index = conteudo.indexOf("#");
+		String resto = conteudo.substring(index, conteudo.length());
+		ArrayList<String> hashtags = new ArrayList<String>();
+		for (String hashtag : resto.split(" ")) {
+			if (!hashtag.startsWith("#"))
+				throw new Exception(
+						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
+								+ hashtag + "'.");
+			hashtags.add(hashtag);
+		}
+		this.hashtagsAll = hashtags;
+		return hashtags;
 	}
 
 	
