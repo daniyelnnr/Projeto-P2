@@ -127,7 +127,7 @@ public class BancoDeDados {
 	
 	public void ordenaHashtags(){
 		//aqui tem que fazer um for na lista "tags" e ordenalas por ordem de frequencia
-		HashMap<String, Integer> hashtagsFrequencia = new HashMap();
+		HashMap<String, Integer> hashtagsFrequencia = new HashMap<String, Integer>();
 		for (String string : hashtagsAll) {
 			if(hashtagsFrequencia.containsKey(string)){
 				int frequenciaAtual = hashtagsFrequencia.get(string);
@@ -144,6 +144,9 @@ public class BancoDeDados {
 		        return hashtagsFrequencia.get(y) - hashtagsFrequencia.get(x);
 		    }
 		});
+		for (int i = 0; i < 3; i++) {
+			this.trendHastags.add(list.get(i));
+		}
 	}
 
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
