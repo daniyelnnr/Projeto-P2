@@ -2,11 +2,16 @@ package core;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BancoDeDados {
 
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-
+	private ArrayList<String> usuariosMenosPop = new ArrayList<String>();
+	private Usuario[] trendHastags = new Usuario[3];
+	private ArrayList<String> usuariosMaisPop = new ArrayList<String>();
+	
+	
 	public Usuario get(int i) {
 		return getListaUsuario().get(i);
 	}
@@ -105,14 +110,19 @@ public class BancoDeDados {
 	}
 	
 	// implementar depois
-	public String ordenaUsuario(){
-		//aqui tem que fazer um for em lista de usuario e ordenalos de acordo com popularidade
-		return "cú preto";
+	public void ordenaUsuario(){
+		Collections.sort(this.listaUsuario);
+		for (int i = 0; i < 3; i++) {
+			this.usuariosMaisPop.add(this.listaUsuario.get(i).getNome());
+		}
+		for (int i = this.listaUsuario.size(); i < this.listaUsuario.size()-3; i--) {
+			this.usuariosMenosPop.add(this.listaUsuario.get(i).getNome());
+		}
+		
 	}
 	
-	public String ordenaHashtags(){
+	public void ordenaHashtags(){
 		//aqui tem que fazer um for na lista "tags" e ordenalas por ordem de frequencia
-		return "cú branco";
 	}
 
 	

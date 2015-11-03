@@ -3,7 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Usuario implements Comparable<Object>{
+public class Usuario implements Comparable<Usuario>{
 
 	private String email;
 	private String senha;
@@ -91,6 +91,7 @@ public class Usuario implements Comparable<Object>{
 	
 	public void atribuirPontos(int valor){
 		pops += valor;
+		this.tiposStrategy = TipoDeUsuarioFactory.getInstance().createTipoDeUsuarioStrategy(getPops());
 	}
 
 	public String getFoto() {
@@ -200,6 +201,7 @@ public class Usuario implements Comparable<Object>{
 	}
 
 	public void postarMensagem(Validadores validadores, String conteudo, String data) throws Exception {
+		//Mudar o catar hastags para Postagem
 		validadores.validarUsuarioLogado(this, "Nao eh possivel postar mensagem. ");
 		int index = conteudo.indexOf("#");
 		String msg = conteudo.substring(0, index - 1);
@@ -207,6 +209,7 @@ public class Usuario implements Comparable<Object>{
 			throw new Exception(
 					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		String resto = conteudo.substring(index, conteudo.length());
+		
 		ArrayList<String> hashtags = new ArrayList<String>();
 		for (String hashtag : resto.split(" ")) {
 			if (!hashtag.startsWith("#"))
@@ -269,13 +272,27 @@ public class Usuario implements Comparable<Object>{
 		this.tiposStrategy.curtir(usuarioAmigo, postagem);
 		
 	}
-
+	
+	public void descurtirPost(BancoDeDados bancodedados, String emailAmigo, int indice) throws Exception {
+		Postagem postagem = getPostagemAmigo(emailAmigo,indice);
+		postagem.setNewLikes();
+		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
+		usuarioAmigo.notificacoes.add(getNome() + " curtiu seu post de " + postagem.getData() + ".");
+		this.tiposStrategy.descurtir(usuarioAmigo, postagem);
+		
+	}
 
 	//Necessario por enquanto apenas para a UML!
 	@Override
-	public int compareTo(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Usuario outroUsuario) {
+		if(outroUsuario.getPops() < this.getPops()){
+			return -1;
+		}
+		if(outroUsuario.getPops() > this.getPops()){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 
 	

@@ -11,8 +11,8 @@ public class UsuarioNormal implements ITipoDeUsuario{
 	}
 
 	@Override
-	public void descurtir(Usuario usuarioAmigom, Postagem postagem) {
-		// TODO Auto-generated method stub
+	public void descurtir(Usuario usuarioAmigo, Postagem postagem) {
+		usuarioAmigo.atribuirPontos(10);
 		
 	}
 
