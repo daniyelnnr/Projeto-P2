@@ -134,4 +134,8 @@ public class Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void adicionaPops(int pops) {
+		this.usuarioLogado.atribuirPontos(pops);
+	}
 }

@@ -158,4 +158,8 @@ public class Facade {
 	public String atualizaRanking(){
 		return sistema.atualizaRanking();
 	}
+	
+	public void adicionaPops(int pops){
+		sistema.adicionaPops(pops);
+	}
 }
