@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import exceptions.ErroUsuarioOffline;
 
 public class Controller {
 
