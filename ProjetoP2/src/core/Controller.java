@@ -128,8 +128,6 @@ public class Controller {
 		return validadores;
 	}
 
-	
-
 	public String atualizaRanking() {
 		// TODO Auto-generated method stub
 		return null;
@@ -137,5 +135,9 @@ public class Controller {
 
 	public void adicionaPops(int pops) {
 		this.usuarioLogado.atribuirPontos(pops);
+	}
+	
+	public String getPopularidade(){
+		return this.usuarioLogado.getPopularidade();
 	}
 }

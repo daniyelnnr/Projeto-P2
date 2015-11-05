@@ -287,6 +287,8 @@ public class Usuario implements Comparable<Usuario>{
 	}
 
 	
-	
+	public String getPopularidade(){
+		return this.tiposStrategy.getTipoPopularidade();
+	}
 
 }

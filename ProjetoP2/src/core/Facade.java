@@ -162,4 +162,8 @@ public class Facade {
 	public void adicionaPops(int pops){
 		sistema.adicionaPops(pops);
 	}
+	
+	public String getPopularidade(){
+		return sistema.getPopularidade();
+	}
 }

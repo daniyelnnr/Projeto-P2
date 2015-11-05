@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class UsuarioCelebridade implements ITipoDeUsuario {
 
+	private String tipoPopularidade = "Celebridade Pop";
 
 	@Override
 	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
@@ -33,6 +34,11 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 		}
 		usuarioAmigo.atribuirPontos(pontos);
 		
+	}
+
+	@Override
+	public String getTipoPopularidade() {
+		return this.tipoPopularidade;
 	}
 
 
