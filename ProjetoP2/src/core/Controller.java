@@ -144,4 +144,8 @@ public class Controller {
 	public void rejeitarPost(String emailUsuario, int post) throws Exception{
 		usuarioLogado.descurtirPost(getBancodedados(), emailUsuario, post); //tirar getBancoDeDados
 	}
+
+	public int getPopsPost(int post) {
+		return usuarioLogado.getMural().get(post).getPops();
+	}
 }

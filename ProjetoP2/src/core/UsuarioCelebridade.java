@@ -15,6 +15,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 			pontos =+ 10;
 		}
 		usuarioAmigo.atribuirPontos(pontos);
+		postagem.atribuirPontos(pontos);
 	}
 
 	private boolean verificaData(Postagem postagem) {
@@ -33,7 +34,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 			pontos =- 10;
 		}
 		usuarioAmigo.atribuirPontos(pontos);
-		
+		postagem.atribuirPontos(pontos);
 	}
 
 	@Override

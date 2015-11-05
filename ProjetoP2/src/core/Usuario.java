@@ -231,7 +231,6 @@ public class Usuario implements Comparable<Usuario>{
 		return getMural().get(indice).getMensagem() + " "
 				+ getMural().get(indice).getTags() + " ("
 				+ getMural().get(indice).getData() + ")";
-	
 	}
 
 	public String getPost(String atributo, int indice) throws Exception {

@@ -8,7 +8,7 @@ import java.util.regex.*;
 public class Postagem implements Comparable<Postagem> {
 	private String mensagem;
 	private String data;
-	private int pontosPopularidade;
+	private int pops;
 	private ArrayList<String> tags = new ArrayList<String>();
 	private int likes;
 	private int deslikes;
@@ -19,7 +19,7 @@ public class Postagem implements Comparable<Postagem> {
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
 		this.mensagem = mensagem;
 		this.data = data;
-		this.setPontosPopularidade(0);
+		this.setPops(0);
 		this.likes = 0;
 		this.setDeslikes(0);
 		this.tags = hashtags;
@@ -113,12 +113,12 @@ public class Postagem implements Comparable<Postagem> {
 		this.tags.add(tag);
 	}
 
-	public int getPontosPopularidade() {
-		return pontosPopularidade;
+	public int getPops() {
+		return pops;
 	}
 
-	public void setPontosPopularidade(int pontosPopularidade) {
-		this.pontosPopularidade = pontosPopularidade;
+	public void setPops(int pops) {
+		this.pops = pops;
 	}
 
 	public int getDeslikes() {
@@ -127,6 +127,10 @@ public class Postagem implements Comparable<Postagem> {
 
 	public void setDeslikes(int deslikes) {
 		this.deslikes = deslikes;
+	}
+
+	public void atribuirPontos(int pontos) {
+		pops += pontos;
 	}
 	
 }

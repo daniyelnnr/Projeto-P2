@@ -170,4 +170,8 @@ public class Facade {
 	public void rejeitarPost(String emailUsuario, int post) throws Exception {
 		sistema.rejeitarPost(emailUsuario, post);
 	}
+	
+	public int getPopsPost(int post){
+		return sistema.getPopsPost(post);
+	}
 }
