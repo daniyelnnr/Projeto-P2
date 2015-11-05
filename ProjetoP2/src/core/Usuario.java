@@ -201,17 +201,15 @@ public class Usuario implements Comparable<Usuario>{
 	}
 
 	public void postarMensagem(String conteudo, String data, ArrayList<String> hashtags) throws Exception {
-		//Mudar o catar hastags para Banco De Dados
-		int index = conteudo.indexOf("#");
+		int index = conteudo.length() - 1;
+	 	if(conteudo.contains("#"))
+	 		index = conteudo.indexOf("#");
 		String msg = conteudo.substring(0, index - 1);
 		if (msg.length() >= 200)
 			throw new Exception(
 					"Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
-		
-
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-		
 		//this.adicionaFeedAmigo(postagem);
 		//this.postagemEmHistorico(postagem);
 	}

@@ -151,7 +151,7 @@ public class BancoDeDados {
 
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
 		if(!conteudo.contains("#"))
-			return null;
+			return new ArrayList<String>();
 		int index = conteudo.indexOf("#");
 		String resto = conteudo.substring(index, conteudo.length());
 		ArrayList<String> hashtags = new ArrayList<String>();
