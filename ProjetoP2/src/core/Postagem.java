@@ -130,5 +130,9 @@ public class Postagem implements Comparable<Postagem> {
 	public void atribuirPontos(int pontos) {
 		pops += pontos;
 	}
+
+	public void setNewDeslikes() {
+		this.deslikes++;
+	}
 	
 }

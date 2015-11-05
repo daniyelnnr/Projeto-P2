@@ -174,5 +174,13 @@ public class Facade {
 	public int getPopsPost(int post){
 		return sistema.getPopsPost(post);
 	}
-	 
+	
+	public int qtdCurtidasDePost(int post){
+		return sistema.qtdCurtidasDePost(post);
+	}
+	
+	public int qtdRejeicoesDePost(int post){
+		return sistema.qtdDescurtidasDePost(post);
+	}
+	
 }

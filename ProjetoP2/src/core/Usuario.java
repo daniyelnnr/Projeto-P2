@@ -262,7 +262,7 @@ public class Usuario implements Comparable<Usuario>{
 	
 	public void descurtirPost(BancoDeDados bancodedados, String emailAmigo, int indice) throws Exception {
 		Postagem postagem = getPostagemAmigo(emailAmigo,indice);
-		postagem.setNewLikes();
+		postagem.setNewDeslikes();
 		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
 		usuarioAmigo.notificacoes.add(getNome() + " curtiu seu post de " + postagem.getData() + ".");
 		this.tiposStrategy.descurtir(usuarioAmigo, postagem);

@@ -148,4 +148,12 @@ public class Controller {
 	public int getPopsPost(int post) {
 		return usuarioLogado.getMural().get(post).getPops();
 	}
+
+	public int qtdCurtidasDePost(int post) {
+		return this.usuarioLogado.getMural().get(post).getLikes();
+	}
+	
+	public int qtdDescurtidasDePost(int post) {
+		return this.usuarioLogado.getMural().get(post).getDeslikes();
+	}
 }
