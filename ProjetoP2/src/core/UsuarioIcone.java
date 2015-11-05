@@ -7,14 +7,14 @@ public class UsuarioIcone implements ITipoDeUsuario {
 	@Override
 	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
 		usuarioAmigo.atribuirPontos(50);
-		postagem.addTag("#EpicWin");
+		postagem.addTag("#epicwin");
 		
 	}
 
 	@Override
 	public void descurtir(Usuario usuarioAmigo, Postagem postagem) {
 		usuarioAmigo.atribuirPontos(-50);
-		postagem.addTag("#EpicFail");
+		postagem.addTag("#epicfail");
 	}
 
 	@Override

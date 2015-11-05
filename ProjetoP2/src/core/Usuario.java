@@ -244,10 +244,10 @@ public class Usuario implements Comparable<Usuario>{
 	
 		else if (atributo.equalsIgnoreCase("data")) {
 			mensagemRequerida = mural.get(indice).getData();
-		} else {
+		} else if (atributo.equalsIgnoreCase("hashtags")){
 			mensagemRequerida = mural.get(indice)
 					.getTagsToString();
-	
+			System.out.println(mensagemRequerida);
 		}
 	
 		return mensagemRequerida;
