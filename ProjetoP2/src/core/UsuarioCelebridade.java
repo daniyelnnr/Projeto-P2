@@ -9,7 +9,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 	private String tipoPopularidade = "Celebridade Pop";
 
 	@Override
-	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
+	public void curtir(Usuario usuarioAmigo, Postagem postagem) throws Exception {
 		int pontos = 25;
 		if(verificaData(postagem)){
 			pontos += 10;
@@ -18,9 +18,9 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 		postagem.atribuirPontos(pontos);
 	}
 
-	private boolean verificaData(Postagem postagem) {
-		DateFormat dataCurtida = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		if(postagem.dataBasico.DATE_FIELD == dataCurtida.DATE_FIELD){
+	private boolean verificaData(Postagem postagem) throws Exception {
+		DateFormat dataCurtida = new SimpleDateFormat("yyyy/MM/dd");
+		if(postagem.getData().substring(0, 11).equals(dataCurtida)){
 			return true;
 		}else{
 			return false;
@@ -28,7 +28,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 	}
 
 	@Override
-	public void descurtir(Usuario usuarioAmigo, Postagem postagem) {
+	public void descurtir(Usuario usuarioAmigo, Postagem postagem) throws Exception {
 		int pontos = -25;
 		if(verificaData(postagem)){
 			pontos -= 10;

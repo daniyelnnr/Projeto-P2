@@ -174,4 +174,5 @@ public class Facade {
 	public int getPopsPost(int post){
 		return sistema.getPopsPost(post);
 	}
+	 
 }
