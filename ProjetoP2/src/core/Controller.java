@@ -130,8 +130,7 @@ public class Controller {
 	}
 
 	public String atualizaRanking() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.bancodedados.ordenaUsuario();
 	}
 
 	public void adicionaPops(int pops) {
@@ -169,5 +168,10 @@ public class Controller {
 
 	public int getPopsUsuario() {
 		return this.usuarioLogado.getPops();
+	}
+
+	public String atualizaTrendingTopics() {
+		this.bancodedados.ordenaHashtags();
+		return this.bancodedados.getTrendingTopics();
 	}
 }

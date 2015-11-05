@@ -204,6 +204,10 @@ public class Usuario implements Comparable<Usuario>{
 		int index = conteudo.length() - 1;
 	 	if(conteudo.contains("#"))
 	 		index = conteudo.indexOf("#");
+	 	if(conteudo.indexOf("#") == 0){
+	 		index ++;
+	 	}
+	 	
 		String msg = conteudo.substring(0, index - 1);
 		if (msg.length() >= 200)
 			throw new Exception(
@@ -277,6 +281,9 @@ public class Usuario implements Comparable<Usuario>{
 		}
 		if(outroUsuario.getPops() > this.getPops()){
 			return 1;
+		}
+		if(outroUsuario.getPops() == this.getPops()){
+			return outroUsuario.getNome().compareTo(this.getNome());
 		}else{
 			return 0;
 		}

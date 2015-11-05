@@ -136,4 +136,8 @@ public class Postagem implements Comparable<Postagem> {
 		this.deslikes++;
 	}
 	
+	public ArrayList<String> getArrayTags(){
+		return this.tags;
+	}
+	
 }

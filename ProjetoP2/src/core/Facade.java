@@ -190,5 +190,12 @@ public class Facade {
 	public int getPopsUsuario() throws Exception{
 		return sistema.getPopsUsuario();
 	}
+	public String atualizaTrendingTopics(){
+		return sistema.atualizaTrendingTopics();
+	}
+	
+	public String atualizaRankings(){
+		return sistema.atualizaRanking();
+	}
 	
 }
