@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import exceptions.ErroUsuarioOffline;
+
 public class Controller {
 
 	Validadores validadores = new Validadores();
@@ -149,11 +151,20 @@ public class Controller {
 		return usuarioLogado.getMural().get(post).getPops();
 	}
 
-	public int qtdCurtidasDePost(int post) {
-		return this.usuarioLogado.getMural().get(post).getLikes();
+	
+	public int qtdCurtidasDePost(int post) throws Exception {
+		return this.usuarioLogado.getPostagem(post).getLikes();
 	}
 	
-	public int qtdDescurtidasDePost(int post) {
-		return this.usuarioLogado.getMural().get(post).getDeslikes();
+	public int qtdDescurtidasDePost(int post) throws Exception {
+		return this.usuarioLogado.getPostagem(post).getDeslikes();
+	}
+
+	public int getPopsUsuario(String emailUsuario) throws Exception {
+		if(this.usuarioLogado != null){
+			throw new Exception("Erro na consulta de Pops. Um usuarix ainda esta logadx.");
+		}
+		Usuario usuario = this.bancodedados.buscaUsuario(emailUsuario);
+		return usuario.getPops();
 	}
 }

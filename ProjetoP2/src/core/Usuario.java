@@ -282,6 +282,13 @@ public class Usuario implements Comparable<Usuario>{
 		}
 	}
 
+	public Postagem getPostagem(int indice) throws Exception{
+		if(indice > this.getMural().size()){
+			throw new Exception(String.format("Post #%d nao existe. Usuarix possui apenas %d post(s).", indice, this.getMural().size()));
+		}
+		return this.getMural().get(indice);
+	}
+	
 	
 	public String getPopularidade(){
 		return this.tiposStrategy.getTipoPopularidade();

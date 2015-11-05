@@ -175,12 +175,16 @@ public class Facade {
 		return sistema.getPopsPost(post);
 	}
 	
-	public int qtdCurtidasDePost(int post){
+	public int qtdCurtidasDePost(int post) throws Exception{
 		return sistema.qtdCurtidasDePost(post);
 	}
 	
-	public int qtdRejeicoesDePost(int post){
+	public int qtdRejeicoesDePost(int post) throws Exception{
 		return sistema.qtdDescurtidasDePost(post);
+	}
+	
+	public int getPopsUsuario(String emailUsuario) throws Exception{
+		return sistema.getPopsUsuario(emailUsuario);
 	}
 	
 }
