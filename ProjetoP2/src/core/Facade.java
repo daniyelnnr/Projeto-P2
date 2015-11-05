@@ -166,4 +166,8 @@ public class Facade {
 	public String getPopularidade(){
 		return sistema.getPopularidade();
 	}
+	
+	public void rejeitarPost(String emailUsuario, int post) throws Exception {
+		sistema.rejeitarPost(emailUsuario, post);
+	}
 }

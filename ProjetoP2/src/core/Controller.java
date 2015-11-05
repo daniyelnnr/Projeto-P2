@@ -140,4 +140,8 @@ public class Controller {
 	public String getPopularidade(){
 		return this.usuarioLogado.getPopularidade();
 	}
+
+	public void rejeitarPost(String emailUsuario, int post) throws Exception{
+		usuarioLogado.descurtirPost(getBancodedados(), emailUsuario, post); //tirar getBancoDeDados
+	}
 }
