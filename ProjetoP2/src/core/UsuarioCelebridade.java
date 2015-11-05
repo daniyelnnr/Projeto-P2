@@ -12,7 +12,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
 		int pontos = 25;
 		if(verificaData(postagem)){
-			pontos =+ 10;
+			pontos += 10;
 		}
 		usuarioAmigo.atribuirPontos(pontos);
 		postagem.atribuirPontos(pontos);
@@ -31,7 +31,7 @@ public class UsuarioCelebridade implements ITipoDeUsuario {
 	public void descurtir(Usuario usuarioAmigo, Postagem postagem) {
 		int pontos = -25;
 		if(verificaData(postagem)){
-			pontos =- 10;
+			pontos -= 10;
 		}
 		usuarioAmigo.atribuirPontos(pontos);
 		postagem.atribuirPontos(pontos);
