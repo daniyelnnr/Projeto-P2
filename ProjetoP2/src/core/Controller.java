@@ -167,4 +167,8 @@ public class Controller {
 		Usuario usuario = this.bancodedados.buscaUsuario(emailUsuario);
 		return usuario.getPops();
 	}
+
+	public int getPopsUsuario() {
+		return this.usuarioLogado.getPops();
+	}
 }

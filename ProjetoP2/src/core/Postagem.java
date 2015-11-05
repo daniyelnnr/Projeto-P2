@@ -108,7 +108,8 @@ public class Postagem implements Comparable<Postagem> {
 	}
 	
 	public void addTag(String tag){
-		this.tags.add(tag);
+		if(!this.tags.contains(tag))
+			this.tags.add(tag);
 	}
 
 	public int getPops() {

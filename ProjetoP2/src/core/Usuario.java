@@ -62,7 +62,7 @@ public class Usuario implements Comparable<Usuario>{
 	}
 	
 	public int getPops(){
-		return pops;
+		return this.pops;
 	}
 
 	public void setSenha(String novaSenha) {

@@ -187,4 +187,8 @@ public class Facade {
 		return sistema.getPopsUsuario(emailUsuario);
 	}
 	
+	public int getPopsUsuario() throws Exception{
+		return sistema.getPopsUsuario();
+	}
+	
 }
