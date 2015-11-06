@@ -133,7 +133,7 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	public String getPost(int indice) throws Exception {
-		return getMural().get(indice).getMensagem() + " " + getMural().get(indice).getTags() + " ("
+		return getMural().get(indice).getMensagem() + " " + getMural().get(indice).getTagsEspaco() + " ("
 				+ getMural().get(indice).getData() + ")";
 	}
 
@@ -147,7 +147,7 @@ public class Usuario implements Comparable<Usuario> {
 		else if (atributo.equalsIgnoreCase("data")) {
 			mensagemRequerida = mural.get(indice).getData();
 		} else if (atributo.equalsIgnoreCase("hashtags")) {
-			mensagemRequerida = mural.get(indice).getTagsToString();
+			mensagemRequerida = mural.get(indice).getTagsVirgula();
 		}
 
 		return mensagemRequerida;

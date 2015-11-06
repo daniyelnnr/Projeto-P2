@@ -7,9 +7,6 @@ public class Notificacoes {
 	ArrayList<String> notificacoes = new ArrayList<String>();
 	Usuario usuarioRemetente;
 
-	public int getNotificacoes() {
-		return this.notificacoes.size();
-	}
 
 	public String getNextNotificacao() throws Exception {
 		if (this.notificacoes.size() == 0) {
@@ -24,6 +21,10 @@ public class Notificacoes {
 	public void add(String string) {
 		this.notificacoes.add(string);
 
+	}
+
+	public int getNotificacoes() {
+		return this.notificacoes.size();
 	}
 
 }

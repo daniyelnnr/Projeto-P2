@@ -19,9 +19,9 @@ public class Postagem implements Comparable<Postagem> {
 		this.mensagem = mensagem;
 		this.data = data;
 		this.setPops(0);
-		this.likes = 0;
+		this.setLikes(0);
 		this.setDeslikes(0);
-		this.tags = hashtags;
+		this.setTags(hashtags);
 		this.refinaMensagem(this.mensagem);
 		bancoHashtags.adicionaHashtags(hashtags);
 	}
@@ -63,17 +63,17 @@ public class Postagem implements Comparable<Postagem> {
 		return conteudo.get(index);
 	}
 
-	public String getTags() {
+	public String getTagsEspaco() {
 		String txt = "";
-		for (String tag : tags) {
+		for (String tag : getTags()) {
 			txt += tag + " ";
 		}
 		return txt.substring(0, txt.length() - 1);
 	}
 
-	public String getTagsToString() {
+	public String getTagsVirgula() {
 		String txt = "";
-		for (String tag : tags) {
+		for (String tag : getTags()) {
 			txt += tag + ",";
 		}
 		return txt.substring(0, txt.length() - 1);
@@ -88,8 +88,8 @@ public class Postagem implements Comparable<Postagem> {
 	}
 
 	public void addTag(String tag) {
-		if (!this.tags.contains(tag)) {
-			this.tags.add(tag);
+		if (!this.getTags().contains(tag)) {
+			this.getTags().add(tag);
 			this.bancoHashtags.adicionaHashtags(tag);
 		}
 	}
@@ -129,7 +129,7 @@ public class Postagem implements Comparable<Postagem> {
 	}
 
 	public ArrayList<String> getArrayTags() {
-		return this.tags;
+		return this.getTags();
 	}
 
 	public int getLikes() {
@@ -137,6 +137,18 @@ public class Postagem implements Comparable<Postagem> {
 	}
 
 	public void setNewLikes() {
-		this.likes += 1;
+		this.setLikes(this.getLikes() + 1);
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
 	}
 }
