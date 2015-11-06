@@ -13,6 +13,7 @@ public class Postagem implements Comparable<Postagem> {
 	private int likes;
 	private int deslikes;
 	private ArrayList<String> conteudo = new ArrayList<String>();
+	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 
 
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
@@ -23,7 +24,7 @@ public class Postagem implements Comparable<Postagem> {
 		this.setDeslikes(0);
 		this.tags = hashtags;
 		this.refinaMensagem(this.mensagem);
-
+		bancoHashtags.adicionaHashtags(hashtags);
 	}
 
 	public void refinaMensagem(String mensagem){

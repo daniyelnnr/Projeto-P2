@@ -9,7 +9,6 @@ public class UsuarioIcone implements ITipoDeUsuario {
 		usuarioAmigo.atribuirPontos(50);
 		postagem.atribuirPontos(50);
 		postagem.addTag("#epicwin");
-		
 	}
 
 	@Override

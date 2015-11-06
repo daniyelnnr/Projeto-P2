@@ -14,6 +14,7 @@ public class BancoDeDados {
 	private ArrayList<String> hashtagsAll = new ArrayList<String>();
 	private ArrayList<String> trendHastags = new ArrayList<String>();
 	private ArrayList<String> usuariosMaisPop = new ArrayList<String>();
+	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 	private HashMap<String, Integer> hashtagsMap;
 
 	public Usuario get(int i) {
@@ -130,17 +131,17 @@ public class BancoDeDados {
 	}
 
 	public void ordenaHashtags() {
-		this.hashtagsAll.clear();
+		//this.hashtagsAll.clear();
 		this.trendHastags.clear();
 		// aqui tem que fazer um for na lista "tags" e ordenalas por ordem de
 		// frequencia
-		for (Usuario usuario : listaUsuario) {
-			for (Postagem postagem : usuario.getMural()) {
-				for (String tag : postagem.getArrayTags()) {
-					this.hashtagsAll.add(tag);
-				}
-			}
-		}
+//		for (Usuario usuario : listaUsuario) {
+//			for (Postagem postagem : usuario.getMural()) {
+//				for (String tag : postagem.getArrayTags()) {
+//					this.hashtagsAll.add(tag);
+//				}
+//			}
+//		}
 
 		HashMap<String, Integer> hashtagsFrequencia = new HashMap<String, Integer>();
 		for (String string : hashtagsAll) {
@@ -178,7 +179,7 @@ public class BancoDeDados {
 								+ hashtag + "'.");
 			hashtags.add(hashtag);
 		}
-		// this.hashtagsAll.addAll(hashtags);
+		//this.bancoHashtags.adicionaHashtags(hashtags);
 		return hashtags;
 	}
 
