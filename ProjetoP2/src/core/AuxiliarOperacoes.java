@@ -2,20 +2,15 @@ package core;
 
 import exceptions.ErroUsuarioOffline;
 
-public class Operacoes {
+public class AuxiliarOperacoes {
 	// Validadores validadores, BancoDeDados bancodedados, Usuario usuarioLogado
-	public String cadastraUsuario(Validadores validadores,
-			BancoDeDados bancodedados, String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar)
-			throws Exception {
-		if (nomeUsuario.equals("") || nomeUsuario == null
-				|| nomeUsuario.equals("  ")) {
+	public String cadastraUsuario(AuxiliarValidadores validadores, BancoDeDados bancodedados, String nomeUsuario,
+			String emailUsuario, String senhaUsuario, String dataNasUsuario, String imgAvatar) throws Exception {
+		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
 			throw new Exception("Nome dx usuarix nao pode ser vazio.");
-		} else if (validadores.validaData(dataNasUsuario)
-				&& validadores.validaEmail(emailUsuario)) {
+		} else if (validadores.validaData(dataNasUsuario) && validadores.validaEmail(emailUsuario)) {
 			validadores.validaData(dataNasUsuario);
-			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
-					senhaUsuario, dataNasUsuario, imgAvatar);
+			Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
 			bancodedados.getListaUsuario().add(usuario);
 			return usuario.getEmail();
 		} else {
@@ -24,17 +19,13 @@ public class Operacoes {
 
 	}
 
-	public String cadastraUsuario(Validadores validadores,
-			BancoDeDados bancodedados, String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) throws Exception {
+	public String cadastraUsuario(AuxiliarValidadores validadores, BancoDeDados bancodedados, String nomeUsuario,
+			String emailUsuario, String senhaUsuario, String dataNasUsuario) throws Exception {
 
-		if (nomeUsuario.equals("") || nomeUsuario == null
-				|| nomeUsuario.equals("  ")) {
+		if (nomeUsuario.equals("") || nomeUsuario == null || nomeUsuario.equals("  ")) {
 			throw new Exception("Nome dx usuarix nao pode ser vazio.");
-		} else if (validadores.validaData(dataNasUsuario)
-				&& validadores.validaEmail(emailUsuario)) {
-			Usuario usuario = new Usuario(nomeUsuario, emailUsuario,
-					senhaUsuario, dataNasUsuario);
+		} else if (validadores.validaData(dataNasUsuario) && validadores.validaEmail(emailUsuario)) {
+			Usuario usuario = new Usuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
 			bancodedados.getListaUsuario().add(usuario);
 			return usuario.getEmail();
 		} else {
@@ -43,13 +34,11 @@ public class Operacoes {
 
 	}
 
-	public boolean login(Controller controller, String emailUsuario,
-			String senhaUsuario) throws Exception {
+	public boolean login(Controller controller, String emailUsuario, String senhaUsuario) throws Exception {
 		if (controller.usuarioLogado == null) {
 			Usuario user = controller.bancodedados.buscaUsuario(emailUsuario);
 			if (user == null) {
-				throw new Exception("Um usuarix com email " + emailUsuario
-						+ " nao esta cadastradx.");
+				throw new Exception("Um usuarix com email " + emailUsuario + " nao esta cadastradx.");
 			}
 
 			else if (user.getSenha().equals(senhaUsuario)) {
@@ -61,8 +50,7 @@ public class Operacoes {
 				throw new Exception("Senha invalida.");
 			}
 		} else {
-			throw new Exception("Um usuarix ja esta logadx: "
-					+ controller.usuarioLogado.getNome() + ".");
+			throw new Exception("Um usuarix ja esta logadx: " + controller.usuarioLogado.getNome() + ".");
 		}
 	}
 

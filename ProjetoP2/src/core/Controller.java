@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Controller {
 
 	Usuario usuarioLogado = null;
-	Amizade amizade = new Amizade();
-	Operacoes operacoes = new Operacoes();
-	Validadores validadores = new Validadores();
+	AuxiliarAmizade amizade = new AuxiliarAmizade();
+	AuxiliarOperacoes operacoes = new AuxiliarOperacoes();
+	AuxiliarValidadores validadores = new AuxiliarValidadores();
 	BancoDeDados bancodedados = new BancoDeDados();
 
 	// LOGIN, SINGUP, LOGOUT
@@ -169,7 +169,7 @@ public class Controller {
 		return this.usuarioLogado;
 	}
 
-	public Validadores getValidadores() {
+	public AuxiliarValidadores getValidadores() {
 		return validadores;
 	}
 

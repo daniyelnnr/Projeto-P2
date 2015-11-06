@@ -7,7 +7,6 @@ public class Notificacoes {
 	ArrayList<String> notificacoes = new ArrayList<String>();
 	Usuario usuarioRemetente;
 
-
 	public String getNextNotificacao() throws Exception {
 		if (this.notificacoes.size() == 0) {
 			throw new Exception("Nao ha mais notificacoes.");

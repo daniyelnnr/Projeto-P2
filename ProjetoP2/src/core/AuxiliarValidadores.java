@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 import exceptions.ErroUsuarioOffline;
 
-public class Validadores {
+public class AuxiliarValidadores {
 
 	public boolean validaEmail(String email) {
 		int count = 0;
@@ -57,10 +57,8 @@ public class Validadores {
 		}
 		if (count == 2) {
 			String dia = data.substring(0, data.indexOf("/"));
-			String mes = data.substring(data.indexOf("/") + 1,
-					data.lastIndexOf("/"));
-			String ano = data.substring(data.lastIndexOf("/") + 1,
-					data.length());
+			String mes = data.substring(data.indexOf("/") + 1, data.lastIndexOf("/"));
+			String ano = data.substring(data.lastIndexOf("/") + 1, data.length());
 			if (dia.length() == 2 && mes.length() == 2 && ano.length() == 4) {
 				SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
 				input.setLenient(false);
@@ -80,7 +78,7 @@ public class Validadores {
 		}
 	}
 
-	public void validarUsuarioLogado(Object usuarioLogado, String menssagem) throws ErroUsuarioOffline{
+	public void validarUsuarioLogado(Object usuarioLogado, String menssagem) throws ErroUsuarioOffline {
 		if (usuarioLogado == null) {
 			throw new ErroUsuarioOffline(menssagem);
 		}

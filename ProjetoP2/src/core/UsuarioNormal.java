@@ -1,9 +1,9 @@
 package core;
 
-public class UsuarioNormal implements ITipoDeUsuario{
+public class UsuarioNormal implements ITipoDeUsuario {
 
 	private String tipoPopularidade = "Normal Pop";
-	
+
 	@Override
 	public void curtir(Usuario usuarioAmigo, Postagem postagem) {
 		usuarioAmigo.atribuirPontos(10);
@@ -15,7 +15,7 @@ public class UsuarioNormal implements ITipoDeUsuario{
 		usuarioAmigo.atribuirPontos(-10);
 		postagem.atribuirPontos(-10);
 	}
-	
+
 	@Override
 	public String getTipoPopularidade() {
 		return this.tipoPopularidade;

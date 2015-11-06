@@ -1,7 +1,7 @@
 package core;
 
 public class UsuarioIcone implements ITipoDeUsuario {
-	
+
 	private String tipoPopularidade = "Icone Pop";
 
 	@Override

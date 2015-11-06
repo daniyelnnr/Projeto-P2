@@ -16,8 +16,7 @@ public class Facade {
 
 	public void fechaSistema() throws Exception {
 		if (sistema.getUsuarioLogado() != null) {
-			throw new Exception(
-					"Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
+			throw new Exception("Nao foi possivel fechar o sistema. Um usuarix ainda esta logadx.");
 		}
 
 		else {
@@ -25,28 +24,24 @@ public class Facade {
 		}
 	}
 
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar)
-			throws Exception {
-		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
-				dataNasUsuario, imgAvatar);
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
+			String imgAvatar) throws Exception {
+		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
 
 		return emailUsuario;
 	}
 
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) throws Exception {
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario)
+			throws Exception {
 		try {
-			sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario,
-					dataNasUsuario);
+			sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
 			return emailUsuario;
 		} catch (Exception e) {
 			throw new ErroCadastro(e.getMessage());
 		}
 	}
 
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
-			throws Exception {
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
 		return sistema.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
@@ -84,8 +79,7 @@ public class Facade {
 		return sistema.getInfoUsuarioLogado(nomeInformacao);
 	}
 
-	public void login(String emailUsuario, String senhaUsuario)
-			throws Exception {
+	public void login(String emailUsuario, String senhaUsuario) throws Exception {
 		try {
 			sistema.login(emailUsuario, senhaUsuario);
 		} catch (Exception e) {
@@ -102,13 +96,9 @@ public class Facade {
 		sistema.removeUsuario(email);
 	}
 
-
-
-	public void atualizaPerfil(String nomeInformacao, String valor)
-			throws Exception {
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
 		if (sistema.getUsuarioLogado() == null) {
-			throw new ErroUsuarioOffline(
-					"Nao eh possivel atualizar um perfil. ");
+			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
 		}
 		try {
 			sistema.atualizaPerfil(nomeInformacao, valor);
@@ -117,11 +107,9 @@ public class Facade {
 		}
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor,
-			String velhaSenha) throws Exception {
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception {
 		if (sistema.getUsuarioLogado() == null) {
-			throw new ErroUsuarioOffline(
-					"Nao eh possivel atualizar um perfil. ");
+			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
 		}
 		try {
 			sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
@@ -151,51 +139,52 @@ public class Facade {
 		sistema.curtirPost(emailAmigo, indicePost);
 	}
 
-	public String getConteudoPost(int indice, int post) throws Exception{
+	public String getConteudoPost(int indice, int post) throws Exception {
 		return sistema.getConteudo(indice, post);
 	}
-	
-	public String atualizaRanking(){
+
+	public String atualizaRanking() {
 		return sistema.atualizaRanking();
 	}
-	
-	public void adicionaPops(int pops){
+
+	public void adicionaPops(int pops) {
 		sistema.adicionaPops(pops);
 	}
-	
-	public String getPopularidade(){
+
+	public String getPopularidade() {
 		return sistema.getPopularidade();
 	}
-	
+
 	public void rejeitarPost(String emailUsuario, int post) throws Exception {
 		sistema.rejeitarPost(emailUsuario, post);
 	}
-	
-	public int getPopsPost(int post){
+
+	public int getPopsPost(int post) {
 		return sistema.getPopsPost(post);
 	}
-	
-	public int qtdCurtidasDePost(int post) throws Exception{
+
+	public int qtdCurtidasDePost(int post) throws Exception {
 		return sistema.qtdCurtidasDePost(post);
 	}
-	
-	public int qtdRejeicoesDePost(int post) throws Exception{
+
+	public int qtdRejeicoesDePost(int post) throws Exception {
 		return sistema.qtdDescurtidasDePost(post);
 	}
-	
-	public int getPopsUsuario(String emailUsuario) throws Exception{
+
+	public int getPopsUsuario(String emailUsuario) throws Exception {
 		return sistema.getPopsUsuario(emailUsuario);
 	}
-	
-	public int getPopsUsuario() throws Exception{
+
+	public int getPopsUsuario() throws Exception {
 		return sistema.getPopsUsuario();
 	}
-	public String atualizaTrendingTopics(){
+
+	public String atualizaTrendingTopics() {
 		return sistema.atualizaTrendingTopics();
 	}
-	
-	public String atualizaRankings(){
+
+	public String atualizaRankings() {
 		return sistema.atualizaRanking();
 	}
-	
+
 }

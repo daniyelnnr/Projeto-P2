@@ -20,7 +20,6 @@ public class Usuario implements Comparable<Usuario> {
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
 
-
 	public Usuario(String nome, String email, String senha, String dataNasc, String imgAvatar) {
 
 		this.email = email;
@@ -66,8 +65,6 @@ public class Usuario implements Comparable<Usuario> {
 		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade.");
 	}
 
-
-
 	public Postagem getPostagemAmigo(String emailAmigo, int indicePost) {
 		Postagem postagemRequerida = null;
 
@@ -81,7 +78,7 @@ public class Usuario implements Comparable<Usuario> {
 
 	}
 
-	public void atualizaPerfil(Validadores validadores, String nomeInformacao, String valor) throws Exception {
+	public void atualizaPerfil(AuxiliarValidadores validadores, String nomeInformacao, String valor) throws Exception {
 		validadores.validarUsuarioLogado(this, "");
 
 		if (nomeInformacao.equalsIgnoreCase("Nome")) {
@@ -195,7 +192,7 @@ public class Usuario implements Comparable<Usuario> {
 	public int getQtdAmigos() {
 		return this.amigos.size();
 	}
-	
+
 	public String getPopularidade() {
 		return this.tiposStrategy.getTipoPopularidade();
 	}

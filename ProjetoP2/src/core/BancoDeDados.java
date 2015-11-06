@@ -60,7 +60,7 @@ public class BancoDeDados {
 
 	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor) throws Exception {
 		controller.validadores.validarUsuarioLogado(controller.usuarioLogado, "");
-		
+
 		switch (nomeInformacao.toUpperCase()) {
 		case "NOME":
 			if (valor.equals("")) {
@@ -86,7 +86,6 @@ public class BancoDeDados {
 			throw new Exception();
 		}
 	}
-
 
 	// implementar depois
 	public String ordenaUsuario() {
