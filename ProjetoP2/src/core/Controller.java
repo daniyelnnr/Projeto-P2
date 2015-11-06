@@ -2,36 +2,32 @@ package core;
 
 import java.util.ArrayList;
 
-
 public class Controller {
 
-	Validadores validadores = new Validadores();
 	Usuario usuarioLogado = null;
-	BancoDeDados bancodedados = new BancoDeDados();
 	Amizade amizade = new Amizade();
 	Operacoes operacoes = new Operacoes();
+	Validadores validadores = new Validadores();
+	BancoDeDados bancodedados = new BancoDeDados();
 
-	
-	//LOGIN, SINGUP, LOGOUT
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-	String senhaUsuario, String dataNasUsuario, String imgAvatar)
-	throws Exception {
-		return operacoes.cadastraUsuario( getValidadores(), getBancodedados(), nomeUsuario,
-				emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
+	// LOGIN, SINGUP, LOGOUT
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
+			String imgAvatar) throws Exception {
+		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario, emailUsuario, senhaUsuario,
+				dataNasUsuario, imgAvatar);
 	}
 
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-	String senhaUsuario, String dataNasUsuario) throws Exception {
-		return operacoes.cadastraUsuario( getValidadores(), getBancodedados(), nomeUsuario,
-				emailUsuario, senhaUsuario, dataNasUsuario);
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario)
+			throws Exception {
+		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario, emailUsuario, senhaUsuario,
+				dataNasUsuario);
 	}
 
 	public void removeUsuario(String email) {
 		this.bancodedados.removeUsuario(email);
 	}
 
-	public boolean login(String emailUsuario, String senhaUsuario)
-	throws Exception {
+	public boolean login(String emailUsuario, String senhaUsuario) throws Exception {
 		return operacoes.login(this, emailUsuario, senhaUsuario);
 	}
 
@@ -39,61 +35,66 @@ public class Controller {
 		operacoes.logout(this);
 	}
 
-	//BANCO DE DADOS
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
-			throws Exception {
+	// BANCO DE DADOS
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
 		return this.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
 
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
-		return this.bancodedados.getInfoUsuario(nomeInformacao,
-				this.usuarioLogado.getEmail());
+		return this.bancodedados.getInfoUsuario(nomeInformacao, this.usuarioLogado.getEmail());
 
 	}
-	
-	public void atualizaPerfil(String nomeInformacao, String valor)
-	throws Exception {
+
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
 		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor,
-	String velhaSenha) throws Exception {
-		usuarioLogado.atualizaPerfil(nomeInformacao, valor,
-				velhaSenha);
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception {
+		usuarioLogado.atualizaPerfil(nomeInformacao, valor, velhaSenha);
 	}
 
-	//AMIZADE
+	// AMIZADE
 	public void aceitaAmizade(String email) throws Exception {
-		amizade.aceitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
+		Usuario usuario = bancodedados.buscaUsuario(email);
+		amizade.aceitaAmizade(getUsuarioLogado(), usuario, email);
 	}
 
 	public void adicionaAmigo(String email) {
-		amizade.adicionaAmigo(getUsuarioLogado(), getBancodedados(),  email);
+		Usuario usuario = bancodedados.buscaUsuario(email);
+		amizade.adicionaAmigo(getUsuarioLogado(), usuario, email);
 	}
 
 	public void removeAmigo(String email) {
-		amizade.removeAmigo(getUsuarioLogado(), getBancodedados(),  email);
+		Usuario usuario = bancodedados.buscaUsuario(email);
+		amizade.removeAmigo(getUsuarioLogado(), usuario, email);
 	}
 
 	public void rejeitaAmizade(String email) throws Exception {
-		amizade.rejeitaAmizade(getUsuarioLogado(), getBancodedados(),  email);
+		Usuario usuario = bancodedados.buscaUsuario(email);
+		amizade.rejeitaAmizade(getUsuarioLogado(), usuario, email);
 	}
 
-	//NOTIFICAÇÔES
+	// NOTIFICACOES
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
 
-	//USUARIO LOGADO
 	public String getNextInformacao() throws Exception {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
+	// POSTAGEM & GET CONTEUDO QTD AMIGOS
 
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
-		usuarioLogado.curtirPost(getBancodedados(), emailAmigo, indice);
+		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
+		usuarioLogado.curtirPost(usuarioAmigo, emailAmigo, indice);
 	}
-	
+
+	public void rejeitarPost(String emailUsuario, int post) throws Exception {
+		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailUsuario);
+		usuarioLogado.descurtirPost(usuarioAmigo, emailUsuario, post); // tirar
+	}
+
 	public void postarMensagem(String conteudo, String data) throws Exception {
 		ArrayList<String> hashtags = this.bancodedados.pegaHastags(conteudo);
 		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
@@ -116,39 +117,9 @@ public class Controller {
 		return this.usuarioLogado.getMural().get(post).getConteudo(indice);
 	}
 
-	public Usuario getUsuarioLogado() {
-		return this.usuarioLogado;
-	}
-	
-	//GETTERS SETTERS
-	public BancoDeDados getBancodedados() {
-		return bancodedados;
-	}
-	
-	public Validadores getValidadores() {
-		return validadores;
-	}
-
-	public String atualizaRanking() {
-		return this.bancodedados.ordenaUsuario();
-	}
-
-	public void adicionaPops(int pops) {
-		this.usuarioLogado.atribuirPontos(pops);
-	}
-	
-	public String getPopularidade(){
-		return this.usuarioLogado.getPopularidade();
-	}
-
-	public void rejeitarPost(String emailUsuario, int post) throws Exception{
-		usuarioLogado.descurtirPost(getBancodedados(), emailUsuario, post); //tirar getBancoDeDados
-	}
-
 	public int getPopsPost(int post) {
 		return usuarioLogado.getMural().get(post).getPops();
 	}
-
 	
 	public int qtdCurtidasDePost(int post) throws Exception {
 		return this.usuarioLogado.getPostagem(post).getLikes();
@@ -158,8 +129,9 @@ public class Controller {
 		return this.usuarioLogado.getPostagem(post).getDeslikes();
 	}
 
+	// POPS & RANKINGS
 	public int getPopsUsuario(String emailUsuario) throws Exception {
-		if(this.usuarioLogado != null){
+		if (this.usuarioLogado != null) {
 			throw new Exception("Erro na consulta de Pops. Um usuarix ainda esta logadx.");
 		}
 		Usuario usuario = this.bancodedados.buscaUsuario(emailUsuario);
@@ -174,4 +146,31 @@ public class Controller {
 		this.bancodedados.ordenaHashtags();
 		return this.bancodedados.getTrendingTopics();
 	}
+
+	public String atualizaRanking() {
+		return this.bancodedados.ordenaUsuario();
+	}
+
+	public void adicionaPops(int pops) {
+		this.usuarioLogado.atribuirPontos(pops);
+	}
+
+	public String getPopularidade() {
+		return this.usuarioLogado.getPopularidade();
+	}
+
+
+	// GETTERS SETTERS
+	public BancoDeDados getBancodedados() {
+		return bancodedados;
+	}
+
+	public Usuario getUsuarioLogado() {
+		return this.usuarioLogado;
+	}
+
+	public Validadores getValidadores() {
+		return validadores;
+	}
+
 }

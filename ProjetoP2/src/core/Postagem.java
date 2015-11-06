@@ -15,7 +15,6 @@ public class Postagem implements Comparable<Postagem> {
 	private ArrayList<String> conteudo = new ArrayList<String>();
 	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 
-
 	public Postagem(String mensagem, ArrayList<String> hashtags, String data) {
 		this.mensagem = mensagem;
 		this.data = data;
@@ -27,46 +26,41 @@ public class Postagem implements Comparable<Postagem> {
 		bancoHashtags.adicionaHashtags(hashtags);
 	}
 
-	public void refinaMensagem(String mensagem){
-		if(mensagem.contains(" <imagem>")){
-			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <imagem>")));	
+	public void refinaMensagem(String mensagem) {
+		if (mensagem.contains(" <imagem>")) {
+			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <imagem>")));
 		}
-		if(mensagem.contains(" <audio>")){
+		if (mensagem.contains(" <audio>")) {
 			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <audio>")));
 		}
-		
-		Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");  
+
+		Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");
 		List<String> list1 = new ArrayList<String>();
 		Matcher m1 = padrao1.matcher(mensagem);
 
-			while (m1.find()) {
-			    list1.add("$arquivo_audio:" + m1.group());
-			}
-			this.conteudo.addAll(list1);
-		Pattern padrao2 = Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");  
+		while (m1.find()) {
+			list1.add("$arquivo_audio:" + m1.group());
+		}
+		this.conteudo.addAll(list1);
+		Pattern padrao2 = Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");
 		List<String> list2 = new ArrayList<String>();
 		Matcher m2 = padrao2.matcher(mensagem);
 
-			while (m2.find()) {
-			    list2.add("$arquivo_imagem:" + m2.group());
-			}
-			this.conteudo.addAll(list2);
+		while (m2.find()) {
+			list2.add("$arquivo_imagem:" + m2.group());
+		}
+		this.conteudo.addAll(list2);
 	}
-	
+
 	public String getConteudo(int index) throws Exception {
-		if(index < 0){
+		if (index < 0) {
 			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
 		}
-		if((this.conteudo.size()) < index+1){
-			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size() + " itens distintos.");
+		if ((this.conteudo.size()) < index + 1) {
+			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size()
+					+ " itens distintos.");
 		}
 		return conteudo.get(index);
-	}
-	
-	
-	
-	public String getMensagem() {
-		return mensagem;
 	}
 
 	public String getTags() {
@@ -85,14 +79,6 @@ public class Postagem implements Comparable<Postagem> {
 		return txt.substring(0, txt.length() - 1);
 	}
 
-	public int getLikes() {
-		return likes;
-	}
-
-	public void setNewLikes() {
-		this.likes += 1;
-	}
-
 	public String getData() throws Exception {
 		String data = this.data;
 		SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -101,16 +87,17 @@ public class Postagem implements Comparable<Postagem> {
 		return output;
 	}
 
+	public void addTag(String tag) {
+		if (!this.tags.contains(tag)) {
+			this.tags.add(tag);
+			this.bancoHashtags.adicionaHashtags(tag);
+		}
+	}
 
 	@Override
 	public int compareTo(Postagem postagem) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	public void addTag(String tag){
-		if(!this.tags.contains(tag))
-			this.tags.add(tag);
 	}
 
 	public int getPops() {
@@ -129,6 +116,10 @@ public class Postagem implements Comparable<Postagem> {
 		this.deslikes = deslikes;
 	}
 
+	public String getMensagem() {
+		return mensagem;
+	}
+
 	public void atribuirPontos(int pontos) {
 		pops += pontos;
 	}
@@ -136,9 +127,16 @@ public class Postagem implements Comparable<Postagem> {
 	public void setNewDeslikes() {
 		this.deslikes++;
 	}
-	
-	public ArrayList<String> getArrayTags(){
+
+	public ArrayList<String> getArrayTags() {
 		return this.tags;
 	}
-	
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setNewLikes() {
+		this.likes += 1;
+	}
 }

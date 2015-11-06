@@ -6,7 +6,7 @@ import java.util.List;
 public class BancoHashtags {
 	
 	private static BancoHashtags bancoHashtags;
-	private List<String> hashtagsAll = new ArrayList<String>();
+	private ArrayList<String> hashtagsAll = new ArrayList<String>();
 	
 	public static BancoHashtags getInstance(){
 		if (bancoHashtags == null){
@@ -19,8 +19,8 @@ public class BancoHashtags {
 		this.hashtagsAll.addAll(hashtags);
 	}
 	
-	public List<String> getHashtags(){
-		return null;
+	public ArrayList<String> getHashtags(){
+		return hashtagsAll;
 	}
 	
 	public void adicionaHashtags(String hashtag){
