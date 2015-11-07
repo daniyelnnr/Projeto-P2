@@ -23,7 +23,6 @@ public class Postagem implements Comparable<Postagem> {
 		this.setDeslikes(0);
 		this.setTags(hashtags);
 		this.refinaMensagem(this.mensagem);
-		bancoHashtags.adicionaHashtags(hashtags);
 	}
 
 	public void refinaMensagem(String mensagem) {

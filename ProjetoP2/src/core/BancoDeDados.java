@@ -3,16 +3,12 @@ package core;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 public class BancoDeDados {
 
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-	private ArrayList<String> trendHastags = new ArrayList<String>();
-	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
-	private HashMap<String, Integer> hashtagsMap;
+	HashMap<String, Integer> hashtagsMap;
 
 	public Usuario buscaUsuario(String emailUsuario) {
 		Usuario user = null;
@@ -102,59 +98,6 @@ public class BancoDeDados {
 		}
 		return retorno;
 
-	}
-
-	public void ordenaHashtags() {
-		this.trendHastags.clear();
-		HashMap<String, Integer> hashtagsFrequencia = new HashMap<String, Integer>();
-		for (String string : this.bancoHashtags.getHashtags()) {
-			if (hashtagsFrequencia.containsKey(string)) {
-				int frequenciaAtual = hashtagsFrequencia.get(string);
-				frequenciaAtual++;
-				hashtagsFrequencia.replace(string, frequenciaAtual);
-			} else {
-				hashtagsFrequencia.put(string, 1);
-			}
-		}
-		List<String> list = new ArrayList<String>(hashtagsFrequencia.keySet());
-		Collections.sort(list, new Comparator<String>() {
-			@Override
-			public int compare(String x, String y) {
-				int compare = hashtagsFrequencia.get(y) - hashtagsFrequencia.get(x);
-				if(compare ==0)
-					compare = y.compareToIgnoreCase(x);
-				return 	compare;
-				}
-		});
-		for (int i = 0; i < 3; i++) {
-			this.trendHastags.add(list.get(i));
-		}
-		this.hashtagsMap = hashtagsFrequencia;
-	}
-
-	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
-		if (!conteudo.contains("#"))
-			return new ArrayList<String>();
-		int index = conteudo.indexOf("#");
-		String resto = conteudo.substring(index, conteudo.length());
-		ArrayList<String> hashtags = new ArrayList<String>();
-		for (String hashtag : resto.split(" ")) {
-			if (!hashtag.startsWith("#"))
-				throw new Exception(
-						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '" + hashtag
-								+ "'.");
-			hashtags.add(hashtag);
-		}
-		return hashtags;
-	}
-
-	public String getTrendingTopics() {
-		String retorno = "Trending Topics: ";
-		for (int i = 0; i < 3; i++) {
-			retorno += String.format(" (%d) %s: %d;", i + 1, this.trendHastags.get(i),
-					this.hashtagsMap.get(this.trendHastags.get(i)));
-		}
-		return retorno;
 	}
 
 	public void removeUsuario(String email) {

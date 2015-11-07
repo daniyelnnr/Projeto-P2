@@ -9,6 +9,8 @@ public class Controller {
 	AuxiliarOperacoes operacoes = new AuxiliarOperacoes();
 	AuxiliarValidadores validadores = new AuxiliarValidadores();
 	BancoDeDados bancodedados = new BancoDeDados();
+	BancoHashtags bancoHashtags = BancoHashtags.getInstance();
+
 
 	// LOGIN, SINGUP, LOGOUT
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
@@ -96,7 +98,7 @@ public class Controller {
 	}
 
 	public void postarMensagem(String conteudo, String data) throws Exception {
-		ArrayList<String> hashtags = this.bancodedados.pegaHastags(conteudo);
+		ArrayList<String> hashtags = this.bancoHashtags.pegaHastags(conteudo);
 		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
 		usuarioLogado.postarMensagem(conteudo, data, hashtags);
 	}
@@ -143,8 +145,7 @@ public class Controller {
 	}
 
 	public String atualizaTrendingTopics() {
-		this.bancodedados.ordenaHashtags();
-		return this.bancodedados.getTrendingTopics();
+		return this.bancoHashtags.getTrendingTopics();
 	}
 
 	public String atualizaRanking() {
