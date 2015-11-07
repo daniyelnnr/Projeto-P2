@@ -120,8 +120,11 @@ public class BancoDeDados {
 		Collections.sort(list, new Comparator<String>() {
 			@Override
 			public int compare(String x, String y) {
-				return hashtagsFrequencia.get(y) - hashtagsFrequencia.get(x);
-			}
+				int compare = hashtagsFrequencia.get(y) - hashtagsFrequencia.get(x);
+				if(compare ==0)
+					compare = y.compareToIgnoreCase(x);
+				return 	compare;
+				}
 		});
 		for (int i = 0; i < 3; i++) {
 			this.trendHastags.add(list.get(i));
