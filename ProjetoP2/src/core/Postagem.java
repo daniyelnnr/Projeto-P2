@@ -2,7 +2,6 @@ package core;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.*;
 
 public class Postagem implements Comparable<Postagem> {
@@ -26,29 +25,51 @@ public class Postagem implements Comparable<Postagem> {
 	}
 
 	public void refinaMensagem(String mensagem) {
-		if (mensagem.contains(" <imagem>")) {
-			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <imagem>")));
-		}
-		if (mensagem.contains(" <audio>")) {
-			this.conteudo.add(mensagem.substring(0, mensagem.indexOf(" <audio>")));
+		Pattern p1 = Pattern.compile(
+				"(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
+		Matcher m = p1.matcher(mensagem);
+		while (m.find()) {
+			if (m.group("mensagem") != null) {
+				this.conteudo.add(m.group("mensagem"));
+			}
+			if (m.group("multimidia") != null) {
+				System.out.println(m.group("multimidia"));
+				
+				if (m.group("multimidia").startsWith("i")) {
+					this.conteudo.add("$arquivo_imagem:" + m.group("caminho"));
+				}
+				if (m.group("multimidia").startsWith("a")) {
+					this.conteudo.add("$arquivo_audio:" + m.group("caminho"));
+				}
+			}
 		}
 
-		Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");
-		List<String> list1 = new ArrayList<String>();
-		Matcher m1 = padrao1.matcher(mensagem);
-
-		while (m1.find()) {
-			list1.add("$arquivo_audio:" + m1.group());
-		}
-		this.conteudo.addAll(list1);
-		Pattern padrao2 = Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");
-		List<String> list2 = new ArrayList<String>();
-		Matcher m2 = padrao2.matcher(mensagem);
-
-		while (m2.find()) {
-			list2.add("$arquivo_imagem:" + m2.group());
-		}
-		this.conteudo.addAll(list2);
+		// if (mensagem.contains(" <imagem>")) {
+		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
+		// <imagem>")));
+		// }
+		// if (mensagem.contains(" <audio>")) {
+		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
+		// <audio>")));
+		// }
+		//
+		// Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");
+		// List<String> list1 = new ArrayList<String>();
+		// Matcher m1 = padrao1.matcher(mensagem);
+		//
+		// while (m1.find()) {
+		// list1.add("$arquivo_audio:" + m1.group());
+		// }
+		// this.conteudo.addAll(list1);
+		// Pattern padrao2 =
+		// Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");
+		// List<String> list2 = new ArrayList<String>();
+		// Matcher m2 = padrao2.matcher(mensagem);
+		//
+		// while (m2.find()) {
+		// list2.add("$arquivo_imagem:" + m2.group());
+		// }
+		// this.conteudo.addAll(list2);
 	}
 
 	public String getConteudo(int index) throws Exception {
