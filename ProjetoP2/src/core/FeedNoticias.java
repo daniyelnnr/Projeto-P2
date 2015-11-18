@@ -19,4 +19,8 @@ public class FeedNoticias {
 		// ordena os post por tempo
 	}
 
+	public void adicionaPostagem(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
+		
+	}
+
 }

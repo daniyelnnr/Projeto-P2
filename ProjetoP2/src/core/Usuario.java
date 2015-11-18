@@ -122,6 +122,17 @@ public class Usuario implements Comparable<Usuario> {
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
+		adicionaFeedDosAmigos(this.amigos, novaPostagem);
+	}
+
+	private void adicionaFeedDosAmigos(ArrayList<Usuario> amigos, Postagem novaPostagem) {
+		for (Usuario usuario : amigos) {
+			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
+		}
+	}
+
+	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
+		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
 	}
 
 	public void postagemEmHistorico(Postagem postagem) {
