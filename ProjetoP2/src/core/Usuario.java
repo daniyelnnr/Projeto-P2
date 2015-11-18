@@ -2,9 +2,14 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.*;
 
-public class Usuario implements Comparable<Usuario> {
+public class Usuario implements Comparable<Usuario>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String email;
 	private String senha;
@@ -278,6 +283,31 @@ public class Usuario implements Comparable<Usuario> {
 
 	public Usuario getAmigo(int indice) {
 		return amigos.get(indice);
+	}
+
+	public void exportaPostagem(int indiceDoPost) throws Exception {
+		File destFile = new File("PostagensExportadas/");
+		if (!destFile.exists()) {
+			destFile.mkdir();
+		}
+		
+		String arquivo ="PostagensExportadas/" + this.email + ".txt";
+		DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
+		Postagem postagem = getMural().get(indiceDoPost);
+		String export = (String.format("Post #%d %s \n", indiceDoPost+1, postagem.getData()));
+		export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
+		for (int i = 1; i < postagem.getConteudo().size(); i++) {
+			export += String.format("<%s>", postagem.getConteudo(i));
+			
+		}
+		export += String.format("<%s>\n", postagem.getTags().toString());
+		export += String.format("+Pop: <%d>\n", postagem.getPops());
+		try {
+			out.writeUTF(export);
+		} finally {
+			out.close();
+		}
+
 	}
 
 }
