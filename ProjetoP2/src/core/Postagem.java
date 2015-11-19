@@ -128,6 +128,14 @@ public class Postagem implements Comparable<Postagem> {
 		String output = myFormat.format(input.parse(data));
 		return output;
 	}
+	
+	public String getData2() throws Exception {
+		String data = this.data;
+		//SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		//SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//String output = input.format(data);
+		return data;
+	}
 
 	public void addTag(String tag) {
 		if (!this.getTags().contains(tag)) {

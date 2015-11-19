@@ -295,18 +295,19 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
 
 			String arquivo = "arquivos/posts_" + this.email + ".txt";
-			DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
+			FileWriter fw = new FileWriter(arquivo, true);  
+			BufferedWriter out = new BufferedWriter(fw);  
 			Postagem postagem = getMural().get(indiceDoPost);
-			String export = (String.format("Post #%d %s \n", indiceDoPost + 1, postagem.getData()));
+			String export = (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
 			export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
 			for (int i = 1; i < postagem.getConteudo().size(); i++) {
-				export += String.format("<%s>", postagem.getConteudo(i));
+				export += String.format("%s", postagem.getConteudo(i));
 
 			}
-			export += String.format("<%s>\n", postagem.getTags().toString());
-			export += String.format("+Pop: <%d>\n", postagem.getPops());
+			export += String.format("%s\n", postagem.getTags().toString());
+			export += String.format("+Pop: %d\n", postagem.getPops());
 			try {
-				out.writeUTF(export);
+				out.write(export);
 			} finally {
 				out.close();
 			}
