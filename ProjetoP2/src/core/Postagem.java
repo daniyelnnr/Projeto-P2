@@ -31,6 +31,7 @@ public class Postagem implements Comparable<Postagem> {
 		while (m.find()) {
 			if (m.group("mensagem") != null) {
 				this.conteudo.add(m.group("mensagem"));
+				
 			}
 			if (m.group("multimidia") != null) {
 				
@@ -43,7 +44,7 @@ public class Postagem implements Comparable<Postagem> {
 			}
 		}
 
-			
+		
 		}
 
 		@Override

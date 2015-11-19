@@ -101,6 +101,7 @@ public class Controller {
 		ArrayList<String> hashtags = this.bancoHashtags.pegaHastags(conteudo);
 		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
 		usuarioLogado.postarMensagem(conteudo, data, hashtags);
+		
 	}
 
 	public String getPost(int indice) throws Exception {
