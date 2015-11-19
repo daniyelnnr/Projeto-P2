@@ -178,4 +178,17 @@ public class Controller {
 		this.usuarioLogado.exportaPostagem(indiceDoPost);
 	}
 
+	public String getPostFeedNoticiasMaisPopulares(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
+	}
+//refatorar
+	public String getPostFeedNoticiasRecentes(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
+	}
+
+	public void atualizaFeed() {
+		this.usuarioLogado.atualizaFeed();
+	}
+	
+
 }

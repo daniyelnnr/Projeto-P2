@@ -1,6 +1,5 @@
 package core;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -44,6 +43,15 @@ public class Postagem implements Comparable<Postagem> {
 			}
 		}
 
+			
+		}
+
+		@Override
+		public String toString() {
+			return getMensagem();
+		}
+	
+
 		// if (mensagem.contains(" <imagem>")) {
 		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
 		// <imagem>")));
@@ -70,15 +78,17 @@ public class Postagem implements Comparable<Postagem> {
 		// list2.add("$arquivo_imagem:" + m2.group());
 		// }
 		// this.conteudo.addAll(list2);
-	}
+	
 
 	public String getConteudo(int index) throws Exception {
 		if (index < 0) {
-			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
+			throw new Exception(
+					"Requisicao invalida. O indice deve ser maior ou igual a zero.");
 		}
 		if ((this.conteudo.size()) < index + 1) {
-			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size()
-					+ " itens distintos.");
+			throw new Exception("Item #" + index
+					+ " nao existe nesse post, ele possui apenas "
+					+ conteudo.size() + " itens distintos.");
 		}
 		return conteudo.get(index);
 	}
@@ -176,8 +186,4 @@ public class Postagem implements Comparable<Postagem> {
 		return this.conteudo;
 	}
 
-	
-	
-
-	
 }

@@ -19,7 +19,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 	private ITipoDeUsuario tiposStrategy;
 
 	Notificacoes notificacoes = new Notificacoes();
-	FeedNoticias feedNoticias = new FeedNoticias();
+	FeedNoticias feedNoticias;
 	HashMap<String, String> HistoricoUsuario = new HashMap<>();
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
@@ -33,6 +33,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
 		this.tiposStrategy = new UsuarioNormal();
+		this.feedNoticias = new FeedNoticias();
 	}
 
 	public Usuario(String nome, String email, String senha, String dataNasc) throws Exception {
@@ -127,18 +128,18 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-		adicionaFeedDosAmigos(this.amigos, novaPostagem);
+//		adicionaFeedDosAmigos(novaPostagem);
 	}
 
-	private void adicionaFeedDosAmigos(ArrayList<Usuario> amigos, Postagem novaPostagem) {
-		for (Usuario usuario : amigos) {
-			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
-		}
-	}
+//	private void adicionaFeedDosAmigos(Postagem novaPostagem) {
+//		for (Usuario usuario : this.amigos) {
+//			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
+//		}
+//	}
 
-	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
-		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
-	}
+//	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
+//		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
+//	}
 
 	public void postagemEmHistorico(Postagem postagem) {
 		// vai pegar a postagem transformar em historico e adicionala ao
@@ -308,6 +309,10 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 			out.close();
 		}
 
+	}
+
+	public void atualizaFeed() {
+		this.feedNoticias.atualizaFeed(this.amigos);
 	}
 
 }

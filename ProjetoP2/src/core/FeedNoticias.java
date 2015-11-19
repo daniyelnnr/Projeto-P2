@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,47 +27,100 @@ public class FeedNoticias {
 		this.feeds.put(1, this.feedCelebridade);
 		this.feeds.put(2, this.feedIcone);
 		this.feedsParaAtualizar.put(0, this.feedAtualizadoPorData);
-		this.feedsParaAtualizar.put(0, this.feedAtualizadoPorPop);
+		this.feedsParaAtualizar.put(1, this.feedAtualizadoPorPop);
 		this.comparadores.put(0, compararData);
 		this.comparadores.put(1, compararPops);
 	}
 
-	public void atualizaFeed() {
-		for (int j = 0; j < 2; j++) {
-			for (int i = 0; i < 3; i++) {
-				Collections.sort(feeds.get(i), this.comparadores.get(j));
+	public void atualizaFeed(ArrayList<Usuario> amigos) {
+		for (Usuario amigo : amigos) {
+//			Collections.sort(amigo.mural, compararData);
+//			Collections.sort(amigo.mural, compararPops);
+			if (amigo.getPopularidade().equals("Normal Pop")) {
+				for (int i = 0; i < 2; i++) {
+					Collections.sort(amigo.mural, comparadores.get(i));
+					for (int j = 0; j < amigo.mural.size() && j < 2; j++) {
+						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					}
+				}
 			}
-			this.feedsParaAtualizar.get(j).addAll(this.feedNormal.subList(0, 2));
-			this.feedsParaAtualizar.get(j).addAll(this.feedCelebridade.subList(0, 4));
-			this.feedsParaAtualizar.get(j).addAll(this.feedIcone.subList(0, 6));
+			else if (amigo.getPopularidade().equals("Celebridade Pop")) {
+				for (int i = 0; i < 2; i++) {
+					Collections.sort(amigo.mural, comparadores.get(i));
+					for (int j = 0; j < amigo.mural.size() && j < 4; j++) {
+						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					}
+				}
+			}
+			else if (amigo.getPopularidade().equals("Icone Pop")) {
+				for (int i = 0; i < 2; i++) {
+					Collections.sort(amigo.mural, comparadores.get(i));
+					for (int j = 0; j < amigo.mural.size() && j < 6; j++) {
+						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					}
+				}
+			}
+
 		}
-
-		this.feedExibidoPorData.addAll(this.feedAtualizadoPorData);
-		this.feedExibidoPorPop.addAll(this.feedAtualizadoPorPop);
+		Collections.sort(feedAtualizadoPorData, compararData);
+		Collections.sort(feedAtualizadoPorPop, compararPops);
+		this.feedExibidoPorData.addAll(feedAtualizadoPorData);
+		this.feedExibidoPorPop.addAll(feedAtualizadoPorPop);
 
 	}
 
-	public HashMap<Integer, ArrayList<Postagem>> getFeeds() {
-		return (HashMap<Integer, ArrayList<Postagem>>) feeds;
+	// for (int j = 0; j < 2; j++) {
+	// for (int i = 0; i < 3; i++) {
+	// Collections.sort(feeds.get(i), this.comparadores.get(j));
+	// }
+	// if(feedNormal.size()<2){
+	// this.feedsParaAtualizar.get(j).addAll(this.feedNormal.subList(0,
+	// feedNormal.size()));
+	// }else{
+	// this.feedsParaAtualizar.get(j).addAll(this.feedNormal.subList(0, 2));
+	// }
+	// if(feedCelebridade.size()<4){
+	// this.feedsParaAtualizar.get(j).addAll(this.feedCelebridade.subList(0,
+	// feedCelebridade.size()));
+	// }else{
+	// this.feedsParaAtualizar.get(j).addAll(this.feedCelebridade.subList(0,
+	// 4));
+	// }
+	// if(feedNormal.size()<6){
+	// this.feedsParaAtualizar.get(j).addAll(this.feedIcone.subList(0,
+	// feedIcone.size()));
+	// }else{
+	// this.feedsParaAtualizar.get(j).addAll(this.feedIcone.subList(0, 6));
+	// }
+	// }
+	//
+	// this.feedExibidoPorData.addAll(this.feedAtualizadoPorData);
+	// this.feedExibidoPorPop.addAll(this.feedAtualizadoPorPop);
+	//
+	// }
+
+	public String getFeedPopularidade(int post) {
+		System.out.println(this.feedExibidoPorPop);
+		System.out.println(this.feedExibidoPorPop.get(post));
+		System.out.println(post);
+		return this.feedExibidoPorPop.get(post).getMensagem();
 	}
 
-	public ArrayList<Postagem> getFeedPopularidade() {
-		return this.feedExibidoPorPop;
+	public String getFeedTempo(int post) {
+		return this.feedExibidoPorData.get(post).getMensagem();
 	}
 
-	public ArrayList<Postagem> getFeedTempo() {
-		return this.feedAtualizadoPorData;
-	}
-
-	public void adicionaPostagem(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
-		if (tipoDeUsuario.getTipoPopularidade().equals("Normal")) {
-			this.feedNormal.add(novaPostagem);
-		} else if (tipoDeUsuario.getTipoPopularidade().equals("Celebridade")) {
-			this.feedCelebridade.add(novaPostagem);
-		} else {
-			this.feedIcone.add(novaPostagem);
-		}
-	}
+	// public void adicionaPostagem(Postagem novaPostagem,
+	// ITipoDeUsuario tipoDeUsuario) {
+	// if (tipoDeUsuario.getTipoPopularidade().equals("Normal Pop")) {
+	// this.feedNormal.add(novaPostagem);
+	// } else if (tipoDeUsuario.getTipoPopularidade()
+	// .equals("Celebridade Pop")) {
+	// this.feedCelebridade.add(novaPostagem);
+	// } else {
+	// this.feedIcone.add(novaPostagem);
+	// }
+	// }
 
 	Comparator<Postagem> compararData = new Comparator<Postagem>() {
 
@@ -89,4 +143,5 @@ public class FeedNoticias {
 
 		}
 	};
+
 }
