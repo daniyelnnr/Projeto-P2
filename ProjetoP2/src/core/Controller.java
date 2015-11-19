@@ -174,4 +174,21 @@ public class Controller {
 		return validadores;
 	}
 
+	public void exportaPostagem(int indiceDoPost) throws Exception {
+		this.usuarioLogado.exportaPostagem(indiceDoPost);
+	}
+
+	public String getPostFeedNoticiasMaisPopulares(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
+	}
+//refatorar
+	public String getPostFeedNoticiasRecentes(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
+	}
+
+	public void atualizaFeed() {
+		this.usuarioLogado.atualizaFeed();
+	}
+	
+
 }

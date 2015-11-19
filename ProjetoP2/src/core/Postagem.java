@@ -8,9 +8,9 @@ public class Postagem implements Comparable<Postagem> {
 	private String mensagem;
 	private String data;
 	private int pops;
-	private ArrayList<String> tags = new ArrayList<String>();
 	private int likes;
 	private int deslikes;
+	private ArrayList<String> tags = new ArrayList<String>();
 	private ArrayList<String> conteudo = new ArrayList<String>();
 	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 
@@ -33,7 +33,6 @@ public class Postagem implements Comparable<Postagem> {
 				this.conteudo.add(m.group("mensagem"));
 			}
 			if (m.group("multimidia") != null) {
-				System.out.println(m.group("multimidia"));
 				
 				if (m.group("multimidia").startsWith("i")) {
 					this.conteudo.add("$arquivo_imagem:" + m.group("caminho"));
@@ -43,6 +42,15 @@ public class Postagem implements Comparable<Postagem> {
 				}
 			}
 		}
+
+			
+		}
+
+		@Override
+		public String toString() {
+			return getMensagem();
+		}
+	
 
 		// if (mensagem.contains(" <imagem>")) {
 		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
@@ -70,15 +78,17 @@ public class Postagem implements Comparable<Postagem> {
 		// list2.add("$arquivo_imagem:" + m2.group());
 		// }
 		// this.conteudo.addAll(list2);
-	}
+	
 
 	public String getConteudo(int index) throws Exception {
 		if (index < 0) {
-			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
+			throw new Exception(
+					"Requisicao invalida. O indice deve ser maior ou igual a zero.");
 		}
 		if ((this.conteudo.size()) < index + 1) {
-			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size()
-					+ " itens distintos.");
+			throw new Exception("Item #" + index
+					+ " nao existe nesse post, ele possui apenas "
+					+ conteudo.size() + " itens distintos.");
 		}
 		return conteudo.get(index);
 	}
@@ -171,4 +181,9 @@ public class Postagem implements Comparable<Postagem> {
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
+
+	public ArrayList<String> getConteudo() {
+		return this.conteudo;
+	}
+
 }

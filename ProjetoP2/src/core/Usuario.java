@@ -2,9 +2,14 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.*;
 
-public class Usuario implements Comparable<Usuario> {
+public class Usuario implements Comparable<Usuario>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String email;
 	private String senha;
@@ -14,7 +19,7 @@ public class Usuario implements Comparable<Usuario> {
 	private ITipoDeUsuario tiposStrategy;
 
 	Notificacoes notificacoes = new Notificacoes();
-	FeedNoticias feedNoticias = new FeedNoticias();
+	FeedNoticias feedNoticias;
 	HashMap<String, String> HistoricoUsuario = new HashMap<>();
 	ArrayList<Postagem> mural = new ArrayList<Postagem>();
 	ArrayList<Usuario> amigos = new ArrayList<Usuario>();
@@ -28,6 +33,7 @@ public class Usuario implements Comparable<Usuario> {
 		this.imgAvatar = imgAvatar;
 		this.dataNasc = dataNasc;
 		this.tiposStrategy = new UsuarioNormal();
+		this.feedNoticias = new FeedNoticias();
 	}
 
 	public Usuario(String nome, String email, String senha, String dataNasc) throws Exception {
@@ -122,18 +128,18 @@ public class Usuario implements Comparable<Usuario> {
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-		adicionaFeedDosAmigos(this.amigos, novaPostagem);
+//		adicionaFeedDosAmigos(novaPostagem);
 	}
 
-	private void adicionaFeedDosAmigos(ArrayList<Usuario> amigos, Postagem novaPostagem) {
-		for (Usuario usuario : amigos) {
-			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
-		}
-	}
+//	private void adicionaFeedDosAmigos(Postagem novaPostagem) {
+//		for (Usuario usuario : this.amigos) {
+//			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
+//		}
+//	}
 
-	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
-		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
-	}
+//	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
+//		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
+//	}
 
 	public void postagemEmHistorico(Postagem postagem) {
 		// vai pegar a postagem transformar em historico e adicionala ao
@@ -278,6 +284,35 @@ public class Usuario implements Comparable<Usuario> {
 
 	public Usuario getAmigo(int indice) {
 		return amigos.get(indice);
+	}
+
+	public void exportaPostagem(int indiceDoPost) throws Exception {
+		File destFile = new File("PostagensExportadas/");
+		if (!destFile.exists()) {
+			destFile.mkdir();
+		}
+		
+		String arquivo ="PostagensExportadas/" + this.email + ".txt";
+		DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
+		Postagem postagem = getMural().get(indiceDoPost);
+		String export = (String.format("Post #%d %s \n", indiceDoPost+1, postagem.getData()));
+		export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
+		for (int i = 1; i < postagem.getConteudo().size(); i++) {
+			export += String.format("<%s>", postagem.getConteudo(i));
+			
+		}
+		export += String.format("<%s>\n", postagem.getTags().toString());
+		export += String.format("+Pop: <%d>\n", postagem.getPops());
+		try {
+			out.writeUTF(export);
+		} finally {
+			out.close();
+		}
+
+	}
+
+	public void atualizaFeed() {
+		this.feedNoticias.atualizaFeed(this.amigos);
 	}
 
 }

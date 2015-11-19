@@ -186,5 +186,24 @@ public class Facade {
 	public String atualizaRankings() {
 		return sistema.atualizaRanking();
 	}
+	
+	public void exportaPostagem(int indiceDoPost){
+		try {
+			this.controle.exportaPostagem(indiceDoPost);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public String getPostFeedNoticiasRecentes(int post){
+		return this.sistema.getPostFeedNoticiasRecentes(post);
+	}
+	public String getPostFeedNoticiasMaisPopulares(int post){
+		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
+		
+	}
+	public void atualizaFeed(){
+		this.sistema.atualizaFeed();
+		
+	}
 
 }
