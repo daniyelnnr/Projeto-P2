@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.io.*;
 
 public class Usuario implements Comparable<Usuario>, Serializable {
@@ -124,22 +125,25 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		}
 
 		String msg = conteudo.substring(0, index - 1);
+		if (!conteudo.contains("#") && !conteudo.contains("</"))
+			msg = conteudo;
 		if (msg.length() >= 200)
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-//		adicionaFeedDosAmigos(novaPostagem);
+		// adicionaFeedDosAmigos(novaPostagem);
 	}
 
-//	private void adicionaFeedDosAmigos(Postagem novaPostagem) {
-//		for (Usuario usuario : this.amigos) {
-//			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
-//		}
-//	}
+	// private void adicionaFeedDosAmigos(Postagem novaPostagem) {
+	// for (Usuario usuario : this.amigos) {
+	// usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
+	// }
+	// }
 
-//	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
-//		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
-//	}
+	// private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario
+	// tipoDeUsuario) {
+	// this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
+	// }
 
 	public void postagemEmHistorico(Postagem postagem) {
 		// vai pegar a postagem transformar em historico e adicionala ao
@@ -286,33 +290,69 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		return amigos.get(indice);
 	}
 
-	public void exportaPostagem(int indiceDoPost) throws Exception {
-		File destFile = new File("PostagensExportadas/");
+	public void exportaPostagem() throws Exception {
+		File destFile = new File("arquivos/");
 		if (!destFile.exists()) {
 			destFile.mkdir();
 		}
-		
-		String arquivo ="PostagensExportadas/" + this.email + ".txt";
-		DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
-		Postagem postagem = getMural().get(indiceDoPost);
-		String export = (String.format("Post #%d %s \n", indiceDoPost+1, postagem.getData()));
-		export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
-		for (int i = 1; i < postagem.getConteudo().size(); i++) {
-			export += String.format("<%s>", postagem.getConteudo(i));
+
+		if (this.mural.size() == 0) {
+			throw new Exception("Erro ao baixar posts. O usuario nao possui posts.");
+		}
+
+		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
+
+			Postagem postagem = getMural().get(indiceDoPost);
+			String arquivo = "arquivos/posts_" + this.email + ".txt";
+			FileWriter fw = new FileWriter(arquivo, true);
+			BufferedWriter out = new BufferedWriter(fw);
+			String export = (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
+			export += "Conteudo:";
+			if (postagem.getMensagem().contains("</")) {
+				export += String.format("\n%s\n",
+						postagem.getMensagem().substring(0, postagem.getMensagem().indexOf("<")));
+			} else {
+				export += String.format("\n%s\n", postagem.getMensagem());
+			}
+			if (!postagem.getConteudo().isEmpty()) {
+				String conteudo = postagem.getMensagem().substring(postagem.getMensagem().indexOf("<"),
+						postagem.getMensagem().lastIndexOf(">") + 1);
+
+				for (String string : conteudo.split(" ")) {
+					export += String.format("\n%s\n", string);
+				}
+
+			}
 			
+		
+				for (String tag : postagem.getArrayTags()) {
+					export += tag;
+					export += " ";
+			
+			if(postagem.getArrayTags() != null){
+				export += "\n";
+			}
+			
+			export += String.format("+Pop: %d\n\n\n", postagem.getPops());
+
+			try {
+				out.write(export);
+			} finally {
+				out.close();
+			}
+			}
 		}
-		export += String.format("<%s>\n", postagem.getTags().toString());
-		export += String.format("+Pop: <%d>\n", postagem.getPops());
-		try {
-			out.writeUTF(export);
-		} finally {
-			out.close();
-		}
+		
 
 	}
 
 	public void atualizaFeed() {
 		this.feedNoticias.atualizaFeed(this.amigos);
+	}
+
+	public int getTotalPosts() {
+		int totalPosts = mural.size();
+		return totalPosts;
 	}
 
 }

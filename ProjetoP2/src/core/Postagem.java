@@ -31,6 +31,7 @@ public class Postagem implements Comparable<Postagem> {
 		while (m.find()) {
 			if (m.group("mensagem") != null) {
 				this.conteudo.add(m.group("mensagem"));
+				
 			}
 			if (m.group("multimidia") != null) {
 				
@@ -43,12 +44,24 @@ public class Postagem implements Comparable<Postagem> {
 			}
 		}
 
-			
+		
 		}
 
 		@Override
 		public String toString() {
-			return getMensagem();
+			String retorno = this.mensagem;
+			for (String string : tags) {
+				retorno += " ";
+				retorno += string;
+			}
+			try {
+				retorno += " ";
+				retorno += String.format("(%s)",this.getData());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return retorno;
 		}
 	
 
@@ -115,6 +128,14 @@ public class Postagem implements Comparable<Postagem> {
 		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String output = myFormat.format(input.parse(data));
 		return output;
+	}
+	
+	public String getData2() throws Exception {
+		String data = this.data;
+		//SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		//SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//String output = input.format(data);
+		return data;
 	}
 
 	public void addTag(String tag) {

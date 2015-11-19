@@ -101,6 +101,7 @@ public class Controller {
 		ArrayList<String> hashtags = this.bancoHashtags.pegaHastags(conteudo);
 		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
 		usuarioLogado.postarMensagem(conteudo, data, hashtags);
+		
 	}
 
 	public String getPost(int indice) throws Exception {
@@ -174,20 +175,24 @@ public class Controller {
 		return validadores;
 	}
 
-	public void exportaPostagem(int indiceDoPost) throws Exception {
-		this.usuarioLogado.exportaPostagem(indiceDoPost);
+	public void exportaPostagem() throws Exception {
+		this.usuarioLogado.exportaPostagem();
 	}
 
-	public String getPostFeedNoticiasMaisPopulares(int post) {
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
 		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
 	}
 //refatorar
-	public String getPostFeedNoticiasRecentes(int post) {
+	public Postagem getPostFeedNoticiasRecentes(int post) {
 		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
 	}
 
 	public void atualizaFeed() {
 		this.usuarioLogado.atualizaFeed();
+	}
+
+	public int getTotalPosts() {
+		return usuarioLogado.getTotalPosts();
 	}
 	
 

@@ -134,6 +134,10 @@ public class Facade {
 	public String getPost(String atributo, int indice) throws Exception {
 		return sistema.getPost(atributo, indice);
 	}
+	
+	public int getTotalPosts(){
+		return sistema.getTotalPosts();
+	}
 
 	public void curtirPost(String emailAmigo, int indicePost) throws Exception {
 		sistema.curtirPost(emailAmigo, indicePost);
@@ -187,23 +191,20 @@ public class Facade {
 		return sistema.atualizaRanking();
 	}
 	
-	public void exportaPostagem(int indiceDoPost){
-		try {
-			this.controle.exportaPostagem(indiceDoPost);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public String getPostFeedNoticiasRecentes(int post){
+	public Postagem getPostFeedNoticiasRecentes(int post){
 		return this.sistema.getPostFeedNoticiasRecentes(post);
 	}
-	public String getPostFeedNoticiasMaisPopulares(int post){
+	public Postagem getPostFeedNoticiasMaisPopulares(int post){
 		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
 		
 	}
 	public void atualizaFeed(){
 		this.sistema.atualizaFeed();
 		
+	}
+	
+	public void baixaPosts() throws Exception{
+		this.sistema.exportaPostagem();
 	}
 
 }
