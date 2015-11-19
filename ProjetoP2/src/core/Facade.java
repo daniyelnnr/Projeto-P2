@@ -194,5 +194,16 @@ public class Facade {
 			e.printStackTrace();
 		}
 	}
+	public String getPostFeedNoticiasRecentes(int post){
+		return this.sistema.getPostFeedNoticiasRecentes(post);
+	}
+	public String getPostFeedNoticiasMaisPopulares(int post){
+		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
+		
+	}
+	public void atualizaFeed(){
+		this.sistema.atualizaFeed();
+		
+	}
 
 }
