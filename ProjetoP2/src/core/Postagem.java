@@ -1,5 +1,6 @@
 package core;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -8,9 +9,9 @@ public class Postagem implements Comparable<Postagem> {
 	private String mensagem;
 	private String data;
 	private int pops;
-	private ArrayList<String> tags = new ArrayList<String>();
 	private int likes;
 	private int deslikes;
+	private ArrayList<String> tags = new ArrayList<String>();
 	private ArrayList<String> conteudo = new ArrayList<String>();
 	private BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 
@@ -33,7 +34,6 @@ public class Postagem implements Comparable<Postagem> {
 				this.conteudo.add(m.group("mensagem"));
 			}
 			if (m.group("multimidia") != null) {
-				System.out.println(m.group("multimidia"));
 				
 				if (m.group("multimidia").startsWith("i")) {
 					this.conteudo.add("$arquivo_imagem:" + m.group("caminho"));
@@ -171,4 +171,13 @@ public class Postagem implements Comparable<Postagem> {
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
+
+	public ArrayList<String> getConteudo() {
+		return this.conteudo;
+	}
+
+	
+	
+
+	
 }
