@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.io.*;
 
 public class Usuario implements Comparable<Usuario>, Serializable {
@@ -295,16 +296,27 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
 
 			String arquivo = "arquivos/posts_" + this.email + ".txt";
-			FileWriter fw = new FileWriter(arquivo, true);  
-			BufferedWriter out = new BufferedWriter(fw);  
+			FileWriter fw = new FileWriter(arquivo, true);
+			BufferedWriter out = new BufferedWriter(fw);
 			Postagem postagem = getMural().get(indiceDoPost);
 			String export = (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
-			export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
-			for (int i = 1; i < postagem.getConteudo().size(); i++) {
-				export += String.format("%s", postagem.getConteudo(i));
-
+			export += "Conteudo:";
+			if(postagem.getMensagem().contains("</")){
+				export += String.format("\n%s\n", postagem.getMensagem().substring(0, postagem.getMensagem().indexOf("<")));
+			}else{
+				export += String.format("\n%s\n", postagem.getMensagem());
 			}
-			export += String.format("%s\n", postagem.getTags().toString());
+			if (!postagem.getConteudo().isEmpty()) {
+				String conteudo = postagem.getMensagem().substring(postagem.getMensagem().indexOf("<"), postagem.getMensagem().lastIndexOf(">"));
+				//conteudo.split(" ");
+				export += String.format("%s", conteudo);
+				
+			}
+			for (String tag : postagem.getArrayTags()) {
+				export += tag;
+				export += " ";
+			}
+			export += "\n";
 			export += String.format("+Pop: %d\n", postagem.getPops());
 			try {
 				out.write(export);
