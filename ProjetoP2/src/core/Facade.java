@@ -134,6 +134,10 @@ public class Facade {
 	public String getPost(String atributo, int indice) throws Exception {
 		return sistema.getPost(atributo, indice);
 	}
+	
+	public int getTotalPosts(){
+		return sistema.getTotalPosts();
+	}
 
 	public void curtirPost(String emailAmigo, int indicePost) throws Exception {
 		sistema.curtirPost(emailAmigo, indicePost);

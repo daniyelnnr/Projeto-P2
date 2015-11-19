@@ -189,6 +189,10 @@ public class Controller {
 	public void atualizaFeed() {
 		this.usuarioLogado.atualizaFeed();
 	}
+
+	public int getTotalPosts() {
+		return usuarioLogado.getTotalPosts();
+	}
 	
 
 }

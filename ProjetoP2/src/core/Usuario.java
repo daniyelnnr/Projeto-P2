@@ -318,4 +318,9 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		this.feedNoticias.atualizaFeed(this.amigos);
 	}
 
+	public int getTotalPosts() {
+		int totalPosts = mural.size();
+		return totalPosts;
+	}
+
 }
