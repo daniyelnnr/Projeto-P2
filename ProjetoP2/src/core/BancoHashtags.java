@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BancoHashtags {
 
@@ -20,17 +22,23 @@ public class BancoHashtags {
 	}
 
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
-		if (!conteudo.contains("#"))
-			return new ArrayList<String>();
-		int index = conteudo.indexOf("#");
-		String resto = conteudo.substring(index, conteudo.length());
+		String hashtag = null;
 		ArrayList<String> hashtags = new ArrayList<String>();
-		for (String hashtag : resto.split(" ")) {
-			if (!hashtag.startsWith("#"))
-				throw new Exception(
-						"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '" + hashtag
-								+ "'.");
-			hashtags.add(hashtag);
+		Pattern p1 = Pattern.compile("(((?<mensagem>^.*?)(?=[#,<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)|(?<tags>([#])\\w*)))");
+		Matcher m = p1.matcher(conteudo);
+		Pattern p = Pattern.compile("(#\\w+\\s+)(?<ai>\\w+)");
+		Matcher m1 = p.matcher(conteudo);
+		while(m1.find()){
+			throw new Exception(
+					"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '" + m1.group("ai")
+					+ "'.");
+		}
+		while(m.find())
+		{
+			if(m.group("tags") != null){
+				hashtag = m.group("tags");
+				hashtags.add(hashtag);
+			}
 		}
 		this.hashtagsAll.addAll(hashtags);
 		return hashtags;

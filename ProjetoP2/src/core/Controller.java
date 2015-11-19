@@ -174,4 +174,8 @@ public class Controller {
 		return validadores;
 	}
 
+	public void exportaPostagem(int indiceDoPost) throws Exception {
+		this.usuarioLogado.exportaPostagem(indiceDoPost);
+	}
+
 }

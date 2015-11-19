@@ -186,5 +186,13 @@ public class Facade {
 	public String atualizaRankings() {
 		return sistema.atualizaRanking();
 	}
+	
+	public void exportaPostagem(int indiceDoPost){
+		try {
+			this.controle.exportaPostagem(indiceDoPost);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
