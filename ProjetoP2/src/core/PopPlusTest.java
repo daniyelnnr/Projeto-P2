@@ -11,8 +11,8 @@ public class PopPlusTest {
 
 	public static void main(String[] args) {
 
-		args = new String[] { "core.Facade", "tests/usecase_1.txt", "tests/usecase_2.txt", "tests/usecase_3.txt",
-				"tests/usecase_4.txt", "tests/usecase_5.txt", "tests/usecase_6.txt", "tests/usecase_7.txt", "tests/usecase_8.txt", "tests/usecase_9.txt", "tests/usecase_910.txt" };
+		args = new String[] { "core.Facade", "testes/usecase_1.txt", "testes/usecase_2.txt", "testes/usecase_3.txt",
+				"testes/usecase_4.txt", "testes/usecase_5.txt", "testes/usecase_6.txt", "testes/usecase_7.txt", "testes/usecase_8.txt", "testes/usecase_9.txt", "testes/usecase_910.txt" };
 		EasyAccept.main(args);
 		/*
 		 * List<String> files = new ArrayList<String>(); // Put the us1.txt file

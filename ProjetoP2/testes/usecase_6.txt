@@ -3,7 +3,7 @@
 ###############
 
 # Os POPs de um usuario dependem exclusivamente da popularidade de seus postes,
-# O metodo adicionaPops esta sendo usado para verificar a mudança dinamica do tipo de usuario
+# O metodo adicionaPops esta sendo usado para verificar a mudanï¿½a dinamica do tipo de usuario
 
 iniciaSistema
 
@@ -110,7 +110,6 @@ expect 50 getPopsUsuario
 logout
 
 
-
 login email="madonna@email.com" senha="iamawesome"
 aceitaAmizade usuario="skyler@email.com.br"
 aceitaAmizade usuario="jesse@email.com.br"
@@ -131,6 +130,7 @@ expect "#preocupada,#epicfail,#epicwin" getPost atributo="Hashtags" post=1
 expect 2 qtdRejeicoesDePost post=1
 expect 1 qtdCurtidasDePost post=1
 expect -50 getPopsUsuario
+
 logout
 
 atualizaRanking
