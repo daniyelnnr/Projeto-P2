@@ -174,15 +174,15 @@ public class Controller {
 		return validadores;
 	}
 
-	public void exportaPostagem(int indiceDoPost) throws Exception {
-		this.usuarioLogado.exportaPostagem(indiceDoPost);
+	public void exportaPostagem() throws Exception {
+		this.usuarioLogado.exportaPostagem();
 	}
 
-	public String getPostFeedNoticiasMaisPopulares(int post) {
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
 		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
 	}
 //refatorar
-	public String getPostFeedNoticiasRecentes(int post) {
+	public Postagem getPostFeedNoticiasRecentes(int post) {
 		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
 	}
 

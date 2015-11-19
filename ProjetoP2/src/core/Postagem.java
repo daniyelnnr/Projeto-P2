@@ -48,7 +48,19 @@ public class Postagem implements Comparable<Postagem> {
 
 		@Override
 		public String toString() {
-			return getMensagem();
+			String retorno = this.mensagem;
+			for (String string : tags) {
+				retorno += " ";
+				retorno += string;
+			}
+			try {
+				retorno += " ";
+				retorno += String.format("(%s)",this.getData());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return retorno;
 		}
 	
 

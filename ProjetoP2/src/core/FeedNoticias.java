@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,37 +25,36 @@ public class FeedNoticias {
 		this.feeds.put(0, this.feedNormal);
 		this.feeds.put(1, this.feedCelebridade);
 		this.feeds.put(2, this.feedIcone);
-		this.feedsParaAtualizar.put(0, this.feedAtualizadoPorData);
-		this.feedsParaAtualizar.put(1, this.feedAtualizadoPorPop);
-		this.comparadores.put(0, compararData);
-		this.comparadores.put(1, compararPops);
+		this.feedsParaAtualizar.put(0, this.feedAtualizadoPorPop);
+		this.feedsParaAtualizar.put(1, this.feedAtualizadoPorData);
+		this.comparadores.put(0, compararPops);
+		this.comparadores.put(1, compararData);
 	}
 
 	public void atualizaFeed(ArrayList<Usuario> amigos) {
 		for (Usuario amigo : amigos) {
-//			Collections.sort(amigo.mural, compararData);
-//			Collections.sort(amigo.mural, compararPops);
+			ArrayList<Postagem> muralAmigo = (ArrayList<Postagem>) amigo.mural.clone();
 			if (amigo.getPopularidade().equals("Normal Pop")) {
 				for (int i = 0; i < 2; i++) {
-					Collections.sort(amigo.mural, comparadores.get(i));
-					for (int j = 0; j < amigo.mural.size() && j < 2; j++) {
-						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					Collections.sort(muralAmigo, comparadores.get(i));
+					for (int j = 0; j < muralAmigo.size() && j < 2; j++) {
+						this.feedsParaAtualizar.get(i).add(muralAmigo.get(j));
 					}
 				}
 			}
 			else if (amigo.getPopularidade().equals("Celebridade Pop")) {
 				for (int i = 0; i < 2; i++) {
-					Collections.sort(amigo.mural, comparadores.get(i));
-					for (int j = 0; j < amigo.mural.size() && j < 4; j++) {
-						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					Collections.sort(muralAmigo, comparadores.get(i));
+					for (int j = 0; j < muralAmigo.size() && j < 4; j++) {
+						this.feedsParaAtualizar.get(i).add(muralAmigo.get(j));
 					}
 				}
 			}
 			else if (amigo.getPopularidade().equals("Icone Pop")) {
 				for (int i = 0; i < 2; i++) {
-					Collections.sort(amigo.mural, comparadores.get(i));
-					for (int j = 0; j < amigo.mural.size() && j < 6; j++) {
-						this.feedsParaAtualizar.get(i).add(amigo.mural.get(j));
+					Collections.sort(muralAmigo, comparadores.get(i));
+					for (int j = 0; j < muralAmigo.size() && j < 6; j++) {
+						this.feedsParaAtualizar.get(i).add(muralAmigo.get(j));
 					}
 				}
 			}
@@ -99,15 +97,12 @@ public class FeedNoticias {
 	//
 	// }
 
-	public String getFeedPopularidade(int post) {
-		System.out.println(this.feedExibidoPorPop);
-		System.out.println(this.feedExibidoPorPop.get(post));
-		System.out.println(post);
-		return this.feedExibidoPorPop.get(post).getMensagem();
+	public Postagem getFeedPopularidade(int post) {
+		return this.feedExibidoPorPop.get(this.feedExibidoPorPop.size()-post-1);
 	}
 
-	public String getFeedTempo(int post) {
-		return this.feedExibidoPorData.get(post).getMensagem();
+	public Postagem getFeedTempo(int post) {
+		return this.feedExibidoPorData.get(this.feedExibidoPorData.size()-post-1);
 	}
 
 	// public void adicionaPostagem(Postagem novaPostagem,
@@ -127,7 +122,7 @@ public class FeedNoticias {
 		@Override
 		public int compare(Postagem postagem, Postagem outraPostagem) {
 			try {
-				return postagem.getData().compareTo(outraPostagem.getData());
+				return outraPostagem.getData().compareTo(postagem.getData());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -139,7 +134,15 @@ public class FeedNoticias {
 
 		@Override
 		public int compare(Postagem postagem, Postagem outraPostagem) {
-			return postagem.getPops() - outraPostagem.getPops();
+			if(postagem.getPops()>outraPostagem.getPops()){
+				return -1;
+			}
+			else if(postagem.getPops()<outraPostagem.getPops()){
+				return 1;
+			}
+			else{
+				return compararData.compare(postagem, outraPostagem);
+			}
 
 		}
 	};

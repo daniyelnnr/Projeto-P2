@@ -187,23 +187,20 @@ public class Facade {
 		return sistema.atualizaRanking();
 	}
 	
-	public void exportaPostagem(int indiceDoPost){
-		try {
-			this.controle.exportaPostagem(indiceDoPost);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public String getPostFeedNoticiasRecentes(int post){
+	public Postagem getPostFeedNoticiasRecentes(int post){
 		return this.sistema.getPostFeedNoticiasRecentes(post);
 	}
-	public String getPostFeedNoticiasMaisPopulares(int post){
+	public Postagem getPostFeedNoticiasMaisPopulares(int post){
 		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
 		
 	}
 	public void atualizaFeed(){
 		this.sistema.atualizaFeed();
 		
+	}
+	
+	public void baixaPosts() throws Exception{
+		this.sistema.exportaPostagem();
 	}
 
 }

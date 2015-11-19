@@ -128,18 +128,19 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-//		adicionaFeedDosAmigos(novaPostagem);
+		// adicionaFeedDosAmigos(novaPostagem);
 	}
 
-//	private void adicionaFeedDosAmigos(Postagem novaPostagem) {
-//		for (Usuario usuario : this.amigos) {
-//			usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
-//		}
-//	}
+	// private void adicionaFeedDosAmigos(Postagem novaPostagem) {
+	// for (Usuario usuario : this.amigos) {
+	// usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
+	// }
+	// }
 
-//	private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario tipoDeUsuario) {
-//		this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
-//	}
+	// private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario
+	// tipoDeUsuario) {
+	// this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
+	// }
 
 	public void postagemEmHistorico(Postagem postagem) {
 		// vai pegar a postagem transformar em historico e adicionala ao
@@ -286,27 +287,29 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		return amigos.get(indice);
 	}
 
-	public void exportaPostagem(int indiceDoPost) throws Exception {
-		File destFile = new File("PostagensExportadas/");
+	public void exportaPostagem() throws Exception {
+		File destFile = new File("arquivos/");
 		if (!destFile.exists()) {
 			destFile.mkdir();
 		}
-		
-		String arquivo ="PostagensExportadas/" + this.email + ".txt";
-		DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
-		Postagem postagem = getMural().get(indiceDoPost);
-		String export = (String.format("Post #%d %s \n", indiceDoPost+1, postagem.getData()));
-		export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
-		for (int i = 1; i < postagem.getConteudo().size(); i++) {
-			export += String.format("<%s>", postagem.getConteudo(i));
-			
-		}
-		export += String.format("<%s>\n", postagem.getTags().toString());
-		export += String.format("+Pop: <%d>\n", postagem.getPops());
-		try {
-			out.writeUTF(export);
-		} finally {
-			out.close();
+		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
+
+			String arquivo = "arquivos/posts_" + this.email + ".txt";
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivo, true));
+			Postagem postagem = getMural().get(indiceDoPost);
+			String export = (String.format("Post #%d %s \n", indiceDoPost + 1, postagem.getData()));
+			export += String.format("Conteudo:\n%s\n", postagem.getMensagem());
+			for (int i = 1; i < postagem.getConteudo().size(); i++) {
+				export += String.format("<%s>", postagem.getConteudo(i));
+
+			}
+			export += String.format("<%s>\n", postagem.getTags().toString());
+			export += String.format("+Pop: <%d>\n", postagem.getPops());
+			try {
+				out.writeUTF(export);
+			} finally {
+				out.close();
+			}
 		}
 
 	}
