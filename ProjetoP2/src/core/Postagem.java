@@ -44,8 +44,6 @@ public class Postagem implements Comparable<Postagem> {
 	public void refinaMensagem(String mensagem) {
 		Pattern mensagemPadrao = Pattern.compile(
 				"(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
-		Pattern p1 = Pattern
-				.compile("(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
 		Matcher multimidiaPadrao = mensagemPadrao.matcher(mensagem);
 		while (multimidiaPadrao.find()) {
 			if (multimidiaPadrao.group("mensagem") != null) {
