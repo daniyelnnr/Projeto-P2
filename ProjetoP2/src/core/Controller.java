@@ -91,21 +91,8 @@ public class Controller {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 	
-	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
-	}
+
 	
-	public Postagem getPostFeedNoticiasRecentes(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
-	}
-
-	public void atualizaFeed() {
-		this.usuarioLogado.atualizaFeed();
-	}
-
-	public int getTotalPosts() {
-		return usuarioLogado.getTotalPosts();
-	}
 	// POSTAGEM & GET CONTEUDO QTD AMIGOS
 
 	public void curtirPost(String emailAmigo, int indice) throws Exception {
@@ -153,9 +140,6 @@ public class Controller {
 		return this.usuarioLogado.getPostagem(post).getDeslikes();
 	}
 	
-	public void exportaPostagem() throws Exception {
-		this.usuarioLogado.exportaPostagem();
-	}
 
 
 	// POPS & RANKINGS
@@ -243,33 +227,8 @@ public class Controller {
 	}
 
 }
-		return validadores;
-	}
-
-
-	public void exportaPostagem() throws Exception {
-		this.usuarioLogado.exportaPostagem();
-	}
-	
-	/**
-	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais populares.
-	 * @param post
-	 * @return
-	 */
-	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
-	}
-
-	/**
-	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais recentes.
-	 * @param post
-	 * @return
-	 */
-	public Postagem getPostFeedNoticiasRecentes(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
-	}
 
 
 	
 
-}
+
