@@ -2,27 +2,15 @@ package core;
 
 import easyaccept.EasyAccept;
 
-//import java.util.ArrayList;
-//import java.util.List;
-
-//import easyaccept.EasyAcceptFacade;
-
 public class PopPlusTest {
 
 	public static void main(String[] args) {
 
 		args = new String[] { "core.Facade", "testes/usecase_1.txt", "testes/usecase_2.txt", "testes/usecase_3.txt",
-				"testes/usecase_4.txt", "testes/usecase_5.txt", "testes/usecase_6.txt", "testes/usecase_7.txt", "testes/usecase_8.txt", "testes/usecase_9.txt", "testes/usecase_910.txt" };
+				"testes/usecase_4.txt", "testes/usecase_5.txt", "testes/usecase_6.txt", "testes/usecase_7.txt",
+				"testes/usecase_8.txt", "testes/usecase_9.txt", "testes/usecase_A10.txt" };
 		EasyAccept.main(args);
-		/*
-		 * List<String> files = new ArrayList<String>(); // Put the us1.txt file
-		 * into the "test scripts" list files.add("use_case_1.txt"); //
-		 * Instantiate the Monopoly Game fa�ade Facade popFacade = new Facade();
-		 * // Instantiate EasyAccept fa�ade EasyAcceptFacade eaFacade = new
-		 * EasyAcceptFacade(popFacade, files); // Execute the tests
-		 * eaFacade.executeTests(); // Print the tests execution results
-		 * System.out.println(eaFacade.getCompleteResults());
-		 */
+
 	}
 
 }

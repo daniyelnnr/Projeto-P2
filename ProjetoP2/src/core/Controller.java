@@ -77,13 +77,29 @@ public class Controller {
 		amizade.rejeitaAmizade(getUsuarioLogado(), usuario, email);
 	}
 
-	// NOTIFICACOES
+	// NOTIFICACOES//FEED
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
 
 	public String getNextInformacao() throws Exception {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
+	}
+	
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
+	}
+	
+	public Postagem getPostFeedNoticiasRecentes(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
+	}
+
+	public void atualizaFeed() {
+		this.usuarioLogado.atualizaFeed();
+	}
+
+	public int getTotalPosts() {
+		return usuarioLogado.getTotalPosts();
 	}
 	// POSTAGEM & GET CONTEUDO QTD AMIGOS
 
@@ -131,6 +147,11 @@ public class Controller {
 	public int qtdDescurtidasDePost(int post) throws Exception {
 		return this.usuarioLogado.getPostagem(post).getDeslikes();
 	}
+	
+	public void exportaPostagem() throws Exception {
+		this.usuarioLogado.exportaPostagem();
+	}
+
 
 	// POPS & RANKINGS
 	public int getPopsUsuario(String emailUsuario) throws Exception {
@@ -175,25 +196,8 @@ public class Controller {
 		return validadores;
 	}
 
-	public void exportaPostagem() throws Exception {
-		this.usuarioLogado.exportaPostagem();
-	}
 
-	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
-	}
-//refatorar
-	public Postagem getPostFeedNoticiasRecentes(int post) {
-		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
-	}
 
-	public void atualizaFeed() {
-		this.usuarioLogado.atualizaFeed();
-	}
-
-	public int getTotalPosts() {
-		return usuarioLogado.getTotalPosts();
-	}
 	
 
 }

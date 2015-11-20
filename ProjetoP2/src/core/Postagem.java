@@ -31,10 +31,10 @@ public class Postagem implements Comparable<Postagem> {
 		while (m.find()) {
 			if (m.group("mensagem") != null) {
 				this.conteudo.add(m.group("mensagem"));
-				
+
 			}
 			if (m.group("multimidia") != null) {
-				
+
 				if (m.group("multimidia").startsWith("i")) {
 					this.conteudo.add("$arquivo_imagem:" + m.group("caminho"));
 				}
@@ -44,64 +44,32 @@ public class Postagem implements Comparable<Postagem> {
 			}
 		}
 
-		
-		}
+	}
 
-		@Override
-		public String toString() {
-			String retorno = this.mensagem;
-			for (String string : tags) {
-				retorno += " ";
-				retorno += string;
-			}
-			try {
-				retorno += " ";
-				retorno += String.format("(%s)",this.getData());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return retorno;
+	@Override
+	public String toString() {
+		String retorno = this.mensagem;
+		for (String string : tags) {
+			retorno += " ";
+			retorno += string;
 		}
-	
-
-		// if (mensagem.contains(" <imagem>")) {
-		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
-		// <imagem>")));
-		// }
-		// if (mensagem.contains(" <audio>")) {
-		// this.conteudo.add(mensagem.substring(0, mensagem.indexOf("
-		// <audio>")));
-		// }
-		//
-		// Pattern padrao1 = Pattern.compile("(?<=<audio>)(\\S*)(?=</audio>)");
-		// List<String> list1 = new ArrayList<String>();
-		// Matcher m1 = padrao1.matcher(mensagem);
-		//
-		// while (m1.find()) {
-		// list1.add("$arquivo_audio:" + m1.group());
-		// }
-		// this.conteudo.addAll(list1);
-		// Pattern padrao2 =
-		// Pattern.compile("(?<=<imagem>)(\\S*)(?=</imagem>)");
-		// List<String> list2 = new ArrayList<String>();
-		// Matcher m2 = padrao2.matcher(mensagem);
-		//
-		// while (m2.find()) {
-		// list2.add("$arquivo_imagem:" + m2.group());
-		// }
-		// this.conteudo.addAll(list2);
-	
+		try {
+			retorno += " ";
+			retorno += String.format("(%s)", this.getData());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return retorno;
+	}
 
 	public String getConteudo(int index) throws Exception {
 		if (index < 0) {
-			throw new Exception(
-					"Requisicao invalida. O indice deve ser maior ou igual a zero.");
+			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
 		}
 		if ((this.conteudo.size()) < index + 1) {
-			throw new Exception("Item #" + index
-					+ " nao existe nesse post, ele possui apenas "
-					+ conteudo.size() + " itens distintos.");
+			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size()
+					+ " itens distintos.");
 		}
 		return conteudo.get(index);
 	}
@@ -129,12 +97,9 @@ public class Postagem implements Comparable<Postagem> {
 		String output = myFormat.format(input.parse(data));
 		return output;
 	}
-	
-	public String getData2() throws Exception {
+
+	public String getDataOutroFormato() throws Exception {
 		String data = this.data;
-		//SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		//SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		//String output = input.format(data);
 		return data;
 	}
 

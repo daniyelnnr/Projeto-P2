@@ -62,12 +62,5 @@ public class AuxiliarOperacoes {
 		}
 	}
 
-	public void salvaDados(String stringDestino) {
-		// salvar dados antes de fazer o logout
-	}
-
-	public void recuperaDados(String stringOrigem) {
-		// recupera os dados que foram salvos no txt
-	}
 
 }
