@@ -39,22 +39,21 @@ public class BancoHashtags {
 	 * @return Retorna uma lista com as hashtags filtradas.
 	 * @throws Lanca excecao quando o padrao de hashtags em uma postagem esta incorreto.
 	 */
-	// TODO: REFATORAR
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
 		String hashtag = null;
 		ArrayList<String> hashtags = new ArrayList<String>();
-		Pattern p1 = Pattern.compile(
-				"(((?<mensagem>^.*?)(?=[#,<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)|(?<tags>([#])\\w*)))");
-		Matcher m = p1.matcher(conteudo);
-		Pattern p = Pattern.compile("(#\\w+\\s+)(?<ai>\\w+)");
-		Matcher m1 = p.matcher(conteudo);
-		while (m1.find()) {
+		Pattern tagsPadrao = Pattern.compile(
+				"(?<tags>([#])\\w*)");
+		Matcher matcherTags = tagsPadrao.matcher(conteudo);
+		Pattern tagErroPadrao = Pattern.compile("(#\\w+\\s+)(?<tagComErro>\\w+)");
+		Matcher matcherTagErro = tagErroPadrao.matcher(conteudo);
+		while (matcherTagErro.find()) {
 			throw new Exception("Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
-					+ m1.group("ai") + "'.");
+					+ matcherTagErro.group("tagComErro") + "'.");
 		}
-		while (m.find()) {
-			if (m.group("tags") != null) {
-				hashtag = m.group("tags");
+		while (matcherTags.find()) {
+			if (matcherTags.group("tags") != null) {
+				hashtag = matcherTags.group("tags");
 				hashtags.add(hashtag);
 			}
 		}

@@ -38,21 +38,21 @@ public class Postagem implements Comparable<Postagem> {
 	 * @param mensagem
 	 */
 	public void refinaMensagem(String mensagem) {
-		Pattern p1 = Pattern.compile(
+		Pattern mensagemPadrao = Pattern.compile(
 				"(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
-		Matcher m = p1.matcher(mensagem);
-		while (m.find()) {
-			if (m.group("mensagem") != null) {
-				this.conteudo.add(m.group("mensagem"));
+		Matcher multimidiaPadrao = mensagemPadrao.matcher(mensagem);
+		while (multimidiaPadrao.find()) {
+			if (multimidiaPadrao.group("mensagem") != null) {
+				this.conteudo.add(multimidiaPadrao.group("mensagem"));
 
 			}
-			if (m.group("multimidia") != null) {
+			if (multimidiaPadrao.group("multimidia") != null) {
 
-				if (m.group("multimidia").startsWith("i")) {
-					this.conteudo.add("$arquivo_imagem:" + m.group("caminho"));
+				if (multimidiaPadrao.group("multimidia").startsWith("i")) {
+					this.conteudo.add("$arquivo_imagem:" + multimidiaPadrao.group("caminho"));
 				}
-				if (m.group("multimidia").startsWith("a")) {
-					this.conteudo.add("$arquivo_audio:" + m.group("caminho"));
+				if (multimidiaPadrao.group("multimidia").startsWith("a")) {
+					this.conteudo.add("$arquivo_audio:" + multimidiaPadrao.group("caminho"));
 				}
 			}
 		}
