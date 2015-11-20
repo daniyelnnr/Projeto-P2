@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.regex.*;
 
 /**
- * Classe responsavel por representar uma Postagem e todas suas funcionalidades. 
  * Projeto LP2 - 2014.2
+ * 
  * @author Daniyel Rocha 114210779
  * @author Igor Pinheiro 114210164
  * @author Matheus Maia 114210417
  *
+ *         Classe responsavel por representar uma Postagem e todas suas
+ *         funcionalidades.
  */
 
 public class Postagem implements Comparable<Postagem> {
@@ -32,14 +34,18 @@ public class Postagem implements Comparable<Postagem> {
 		this.setTags(hashtags);
 		this.refinaMensagem(this.mensagem);
 	}
-	
+
 	/**
-	 * Metodo que separa a postagem em partes , podendo ser: mensagem, imagem, audio e hashtags.
+	 * Metodo que separa a postagem em partes , podendo ser: mensagem, imagem,
+	 * audio e hashtags.
+	 * 
 	 * @param mensagem
 	 */
 	public void refinaMensagem(String mensagem) {
 		Pattern mensagemPadrao = Pattern.compile(
 				"(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
+		Pattern p1 = Pattern
+				.compile("(((?<mensagem>^.+?)(?=\\s[#<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)))");
 		Matcher multimidiaPadrao = mensagemPadrao.matcher(mensagem);
 		while (multimidiaPadrao.find()) {
 			if (multimidiaPadrao.group("mensagem") != null) {
@@ -75,20 +81,23 @@ public class Postagem implements Comparable<Postagem> {
 		}
 		return retorno;
 	}
-	
+
 	/**
 	 * Metodo responsavel por recuperar uma parte especifica da postagem.
+	 * 
 	 * @param index
 	 * @return
 	 * @throws Exception
 	 */
 	public String getConteudo(int index) throws Exception {
 		if (index < 0) {
-			throw new Exception("Requisicao invalida. O indice deve ser maior ou igual a zero.");
+			throw new Exception(
+					"Requisicao invalida. O indice deve ser maior ou igual a zero.");
 		}
 		if ((this.conteudo.size()) < index + 1) {
-			throw new Exception("Item #" + index + " nao existe nesse post, ele possui apenas " + conteudo.size()
-					+ " itens distintos.");
+			throw new Exception("Item #" + index
+					+ " nao existe nesse post, ele possui apenas "
+					+ conteudo.size() + " itens distintos.");
 		}
 		return conteudo.get(index);
 	}
@@ -108,9 +117,11 @@ public class Postagem implements Comparable<Postagem> {
 		}
 		return txt.substring(0, txt.length() - 1);
 	}
-	
+
 	/**
-	 * Metodo responsavel por recuperar a data, e formata-la de acordo com a saida requisitada pelo programa.
+	 * Metodo responsavel por recuperar a data, e formata-la de acordo com a
+	 * saida requisitada pelo programa.
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -121,9 +132,10 @@ public class Postagem implements Comparable<Postagem> {
 		String output = myFormat.format(input.parse(data));
 		return output;
 	}
-	
+
 	/**
 	 * Retorna a data do formato Original.
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -131,9 +143,10 @@ public class Postagem implements Comparable<Postagem> {
 		String data = this.data;
 		return data;
 	}
-	
+
 	/**
 	 * Metodo responsavel por adicionar uma hashtag no banco de hashtags.
+	 * 
 	 * @param tag
 	 */
 	public void addTag(String tag) {
@@ -148,71 +161,86 @@ public class Postagem implements Comparable<Postagem> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	/**
 	 * Retorna os pontos de popularidade de uma postagem.
+	 * 
 	 * @return
 	 */
 	public int getPops() {
 		return pops;
 	}
-	
+
 	/**
 	 * Aplica novos valores de pontos de popularidade.
+	 * 
 	 * @param pops
 	 */
 	public void setPops(int pops) {
 		this.pops = pops;
 	}
-	
+
 	/**
 	 * Retorna numero de "descurtidas".
+	 * 
 	 * @return
 	 */
 	public int getDeslikes() {
 		return deslikes;
 	}
-	
+
 	/**
 	 * Aplica novos valores de "descurtidas".
+	 * 
 	 * @param deslikes
 	 */
 	public void setDeslikes(int deslikes) {
 		this.deslikes = deslikes;
 	}
-	
+
 	/**
 	 * Retorna a mensagem do post.
+	 * 
 	 * @return
 	 */
 	public String getMensagem() {
 		return mensagem;
 	}
-	
+
 	/**
 	 * Atribui pontos a uma determinada postagem.
+	 * 
 	 * @param pontos
 	 */
 	public void atribuirPontos(int pontos) {
 		pops += pontos;
 	}
-	
+
 	public void setNewDeslikes() {
 		this.deslikes++;
 	}
-	
+
 	/**
 	 * Recupera a lista de Hashtags.
+	 * 
 	 * @return
 	 */
 	public ArrayList<String> getArrayTags() {
 		return this.getTags();
 	}
 
+	/**
+	 * Retorna a quantidade de Curtidas.
+	 * 
+	 * @return
+	 */
 	public int getLikes() {
 		return likes;
 	}
 
+	/**
+	 * Adiciona uma Curtida a postagem.
+	 */
 	public void setNewLikes() {
 		this.setLikes(this.getLikes() + 1);
 	}
@@ -225,6 +253,11 @@ public class Postagem implements Comparable<Postagem> {
 		return tags;
 	}
 
+	/**
+	 * Aplica um novo valor de lista de hashtags.
+	 * 
+	 * @param tags
+	 */
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}

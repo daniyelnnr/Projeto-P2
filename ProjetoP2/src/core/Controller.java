@@ -22,11 +22,11 @@ public class Controller {
 	BancoDeDados bancodedados = new BancoDeDados();
 	BancoHashtags bancoHashtags = BancoHashtags.getInstance();
 
-
 	/**
 	 * 
-	 * 	Metodo responsavel por realizar o cadastro de novos usuarios, recebendo um Avatar de Imagem.
-	 * 	Pode lançar uma execao na hora da criacao do usuario.
+	 * Atraves de forwarding para AuxuliaOperacoes, este metodo e responsavel
+	 * por realizar o cadastro de novos usuarios, recebendo um Avatar de Imagem.
+	 * Pode lançar uma execao na hora da criacao do usuario.
 	 * 
 	 * @param nomeUsuario
 	 * @param emailUsuario
@@ -43,9 +43,12 @@ public class Controller {
 				nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario,
 				imgAvatar);
 	}
-	
+
 	/**
-	 * Metodo responsavel por realizar o cadastro de novos usuario, contudo diferente do anterior, nao recebe um Avata de Imagem.
+	 * Atreves de forwarding para AuxiliarOperacoes este metodo responsavel por
+	 * realizar o cadastro de novos usuario, contudo diferente do anterior, nao
+	 * recebe um Avata de Imagem.
+	 * 
 	 * @param nomeUsuario
 	 * @param emailUsuario
 	 * @param senhaUsuario
@@ -58,17 +61,22 @@ public class Controller {
 		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(),
 				nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
 	}
-	
+
 	/**
-	 * Remove um usuario do banco de dados da rede. A busca é feita atraves do email do usuario que se deseja remover.
+	 * Atraves de forwarding para BancoDeDados este metodo remove um usuario do
+	 * banco de dados da rede. A busca é feita atraves do email do usuario que
+	 * se deseja remover.
+	 * 
 	 * @param email
 	 */
 	public void removeUsuario(String email) {
 		this.bancodedados.removeUsuario(email);
 	}
-	
+
 	/**
-	 * Metodo responsavel por realizar o login dos usuario na rede social.
+	 * Atraves de forwarding para AuxiliarOperacoes este metodo e responsavel
+	 * por realizar o login dos usuario na rede social.
+	 * 
 	 * @param emailUsuario
 	 * @param senhaUsuario
 	 * @return
@@ -78,17 +86,22 @@ public class Controller {
 			throws Exception {
 		return operacoes.login(this, emailUsuario, senhaUsuario);
 	}
-	
+
 	/**
-	 * Metodo responsavel por realizar o logout dos usuarios na rede social.
+	 * Atraves de forwarding para AuxiliarOperacoes este metodo e responsavel
+	 * por realizar o logout dos usuarios na rede social.
+	 * 
 	 * @throws Exception
 	 */
 	public void logout() throws Exception {
 		operacoes.logout(this);
 	}
-	
+
 	/**
-	 * Pesquisa informacoes de usuarios, atraves do nome da informacao desejada e do email do usuario.
+	 * Atraves de forwarding para BancoDeDados este metodo e responsavel por
+	 * pesquisar informacoes de usuarios, atraves do nome da informacao desejada
+	 * e do email do usuario.
+	 * 
 	 * @param nomeInformacao
 	 * @param emailUsuario
 	 * @return
@@ -100,9 +113,12 @@ public class Controller {
 		return this.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
-	
+
 	/**
-	 * Pesquisa informacoes de usuarios logados, nesse caso requerindo apenas o nome da informacao desejada.
+	 * Atraves de forwarding para Usuario este metodo pesquisa informacoes de
+	 * usuarios logados, nesse caso requerindo apenas o nome da informacao
+	 * desejada.
+	 * 
 	 * @param nomeInformacao
 	 * @return
 	 * @throws Exception
@@ -114,7 +130,9 @@ public class Controller {
 	}
 
 	/**
-	 * Metodo responsavel por atualizar as informacoes de usuarios.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por
+	 * atualizar as informacoes de usuarios.
+	 * 
 	 * @param nomeInformacao
 	 * @param valor
 	 * @throws Exception
@@ -123,9 +141,11 @@ public class Controller {
 			throws Exception {
 		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
 	}
-	
+
 	/**
-	 * Metodo responsavel por promover a atualizacao da senha do usuario.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por promover
+	 * a atualizacao da senha do usuario.
+	 * 
 	 * @param nomeInformacao
 	 * @param valor
 	 * @param velhaSenha
@@ -136,38 +156,47 @@ public class Controller {
 		usuarioLogado.atualizaPerfil(nomeInformacao, valor, velhaSenha);
 	}
 
-	
 	/**
-	 * Ao recever uma solicitacao de amizade, o usuario podera rejeita-la ou adiciona-la, neste caso a amizade e criada.
+	 * Atraves de forwarding para AuxiliarAmizades este metodo ao receber uma
+	 * solicitacao de amizade, o usuario podera rejeita-la ou adiciona-la, neste
+	 * caso a amizade e criada.
+	 * 
 	 * @param email
 	 * @throws Exception
 	 */
-	
+
 	public void aceitaAmizade(String email) throws Exception {
 		Usuario usuario = bancodedados.buscaUsuario(email);
 		amizade.aceitaAmizade(getUsuarioLogado(), usuario, email);
 	}
 
 	/**
-	 * Caso uma solicitacao de amizade seja aceita o amigo e adicionado.
+	 * Atraves de forwarding para AuxiliarAmizade este metodo fica responsavel
+	 * por aceitar a uma solicitacao de amizade seja aceita o amigo e
+	 * adicionado.
+	 * 
 	 * @param email
 	 */
 	public void adicionaAmigo(String email) {
 		Usuario usuario = bancodedados.buscaUsuario(email);
 		amizade.adicionaAmigo(getUsuarioLogado(), usuario, email);
 	}
-	
+
 	/**
-	 * Metodo responsavel por remover amizade.
+	 * Atraves de forwarding para AuxiliarAmizade este metodo e responsavel por
+	 * remover amizade.
+	 * 
 	 * @param email
-	 */	
+	 */
 	public void removeAmigo(String email) {
 		Usuario usuario = bancodedados.buscaUsuario(email);
 		amizade.removeAmigo(getUsuarioLogado(), usuario, email);
 	}
-	
+
 	/**
-	 * Quando uma amizade nao e aceita. Este metodo e chamado.
+	 * Atraves de forwarding para AuxiliarAmizade este metodo fica responsavel
+	 * por rejeitar uma amizade.
+	 * 
 	 * @param email
 	 * @throws Exception
 	 */
@@ -177,16 +206,20 @@ public class Controller {
 	}
 
 	/**
-	 * Retorna as notificacoes do usuario.
+	 * Atraves de forwarding para Usuario este metodo retorna as notificacoes do
+	 * usuario.
+	 * 
 	 * @return
 	 */
-			
+
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
-	
+
 	/**
-	 * Metodo que retorna uma proxima notificao do usuario, se a mesma existir.
+	 * Atraves de forwarding este metodo retorna uma proxima notificao do
+	 * usuario, se a mesma existir.
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -194,9 +227,10 @@ public class Controller {
 		return this.usuarioLogado.notificacoes.getNextNotificacao();
 	}
 
-	
 	/**
-	 * Metodo responsavel por permitir um Usuario curtir posts de seus amigos.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por permitir
+	 * um Usuario curtir posts de seus amigos.
+	 * 
 	 * @param emailAmigo
 	 * @param indice
 	 * @throws Exception
@@ -205,9 +239,11 @@ public class Controller {
 		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailAmigo);
 		usuarioLogado.curtirPost(usuarioAmigo, emailAmigo, indice);
 	}
-	
+
 	/**
-	 * Metodo responsavel por permitir um Usuario rejeitar posts de seus amigos
+	 * Atraves de forwarding para Usuario este metodo e responsavel por permitir
+	 * um Usuario rejeitar posts de seus amigos
+	 * 
 	 * @param emailUsuario
 	 * @param post
 	 * @throws Exception
@@ -216,9 +252,11 @@ public class Controller {
 		Usuario usuarioAmigo = bancodedados.buscaUsuario(emailUsuario);
 		usuarioLogado.descurtirPost(usuarioAmigo, emailUsuario, post); // tirar
 	}
-	
+
 	/**
-	 * Metodo responsavel por postar uma mensagem.
+	 * Atraves de forwarding para AuxiliaVlidadores este metodo e responsavel
+	 * por postar uma mensagem.
+	 * 
 	 * @param conteudo
 	 * @param data
 	 * @throws Exception
@@ -232,7 +270,9 @@ public class Controller {
 	}
 
 	/**
-	 * Retorna um post especifico pelo indice do mesmo.
+	 * Atraves de forwarding para Usuario este metodo retorna um post especifico
+	 * pelo indice do mesmo.
+	 * 
 	 * @param indice
 	 * @return
 	 * @throws Exception
@@ -240,9 +280,11 @@ public class Controller {
 	public String getPost(int indice) throws Exception {
 		return usuarioLogado.getPost(indice);
 	}
-	
+
 	/**
-	 * Retorna uma parte especifica de um post.
+	 * Atraves de forwarding para Usuario, retorna uma parte especifica de um
+	 * post.
+	 * 
 	 * @param atributo
 	 * @param indice
 	 * @return
@@ -251,17 +293,21 @@ public class Controller {
 	public String getPost(String atributo, int indice) throws Exception {
 		return usuarioLogado.getPost(atributo, indice);
 	}
-	
+
 	/**
-	 * Retorna quantidade de amigos.
+	 * Atraves de forwarding para Usuario este metodo retorna a quantidade de
+	 * amigos.
+	 * 
 	 * @return
 	 */
 	public int getQtdAmigos() {
 		return this.usuarioLogado.getQtdAmigos();
 	}
-	
+
 	/**
-	 * Retorna uma parte especifica de um post do Mural do Usuario
+	 * Atraves de forwarding para Usuario este metodo retorna uma parte
+	 * especifica de um post do Mural do Usuario.
+	 * 
 	 * @param indice
 	 * @param post
 	 * @return
@@ -270,18 +316,22 @@ public class Controller {
 	public String getConteudo(int indice, int post) throws Exception {
 		return this.usuarioLogado.getMural().get(post).getConteudo(indice);
 	}
-	
+
 	/**
-	 * Retorna a quantidade de pontos de popularidade de um post especifico.
+	 * Atraves de forwarding para Usuario este metodo retorna a quantidade de
+	 * pontos de popularidade de um post especifico.
+	 * 
 	 * @param post
 	 * @return
 	 */
 	public int getPopsPost(int post) {
 		return usuarioLogado.getMural().get(post).getPops();
 	}
-	
+
 	/**
-	 * Retorna quantidade de curtidas de um post.
+	 * Atraves de forwarding para Usuario este metodo retorna quantidade de
+	 * curtidas de um post.
+	 * 
 	 * @param post
 	 * @return
 	 * @throws Exception
@@ -289,9 +339,11 @@ public class Controller {
 	public int qtdCurtidasDePost(int post) throws Exception {
 		return this.usuarioLogado.getPostagem(post).getLikes();
 	}
-	
+
 	/**
-	 * Retorna quantidade de "descurtidas" de um post.
+	 * Atraves de forwarding para Usuario este metodo retorna quantidade de
+	 * "descurtidas" de um post.
+	 * 
 	 * @param post
 	 * @return
 	 * @throws Exception
@@ -301,7 +353,9 @@ public class Controller {
 	}
 
 	/**
-	 * Retorna quantidade de pontos de popularidade do usuario, pesquisado atraves de seu email.
+	 * Atraves de forwarding para Usuario este metodo retorna quantidade de
+	 * pontos de popularidade do usuario, pesquisado atraves de seu email.
+	 * 
 	 * @param emailUsuario
 	 * @return
 	 * @throws Exception
@@ -314,77 +368,92 @@ public class Controller {
 		Usuario usuario = this.bancodedados.buscaUsuario(emailUsuario);
 		return usuario.getPops();
 	}
-	
+
 	/**
-	 * Retorna a quantidade de pontos de popularidade de um usuario logado.
+	 * Atraves de forwarding para Usuaroi este metodo retorna a quantidade de
+	 * pontos de popularidade de um usuario logado.
+	 * 
 	 * @return
 	 */
 	public int getPopsUsuario() {
 		return this.usuarioLogado.getPops();
 	}
-	
+
 	/**
-	 * Atualiza o ranking de hashtags mais utilizadas.
+	 * Atraves de forwarding para BancoHashtags, atualiza o ranking de hashtags
+	 * mais utilizadas.
+	 * 
 	 * @return
 	 */
 	public String atualizaTrendingTopics() {
 		return this.bancoHashtags.getTrendingTopics();
 	}
-	
+
 	/**
-	 * Metodo responsavel por atualizar os rankings.
+	 * Atraves de forwarding para BancoDeDados este metodo e responsavel por
+	 * atualizar os rankings.
+	 * 
 	 * @return
 	 */
 	public String atualizaRanking() {
 		return this.bancodedados.ordenaUsuario();
 	}
-	
+
 	/**
-	 * Metodo responsavel por adicionar pontos de popularidade.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por
+	 * adicionar pontos de popularidade.
+	 * 
 	 * @param pops
 	 */
 	public void adicionaPops(int pops) {
 		this.usuarioLogado.atribuirPontos(pops);
 	}
-	
+
 	/**
-	 * Metodo responsavel por retornar a popularidade de um usuario.
+	 * Atraves de forwarding para Metodo responsavel por retornar a popularidade
+	 * de um usuario.
+	 * 
 	 * @return
 	 */
 	public String getPopularidade() {
 		return this.usuarioLogado.getPopularidade();
 	}
 
-	
 	/**
 	 * Retorna o banco de dados.
+	 * 
 	 * @return
 	 */
 	public BancoDeDados getBancodedados() {
 		return bancodedados;
 	}
-	
+
 	/**
 	 * Retorna o Usuario Logado no momento.
+	 * 
 	 * @return
 	 */
 	public Usuario getUsuarioLogado() {
 		return this.usuarioLogado;
 	}
-	
+
 	public AuxiliarValidadores getValidadores() {
 		return validadores;
 	}
+
 	/**
-	 * Metodo responsavel por exportar os post para arquivos.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por exportar os post para arquivos.
+	 * 
 	 * @throws Exception
 	 */
 	public void exportaPostagem() throws Exception {
 		this.usuarioLogado.exportaPostagem();
 	}
-	
+
 	/**
-	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais populares.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar o feed de noticias ordenado por noticias
+	 * mais populares.
+	 * 
 	 * @param post
 	 * @return
 	 */
@@ -393,23 +462,26 @@ public class Controller {
 	}
 
 	/**
-	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais recentes.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar o feed de noticias ordenado por noticias
+	 * mais recentes.
+	 * 
 	 * @param post
 	 * @return
 	 */
 	public Postagem getPostFeedNoticiasRecentes(int post) {
 		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
 	}
-	
+
 	/**
-	 * Atualiza os feeds de uma maneira mais generica.
+	 * Atraves de forwarding para Usuario este metodo atualiza os feeds de uma maneira mais generica.
 	 */
 	public void atualizaFeed() {
 		this.usuarioLogado.atualizaFeed();
 	}
-	
+
 	/**
-	 * Retorna a quantidade do total de posts de um usuario.
+	 * Atraves de forwarding para Usuario este metodo retorna a quantidade do total de posts de um usuario.
+	 * 
 	 * @return
 	 */
 	public int getTotalPosts() {
