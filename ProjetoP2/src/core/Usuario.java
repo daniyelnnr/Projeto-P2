@@ -95,7 +95,6 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 				+ " nao lhe enviou solicitacoes de amizade.");
 	}
 
-	// TODO: exc
 	/**
 	 * Metodo que retorna um post especifico de um amigo do proprio usuario.
 	 * 
@@ -208,7 +207,6 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 				+ getMural().get(indice).getData() + ")";
 	}
 
-	// TODO: Exc
 
 	/**
 	 * Retorna uma parte especifica do post.

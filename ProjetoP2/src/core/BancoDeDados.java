@@ -70,34 +70,7 @@ public class BancoDeDados {
 		return informacaoRequerida;
 	}
 	
-	/*
-	 public void atualizaPerfil(Controller controller, String nomeInformacao, String valor) throws Exception {
-		controller.validadores.validarUsuarioLogado(controller.usuarioLogado, "");
-		switch (nomeInformacao.toUpperCase()) {
-		case "NOME":
-			if (valor.equals("")) {
-				throw new Exception("Nome dx usuarix nao pode ser vazio.");
-			}
-			controller.usuarioLogado.setNome(valor);
-			break;
-		case "FOTO":
-			controller.usuarioLogado.setFoto(valor);
-			break;
-		case "EMAIL":
-			if (controller.validadores.validaEmail(valor) == false) {
-				throw new Exception("Formato de e-mail esta invalido.");
-			}
-			controller.usuarioLogado.setEmail(valor);
-			break;
-		case "DATA DE NASCIMENTO":
-			controller.validadores.validaData(valor);
-			controller.usuarioLogado.setData(valor);
-			break;
-		default:
-			throw new Exception();
-		}
-	}
-	*/
+
 
 	/**
 	 * Metodo que ordena os usuarios por nome e retorna uma listagem dos mais e dos menos populares.
@@ -129,23 +102,7 @@ public class BancoDeDados {
 
 	}
 	
-	/*
-	 public Usuario get(int i) {
-		return getListaUsuario().get(i);
-	}
-	*/
 
-	/*
-	 public int size() {
-		return getListaUsuario().size();
-	}
-	*/
-
-	/*
-	public void remove(int i) {
-		getListaUsuario().remove(i);
-	}
-	*/
 	
 	/**
 	 * Metodo que retorna a lista de usuarios do sistema.
@@ -155,10 +112,6 @@ public class BancoDeDados {
 		return listaUsuario;
 	}
 
-	/*
-	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
-		this.listaUsuario = listaUsuario;
-	}
-	*/
+
 
 }

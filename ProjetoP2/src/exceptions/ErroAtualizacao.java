@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ErroAtualizacao extends Exception {
+public class ErroAtualizacao extends ErroDeLogica {
 	  /**
 	 * 
 	 */

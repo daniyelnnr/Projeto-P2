@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import exceptions.ErroDeEntrada;
+
 /**
  * Projeto LP2 - 2014.2
  * 
@@ -36,12 +38,10 @@ public class Controller {
 	 * @return
 	 * @throws Exception
 	 */
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario, String imgAvatar)
-			throws Exception {
-		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(),
-				nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario,
-				imgAvatar);
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
+			String imgAvatar) throws Exception {
+		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario, emailUsuario, senhaUsuario,
+				dataNasUsuario, imgAvatar);
 	}
 
 	/**
@@ -56,10 +56,10 @@ public class Controller {
 	 * @return
 	 * @throws Exception
 	 */
-	public String cadastraUsuario(String nomeUsuario, String emailUsuario,
-			String senhaUsuario, String dataNasUsuario) throws Exception {
-		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(),
-				nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario);
+	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario)
+			throws Exception {
+		return operacoes.cadastraUsuario(getValidadores(), getBancodedados(), nomeUsuario, emailUsuario, senhaUsuario,
+				dataNasUsuario);
 	}
 
 	/**
@@ -82,8 +82,7 @@ public class Controller {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean login(String emailUsuario, String senhaUsuario)
-			throws Exception {
+	public boolean login(String emailUsuario, String senhaUsuario) throws Exception {
 		return operacoes.login(this, emailUsuario, senhaUsuario);
 	}
 
@@ -108,8 +107,7 @@ public class Controller {
 	 * @throws Exception
 	 */
 	// BANCO DE DADOS
-	public String getInfoUsuario(String nomeInformacao, String emailUsuario)
-			throws Exception {
+	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
 		return this.bancodedados.getInfoUsuario(nomeInformacao, emailUsuario);
 
 	}
@@ -124,8 +122,7 @@ public class Controller {
 	 * @throws Exception
 	 */
 	public String getInfoUsuarioLogado(String nomeInformacao) throws Exception {
-		return this.bancodedados.getInfoUsuario(nomeInformacao,
-				this.usuarioLogado.getEmail());
+		return this.bancodedados.getInfoUsuario(nomeInformacao, this.usuarioLogado.getEmail());
 
 	}
 
@@ -137,8 +134,8 @@ public class Controller {
 	 * @param valor
 	 * @throws Exception
 	 */
-	public void atualizaPerfil(String nomeInformacao, String valor)
-			throws Exception {
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
+		this.validadores.validarUsuarioLogado(usuarioLogado, "");
 		usuarioLogado.atualizaPerfil(getValidadores(), nomeInformacao, valor);
 	}
 
@@ -151,8 +148,8 @@ public class Controller {
 	 * @param velhaSenha
 	 * @throws Exception
 	 */
-	public void atualizaPerfil(String nomeInformacao, String valor,
-			String velhaSenha) throws Exception {
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception {
+		this.validadores.validarUsuarioLogado(usuarioLogado, "");
 		usuarioLogado.atualizaPerfil(nomeInformacao, valor, velhaSenha);
 	}
 
@@ -263,8 +260,7 @@ public class Controller {
 	 */
 	public void postarMensagem(String conteudo, String data) throws Exception {
 		ArrayList<String> hashtags = this.bancoHashtags.pegaHastags(conteudo);
-		validadores.validarUsuarioLogado(this.usuarioLogado,
-				"Nao eh possivel postar mensagem. ");
+		validadores.validarUsuarioLogado(this.usuarioLogado, "Nao eh possivel postar mensagem. ");
 		usuarioLogado.postarMensagem(conteudo, data, hashtags);
 
 	}
@@ -362,8 +358,7 @@ public class Controller {
 	 */
 	public int getPopsUsuario(String emailUsuario) throws Exception {
 		if (this.usuarioLogado != null) {
-			throw new Exception(
-					"Erro na consulta de Pops. Um usuarix ainda esta logadx.");
+			throw new Exception("Erro na consulta de Pops. Um usuarix ainda esta logadx.");
 		}
 		Usuario usuario = this.bancodedados.buscaUsuario(emailUsuario);
 		return usuario.getPops();
@@ -442,7 +437,8 @@ public class Controller {
 	}
 
 	/**
-	 * Atraves de forwarding para Usuario este metodo e responsavel por exportar os post para arquivos.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por exportar
+	 * os post para arquivos.
 	 * 
 	 * @throws Exception
 	 */
@@ -451,36 +447,46 @@ public class Controller {
 	}
 
 	/**
-	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar o feed de noticias ordenado por noticias
-	 * mais populares.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar
+	 * o feed de noticias ordenado por noticias mais populares.
 	 * 
 	 * @param post
 	 * @return
+	 * @throws ErroDeEntrada
 	 */
-	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) throws ErroDeEntrada {
+		if (post < 0) {
+			throw new ErroDeEntrada("Indice n valido");
+		}
 		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
 	}
 
 	/**
-	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar o feed de noticias ordenado por noticias
-	 * mais recentes.
+	 * Atraves de forwarding para Usuario este metodo e responsavel por retornar
+	 * o feed de noticias ordenado por noticias mais recentes.
 	 * 
 	 * @param post
 	 * @return
+	 * @throws ErroDeEntrada
 	 */
-	public Postagem getPostFeedNoticiasRecentes(int post) {
+	public Postagem getPostFeedNoticiasRecentes(int post) throws ErroDeEntrada {
+		if (post < 0) {
+			throw new ErroDeEntrada("Indice n valido");
+		}
 		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
 	}
 
 	/**
-	 * Atraves de forwarding para Usuario este metodo atualiza os feeds de uma maneira mais generica.
+	 * Atraves de forwarding para Usuario este metodo atualiza os feeds de uma
+	 * maneira mais generica.
 	 */
 	public void atualizaFeed() {
 		this.usuarioLogado.atualizaFeed();
 	}
 
 	/**
-	 * Atraves de forwarding para Usuario este metodo retorna a quantidade do total de posts de um usuario.
+	 * Atraves de forwarding para Usuario este metodo retorna a quantidade do
+	 * total de posts de um usuario.
 	 * 
 	 * @return
 	 */

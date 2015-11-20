@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ErroCadastro extends Exception {
+public class ErroCadastro extends ErroDeEntrada {
 	  /**
 	 * 
 	 */

@@ -103,8 +103,8 @@ public class AuxiliarValidadores {
 	 * @param Passa a mensagem da excecao que foi lancada.
 	 * @throws Lanca uma excecao indicando que nao ha usuario logado.
 	 */
-	public void validarUsuarioLogado(Object usuarioLogado, String menssagem) throws ErroUsuarioOffline {
-		if (usuarioLogado == null) {//usuarioLogado deve ser do tipo OBJECT?
+	public void validarUsuarioLogado(Usuario usuarioLogado, String menssagem) throws ErroUsuarioOffline {
+		if (usuarioLogado == null) {
 			throw new ErroUsuarioOffline(menssagem);
 		}
 	}

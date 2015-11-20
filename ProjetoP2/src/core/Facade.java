@@ -10,6 +10,7 @@ package core;
 
 import exceptions.ErroAtualizacao;
 import exceptions.ErroCadastro;
+import exceptions.ErroDeEntrada;
 import exceptions.ErroLogin;
 import exceptions.ErroUsuarioOffline;
 
@@ -56,8 +57,11 @@ public class Facade {
 
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
 			String imgAvatar) throws Exception {
-		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
-
+		try {
+			sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
+		} catch (Exception e) {
+			throw new ErroCadastro(e.getMessage());
+		}
 		return emailUsuario;
 	}
 
@@ -199,11 +203,11 @@ public class Facade {
 		return sistema.atualizaRanking();
 	}
 
-	public Postagem getPostFeedNoticiasRecentes(int post) {
+	public Postagem getPostFeedNoticiasRecentes(int post) throws ErroDeEntrada {
 		return this.sistema.getPostFeedNoticiasRecentes(post);
 	}
 
-	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) throws ErroDeEntrada {
 		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
 
 	}

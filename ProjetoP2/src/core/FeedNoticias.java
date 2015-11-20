@@ -32,11 +32,8 @@ public class FeedNoticias {
 	}
 
 	/**
-	 * Metodo que atualiza o feed de noticias de uma lista de usuarios,
-	 * ordenando o feed de cada usuario de acordo com seu tipo de popularidade.
-	 * 
-	 * @param Recebe
-	 *            um ArrayList de usuarios.
+	 * Metodo que atualiza o feed de noticias de uma lista de usuarios, ordenando o feed de cada usuario de acordo com seu tipo de popularidade.
+	 * @param Recebe um ArrayList de usuarios.
 	 */
 	public void atualizaFeed(ArrayList<Usuario> amigos) {
 		for (Usuario amigo : amigos) {
@@ -73,28 +70,6 @@ public class FeedNoticias {
 
 	}
 
-	/**
-	 * Metodo que retorna a postagem do feed ordenado por popularidade.
-	 * 
-	 * @param Recebe
-	 *            um inteiro com o indice da postagem no feed.
-	 * @return Retorna a postagem encontrada.
-	 */
-	public Postagem getFeedPopularidade(int post) {
-		return this.feedExibidoPorPop.get(this.feedExibidoPorPop.size() - post - 1);
-	}
-
-	/**
-	 * Metodo que retorna a postagem do feed ordenado por data.
-	 * 
-	 * @param Recebe
-	 *            um inteiro com o indice da postagem no feed.
-	 * @return Retorna a postagem encontrada.
-	 */
-	public Postagem getFeedTempo(int post) {
-		return this.feedExibidoPorData.get(this.feedExibidoPorData.size() - post - 1);
-	}
-
 	Comparator<Postagem> compararData = new Comparator<Postagem>() {
 
 		@Override
@@ -122,4 +97,22 @@ public class FeedNoticias {
 
 		}
 	};
+
+	/**
+	 * Metodo que retorna a postagem do feed ordenado por popularidade.
+	 * @param Recebe um inteiro com o indice da postagem no feed.
+	 * @return Retorna a postagem encontrada.
+	 */
+	public Postagem getFeedPopularidade(int post) {
+		return this.feedExibidoPorPop.get(this.feedExibidoPorPop.size() - post - 1);
+	}
+
+	/**
+	 * Metodo que retorna a postagem do feed ordenado por data.
+	 * @param Recebe um inteiro com o indice da postagem no feed.
+	 * @return Retorna a postagem encontrada.
+	 */
+	public Postagem getFeedTempo(int post) {
+		return this.feedExibidoPorData.get(this.feedExibidoPorData.size() - post - 1);
+	}
 }

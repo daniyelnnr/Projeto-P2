@@ -118,11 +118,7 @@ public class BancoHashtags {
 		return retorno;
 	}
 	
-	/*
-	public void adicionaHashtags(List<String> hashtags) {
-		this.hashtagsAll.addAll(hashtags);
-	}
-	*/
+
 	
 	/**
 	 * Metodo que retorna a lista de todas as hashtags do sistema.

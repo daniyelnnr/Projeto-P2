@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ErroUsuarioOffline extends Exception {
+public class ErroUsuarioOffline extends ErroDeLogica {
 	private static final long serialVersionUID = 1L;
 
 	public ErroUsuarioOffline(String message) {

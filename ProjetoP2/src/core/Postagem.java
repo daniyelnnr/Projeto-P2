@@ -74,7 +74,6 @@ public class Postagem implements Comparable<Postagem> {
 			retorno += " ";
 			retorno += String.format("(%s)", this.getData());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return retorno;
@@ -156,7 +155,6 @@ public class Postagem implements Comparable<Postagem> {
 
 	@Override
 	public int compareTo(Postagem postagem) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
