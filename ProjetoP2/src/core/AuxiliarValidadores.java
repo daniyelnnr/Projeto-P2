@@ -1,3 +1,11 @@
+/**
+ * Projeto LP2 - 2014.2
+ * @author Daniyel Rocha 114210779
+ * @author Igor Pinheiro 114210164
+ * @author Matheus Maia 114210417
+ * 
+ * Classe que realiza validacoes de email, data e usuario logado no sistema.
+ */
 package core;
 
 import java.text.ParseException;
@@ -6,7 +14,12 @@ import java.text.SimpleDateFormat;
 import exceptions.ErroUsuarioOffline;
 
 public class AuxiliarValidadores {
-
+	
+	/**
+	 * Metodo que realiza a validacao de um email.
+	 * @param Tem como parametro o email a ser verificado.
+	 * @return Retorna um booleano confirmando ou nao a validade do email.
+	 */
 	public boolean validaEmail(String email) {
 		int count = 0;
 		for (char c : email.toCharArray()) {
@@ -45,7 +58,13 @@ public class AuxiliarValidadores {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Metodo que realiza a validacao de uma data.
+	 * @param Tem como parametro a data a ser verificada.
+	 * @return Retorna um booleano confirmando ou nao a validade da data. 
+	 * @throws Lanca excecao caso a data esteja com o formato invalido ou se ela nao existir.
+	 */
 	public boolean validaData(String data) throws Exception {
 		int count = 0;
 		for (char c : data.toCharArray()) {
@@ -78,8 +97,14 @@ public class AuxiliarValidadores {
 		}
 	}
 
+	/**
+	 * Metodo que realiza a verificacao de um usuario logado no sistema.
+	 * @param Tem como parametro o usuario que esta sendo verificado se esta logado.
+	 * @param Passa a mensagem da excecao que foi lancada.
+	 * @throws Lanca uma excecao indicando que nao ha usuario logado.
+	 */
 	public void validarUsuarioLogado(Object usuarioLogado, String menssagem) throws ErroUsuarioOffline {
-		if (usuarioLogado == null) {
+		if (usuarioLogado == null) {//usuarioLogado deve ser do tipo OBJECT?
 			throw new ErroUsuarioOffline(menssagem);
 		}
 	}
