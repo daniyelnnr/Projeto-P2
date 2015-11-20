@@ -299,50 +299,52 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		if (this.mural.size() == 0) {
 			throw new Exception("Erro ao baixar posts. O usuario nao possui posts.");
 		}
-
+		String export = "";
 		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
 
 			Postagem postagem = getMural().get(indiceDoPost);
-			String arquivo = "arquivos/posts_" + this.email + ".txt";
-			FileWriter fw = new FileWriter(arquivo, true);
-			BufferedWriter out = new BufferedWriter(fw);
-			String export = (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
-			export += "Conteudo:";
+			export += (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
+			export += "Conteudo:\n";
 			if (postagem.getMensagem().contains("</")) {
-				export += String.format("\n%s\n",
+				export += String.format("%s\n",
 						postagem.getMensagem().substring(0, postagem.getMensagem().indexOf("<")));
 			} else {
-				export += String.format("\n%s\n", postagem.getMensagem());
+				export += String.format("%s\n", postagem.getMensagem());
 			}
 			if (!postagem.getConteudo().isEmpty()) {
 				String conteudo = postagem.getMensagem().substring(postagem.getMensagem().indexOf("<"),
 						postagem.getMensagem().lastIndexOf(">") + 1);
 
 				for (String string : conteudo.split(" ")) {
-					export += String.format("\n%s\n", string);
+					export += String.format("%s\n", string);
 				}
 
 			}
-			
-		
-				for (String tag : postagem.getArrayTags()) {
-					export += tag;
-					export += " ";
-			
-			if(postagem.getArrayTags() != null){
-				export += "\n";
-			}
-			
-			export += String.format("+Pop: %d\n\n\n", postagem.getPops());
 
-			try {
-				out.write(export);
-			} finally {
-				out.close();
+			for (String tag : postagem.getArrayTags()) {
+				export += tag;
+				export += " ";
 			}
+
+			if (!postagem.getArrayTags().isEmpty())
+				export += "\n";
+			
+			if (indiceDoPost == this.mural.size()-1) {
+				export += String.format("+Pop: %d", postagem.getPops());
+			}else{
+				export += String.format("+Pop: %d\n\n\n", postagem.getPops());				
 			}
+
+			
 		}
-		
+		String arquivo = "arquivos/posts_" + this.email + ".txt";
+		FileWriter fw = new FileWriter(arquivo, false);
+		BufferedWriter out = new BufferedWriter(fw);
+		try {
+			out.write(export);
+		} finally {
+			out.close();
+		}
 
 	}
 
