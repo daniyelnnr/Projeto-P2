@@ -78,6 +78,11 @@ public class Controller {
 	}
 
 	// NOTIFICACOES//FEED
+	/**
+	 * Retorna as notificacoes do usuario.
+	 * @return
+	 */
+			
 	public int getNotificacao() {
 		return this.usuarioLogado.notificacoes.getNotificacoes();
 	}
@@ -193,9 +198,76 @@ public class Controller {
 	}
 
 	public AuxiliarValidadores getValidadores() {
+
+		return validadores;
+	}
+	/**
+	 * Metodo responsavel por exportar os post para arquivos.
+	 * @throws Exception
+	 */
+	public void exportaPostagem() throws Exception {
+		this.usuarioLogado.exportaPostagem();
+	}
+	
+	/**
+	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais populares.
+	 * @param post
+	 * @return
+	 */
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
+	}
+
+	/**
+	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais recentes.
+	 * @param post
+	 * @return
+	 */
+	public Postagem getPostFeedNoticiasRecentes(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
+	}
+	
+	/**
+	 * Atualiza os feeds de uma maneira mais generica.
+	 */
+	public void atualizaFeed() {
+		this.usuarioLogado.atualizaFeed();
+	}
+	
+	/**
+	 * Retorna a quantidade do total de posts de um usuario.
+	 * @return
+	 */
+	public int getTotalPosts() {
+		return usuarioLogado.getTotalPosts();
+	}
+
+}
 		return validadores;
 	}
 
+
+	public void exportaPostagem() throws Exception {
+		this.usuarioLogado.exportaPostagem();
+	}
+	
+	/**
+	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais populares.
+	 * @param post
+	 * @return
+	 */
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedPopularidade(post);
+	}
+
+	/**
+	 * Metodo responsavel por retornar o feed de noticias ordenado por noticias mais recentes.
+	 * @param post
+	 * @return
+	 */
+	public Postagem getPostFeedNoticiasRecentes(int post) {
+		return this.usuarioLogado.feedNoticias.getFeedTempo(post);
+	}
 
 
 	
