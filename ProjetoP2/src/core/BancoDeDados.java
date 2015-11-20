@@ -1,3 +1,11 @@
+/**
+ * Projeto LP2 - 2014.2
+ * @author Daniyel Rocha 114210779
+ * @author Igor Pinheiro 114210164
+ * @author Matheus Maia 114210417
+ * 
+ * Classe que serve como banco de dados, armazenando e manipulando os usuarios do sistema.
+ */
 package core;
 
 import java.text.SimpleDateFormat;
@@ -8,8 +16,13 @@ import java.util.HashMap;
 public class BancoDeDados {
 
 	private ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-	HashMap<String, Integer> hashtagsMap;
-
+	HashMap<String, Integer> hashtagsMap;//nao esta sendo usado?
+	
+	/**
+	 * Metodo que ira buscar um usuario na lista de usuarios armazenados.
+	 * @param Recebe o email de um usuario cadastrado.
+	 * @return Retorna um usuario, se foi encontrado. Retorna null caso o usuario nao foi encontrado.
+	 */
 	public Usuario buscaUsuario(String emailUsuario) {
 		Usuario user = null;
 		for (Usuario usuario : getListaUsuario()) {
@@ -18,16 +31,20 @@ public class BancoDeDados {
 		}
 		return user;
 	}
-
+	
+	/**
+	 * Metodo que ira retornar uma informacao do usuario.
+	 * @param Recebe qual eh a informacao a ser retornada.
+	 * @param Recebe o email do usuario que sera buscado para ter a informacao extraida.
+	 * @return Retorna a informacao especificada do usuario, na forma de String.
+	 * @throws Lanca excecao quando algum metodo chamado internamente lance outra excecao ou haja alguma informacao invalida.
+	 */
 	public String getInfoUsuario(String nomeInformacao, String emailUsuario) throws Exception {
 		String informacaoRequerida = "";
 		Usuario usuarioRequerido = buscaUsuario(emailUsuario);
-
 		if (usuarioRequerido == null) {
-
 			throw new Exception("Um usuarix com email " + emailUsuario + " nao esta cadastradx.");
 		}
-
 		switch (nomeInformacao.toUpperCase()) {
 		case "SENHA":
 			throw new Exception("A senha dx usuarix eh protegida.");
@@ -50,13 +67,18 @@ public class BancoDeDados {
 		default:
 			break;
 		}
-
 		return informacaoRequerida;
 	}
-
+	
+	/**
+	 * Metodo que atualiza as informacoes 
+	 * @param controller
+	 * @param nomeInformacao
+	 * @param valor
+	 * @throws Exception
+	 */
 	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor) throws Exception {
 		controller.validadores.validarUsuarioLogado(controller.usuarioLogado, "");
-
 		switch (nomeInformacao.toUpperCase()) {
 		case "NOME":
 			if (valor.equals("")) {
@@ -77,7 +99,6 @@ public class BancoDeDados {
 			controller.validadores.validaData(valor);
 			controller.usuarioLogado.setData(valor);
 			break;
-
 		default:
 			throw new Exception();
 		}
