@@ -70,14 +70,8 @@ public class BancoDeDados {
 		return informacaoRequerida;
 	}
 	
-	/**
-	 * Metodo que atualiza as informacoes 
-	 * @param controller
-	 * @param nomeInformacao
-	 * @param valor
-	 * @throws Exception
-	 */
-	public void atualizaPerfil(Controller controller, String nomeInformacao, String valor) throws Exception {
+	/*
+	 public void atualizaPerfil(Controller controller, String nomeInformacao, String valor) throws Exception {
 		controller.validadores.validarUsuarioLogado(controller.usuarioLogado, "");
 		switch (nomeInformacao.toUpperCase()) {
 		case "NOME":
@@ -103,7 +97,12 @@ public class BancoDeDados {
 			throw new Exception();
 		}
 	}
+	*/
 
+	/**
+	 * Metodo que ordena os usuarios por nome e retorna uma listagem dos mais e dos menos populares.
+	 * @return Retorna uma string com as informacoes dos usuarios.
+	 */
 	public String ordenaUsuario() {
 		Collections.sort(this.listaUsuario);
 		String retorno = "Mais Populares:";
@@ -119,31 +118,47 @@ public class BancoDeDados {
 		return retorno;
 
 	}
-
+	
+	/**
+	 * Metodo que remove um usuario da lista de usuarios do sistema.
+	 * @param Recebe um email que sera verificado se existe na lista de usuarios - caso exista, ele sera removido.
+	 */
 	public void removeUsuario(String email) {
 		Usuario user = this.buscaUsuario(email);
 		this.listaUsuario.remove(user);
 
 	}
-
-	public Usuario get(int i) {
+	
+	/*
+	 public Usuario get(int i) {
 		return getListaUsuario().get(i);
 	}
+	*/
 
-	public int size() {
+	/*
+	 public int size() {
 		return getListaUsuario().size();
 	}
+	*/
 
+	/*
 	public void remove(int i) {
 		getListaUsuario().remove(i);
 	}
-
+	*/
+	
+	/**
+	 * Metodo que retorna a lista de usuarios do sistema.
+	 * @return Retorna o ArrayList dos usuarios.
+	 */
 	public ArrayList<Usuario> getListaUsuario() {
 		return listaUsuario;
 	}
 
+	/*
 	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
 	}
+	*/
 
 }

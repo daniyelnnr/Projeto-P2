@@ -1,3 +1,11 @@
+/**
+ * Projeto LP2 - 2014.2
+ * @author Daniyel Rocha 114210779
+ * @author Igor Pinheiro 114210164
+ * @author Matheus Maia 114210417
+ * 
+ * Classe que eh uma itermediadora entre a interface grafica e o controller e todos os metodos dessa classe farao forwarding para a classe Controller.
+ */
 package core;
 
 import exceptions.ErroAtualizacao;

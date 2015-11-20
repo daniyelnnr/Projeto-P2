@@ -1,3 +1,11 @@
+/**
+ * Projeto LP2 - 2014.2
+ * @author Daniyel Rocha 114210779
+ * @author Igor Pinheiro 114210164
+ * @author Matheus Maia 114210417
+ * 
+ * Metodo que sera um conglomerado de posts, podendo ser ordenado e exibido de diversas formas.
+ */
 package core;
 
 import java.util.ArrayList;
@@ -23,6 +31,10 @@ public class FeedNoticias {
 		this.comparadores.put(1, compararData);
 	}
 
+	/**
+	 * Metodo que atualiza o feed de noticias de uma lista de usuarios, ordenando o feed de cada usuario de acordo com seu tipo de popularidade.
+	 * @param Recebe um ArrayList de usuarios.
+	 */
 	public void atualizaFeed(ArrayList<Usuario> amigos) {
 		for (Usuario amigo : amigos) {
 			@SuppressWarnings("unchecked")
@@ -86,10 +98,20 @@ public class FeedNoticias {
 		}
 	};
 
+	/**
+	 * Metodo que retorna a postagem do feed ordenado por popularidade.
+	 * @param Recebe um inteiro com o indice da postagem no feed.
+	 * @return Retorna a postagem encontrada.
+	 */
 	public Postagem getFeedPopularidade(int post) {
 		return this.feedExibidoPorPop.get(this.feedExibidoPorPop.size() - post - 1);
 	}
 
+	/**
+	 * Metodo que retorna a postagem do feed ordenado por data.
+	 * @param Recebe um inteiro com o indice da postagem no feed.
+	 * @return Retorna a postagem encontrada.
+	 */
 	public Postagem getFeedTempo(int post) {
 		return this.feedExibidoPorData.get(this.feedExibidoPorData.size() - post - 1);
 	}

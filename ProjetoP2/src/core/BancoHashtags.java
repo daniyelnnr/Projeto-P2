@@ -1,3 +1,11 @@
+/**
+ * Projeto LP2 - 2014.2
+ * @author Daniyel Rocha 114210779
+ * @author Igor Pinheiro 114210164
+ * @author Matheus Maia 114210417
+ * 
+ * Classe que armazena as hashtags que sao utilizadas no sistema. Ela tambem eh uma classe Singleton.
+ */
 package core;
 
 import java.util.ArrayList;
@@ -13,7 +21,11 @@ public class BancoHashtags {
 	private static BancoHashtags bancoHashtags;
 	private ArrayList<String> hashtagsAll = new ArrayList<String>();
 	private HashMap<String, Integer> hashtagsMap;
-
+	
+	/**
+	 * Metodo que retorna uma instancia dele mesmo. Como eh um metodo estatico, a instancia pode ser acessado diretamente.
+	 * @return Retorna uma instancia do mesmo tipo da classe.
+	 */
 	public static BancoHashtags getInstance() {
 		if (bancoHashtags == null) {
 			bancoHashtags = new BancoHashtags();
@@ -21,6 +33,12 @@ public class BancoHashtags {
 		return bancoHashtags;
 	}
 
+	/**
+	 * Metodo que separa e retorna uma lista das hashtags do conteudo de um post, filtrando-as.
+	 * @param Recebe o conteudo de um post.
+	 * @return Retorna uma lista com as hashtags filtradas.
+	 * @throws Lanca excecao quando o padrao de hashtags em uma postagem esta incorreto.
+	 */
 	// TODO: REFATORAR
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
 		String hashtag = null;
@@ -43,7 +61,11 @@ public class BancoHashtags {
 		this.hashtagsAll.addAll(hashtags);
 		return hashtags;
 	}
-
+	
+	/**
+	 * Metodo que ordena as hashtags por frequencia, retornando as mais frequentes.
+	 * @return Retorna uma lista com as hashtags mais frequentes.
+	 */
 	public ArrayList<String> ordenaHashtags() {
 		ArrayList<String> trendHastags = new ArrayList<>();
 		HashMap<String, Integer> hashtagsFrequencia = new HashMap<String, Integer>();
@@ -54,7 +76,12 @@ public class BancoHashtags {
 		this.hashtagsMap = hashtagsFrequencia;
 		return (trendHastags);
 	}
-
+	
+	/**
+	 * Metodo que ordena um mapa por frequencia.
+	 * @param Recebe um mapa que sera ordenado.
+	 * @return Retorna uma lista de hashtags ordenada por frequencia.
+	 */
 	private List<String> listaTagsFrequencia(HashMap<String, Integer> hashtagsFrequencia) {
 		for (String string : getHashtags()) {
 			if (hashtagsFrequencia.containsKey(string)) {
@@ -78,6 +105,10 @@ public class BancoHashtags {
 		return list;
 	}
 
+	/**
+	 * Metodo que gera o Trending Topics, que serao as hashtags mais populares no sistema.
+	 * @return Retorna uma lista das hashtags mais populares.
+	 */
 	public String getTrendingTopics() {
 		ArrayList<String> trendHastags = this.ordenaHashtags();
 		String retorno = "Trending Topics: ";
@@ -87,15 +118,25 @@ public class BancoHashtags {
 		}
 		return retorno;
 	}
-
+	
+	/*
 	public void adicionaHashtags(List<String> hashtags) {
 		this.hashtagsAll.addAll(hashtags);
 	}
-
+	*/
+	
+	/**
+	 * Metodo que retorna a lista de todas as hashtags do sistema.
+	 * @return Retorna um ArrayList com as hashtags.
+	 */
 	public ArrayList<String> getHashtags() {
 		return hashtagsAll;
 	}
-
+	
+	/**
+	 * Metodo que adiciona hashtags ao conjunto de todas as hashtags.
+	 * @param Receve a hashtag a ser adicionada.
+	 */
 	public void adicionaHashtags(String hashtag) {
 		this.hashtagsAll.add(hashtag);
 	}
