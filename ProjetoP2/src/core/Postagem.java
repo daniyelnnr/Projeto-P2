@@ -91,6 +91,7 @@ public class Postagem implements Comparable<Postagem> {
 		// list2.add("$arquivo_imagem:" + m2.group());
 		// }
 		// this.conteudo.addAll(list2);
+		//
 	
 
 	public String getConteudo(int index) throws Exception {
