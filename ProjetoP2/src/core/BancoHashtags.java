@@ -21,21 +21,21 @@ public class BancoHashtags {
 		return bancoHashtags;
 	}
 
+	// TODO: REFATORAR
 	public ArrayList<String> pegaHastags(String conteudo) throws Exception {
 		String hashtag = null;
 		ArrayList<String> hashtags = new ArrayList<String>();
-		Pattern p1 = Pattern.compile("(((?<mensagem>^.*?)(?=[#,<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)|(?<tags>([#])\\w*)))");
+		Pattern p1 = Pattern.compile(
+				"(((?<mensagem>^.*?)(?=[#,<]))|((?<=<(?<multimidia>imagem|audio)>)(?<caminho>\\S*)(?=</(imagem|audio)>)|(?<tags>([#])\\w*)))");
 		Matcher m = p1.matcher(conteudo);
 		Pattern p = Pattern.compile("(#\\w+\\s+)(?<ai>\\w+)");
 		Matcher m1 = p.matcher(conteudo);
-		while(m1.find()){
-			throw new Exception(
-					"Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '" + m1.group("ai")
-					+ "'.");
+		while (m1.find()) {
+			throw new Exception("Nao eh possivel criar o post. As hashtags devem comecar com '#'. Erro na hashtag: '"
+					+ m1.group("ai") + "'.");
 		}
-		while(m.find())
-		{
-			if(m.group("tags") != null){
+		while (m.find()) {
+			if (m.group("tags") != null) {
 				hashtag = m.group("tags");
 				hashtags.add(hashtag);
 			}
@@ -47,6 +47,15 @@ public class BancoHashtags {
 	public ArrayList<String> ordenaHashtags() {
 		ArrayList<String> trendHastags = new ArrayList<>();
 		HashMap<String, Integer> hashtagsFrequencia = new HashMap<String, Integer>();
+		List<String> list = listaTagsFrequencia(hashtagsFrequencia);
+		for (int i = 0; i < 3; i++) {
+			trendHastags.add(list.get(i));
+		}
+		this.hashtagsMap = hashtagsFrequencia;
+		return (trendHastags);
+	}
+
+	private List<String> listaTagsFrequencia(HashMap<String, Integer> hashtagsFrequencia) {
 		for (String string : getHashtags()) {
 			if (hashtagsFrequencia.containsKey(string)) {
 				int frequenciaAtual = hashtagsFrequencia.get(string);
@@ -66,11 +75,7 @@ public class BancoHashtags {
 				return compare;
 			}
 		});
-		for (int i = 0; i < 3; i++) {
-			trendHastags.add(list.get(i));
-		}
-		this.hashtagsMap = hashtagsFrequencia;
-		return (trendHastags);
+		return list;
 	}
 
 	public String getTrendingTopics() {

@@ -24,6 +24,28 @@ public class Facade {
 		}
 	}
 
+	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
+		if (sistema.getUsuarioLogado() == null) {
+			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
+		}
+		try {
+			sistema.atualizaPerfil(nomeInformacao, valor);
+		} catch (Exception e) {
+			throw new ErroAtualizacao(e.getMessage());
+		}
+	}
+
+	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception {
+		if (sistema.getUsuarioLogado() == null) {
+			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
+		}
+		try {
+			sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
+		} catch (Exception e) {
+			throw new ErroAtualizacao(e.getMessage());
+		}
+	}
+
 	public String cadastraUsuario(String nomeUsuario, String emailUsuario, String senhaUsuario, String dataNasUsuario,
 			String imgAvatar) throws Exception {
 		sistema.cadastraUsuario(nomeUsuario, emailUsuario, senhaUsuario, dataNasUsuario, imgAvatar);
@@ -96,28 +118,6 @@ public class Facade {
 		sistema.removeUsuario(email);
 	}
 
-	public void atualizaPerfil(String nomeInformacao, String valor) throws Exception {
-		if (sistema.getUsuarioLogado() == null) {
-			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
-		}
-		try {
-			sistema.atualizaPerfil(nomeInformacao, valor);
-		} catch (Exception e) {
-			throw new ErroAtualizacao(e.getMessage());
-		}
-	}
-
-	public void atualizaPerfil(String nomeInformacao, String valor, String velhaSenha) throws Exception {
-		if (sistema.getUsuarioLogado() == null) {
-			throw new ErroUsuarioOffline("Nao eh possivel atualizar um perfil. ");
-		}
-		try {
-			sistema.atualizaPerfil(nomeInformacao, valor, velhaSenha);
-		} catch (Exception e) {
-			throw new ErroAtualizacao(e.getMessage());
-		}
-	}
-
 	public Usuario buscaUsuario(String emailUsuario) throws Exception {
 		return sistema.bancodedados.buscaUsuario(emailUsuario);
 
@@ -134,8 +134,8 @@ public class Facade {
 	public String getPost(String atributo, int indice) throws Exception {
 		return sistema.getPost(atributo, indice);
 	}
-	
-	public int getTotalPosts(){
+
+	public int getTotalPosts() {
 		return sistema.getTotalPosts();
 	}
 
@@ -190,20 +190,22 @@ public class Facade {
 	public String atualizaRankings() {
 		return sistema.atualizaRanking();
 	}
-	
-	public Postagem getPostFeedNoticiasRecentes(int post){
+
+	public Postagem getPostFeedNoticiasRecentes(int post) {
 		return this.sistema.getPostFeedNoticiasRecentes(post);
 	}
-	public Postagem getPostFeedNoticiasMaisPopulares(int post){
+
+	public Postagem getPostFeedNoticiasMaisPopulares(int post) {
 		return this.sistema.getPostFeedNoticiasMaisPopulares(post);
-		
+
 	}
-	public void atualizaFeed(){
+
+	public void atualizaFeed() {
 		this.sistema.atualizaFeed();
-		
+
 	}
-	
-	public void baixaPosts() throws Exception{
+
+	public void baixaPosts() throws Exception {
 		this.sistema.exportaPostagem();
 	}
 

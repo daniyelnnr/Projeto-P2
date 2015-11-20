@@ -83,7 +83,6 @@ public class BancoDeDados {
 		}
 	}
 
-	// implementar depois
 	public String ordenaUsuario() {
 		Collections.sort(this.listaUsuario);
 		String retorno = "Mais Populares:";

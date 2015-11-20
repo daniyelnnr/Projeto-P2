@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.io.*;
 
 public class Usuario implements Comparable<Usuario>, Serializable {
@@ -27,7 +26,6 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 	ArrayList<Usuario> pedidosAmizade = new ArrayList<Usuario>();
 
 	public Usuario(String nome, String email, String senha, String dataNasc, String imgAvatar) {
-
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
@@ -43,11 +41,6 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.imgAvatar = "resources/default.jpg";
-	}
-
-	public void atribuirPontos(int valor) {
-		pops += valor;
-		this.tiposStrategy = TipoDeUsuarioFactory.getInstance().createTipoDeUsuarioStrategy(getPops());
 	}
 
 	public boolean aceitaAmizade(Usuario amigo) throws Exception {
@@ -71,7 +64,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		}
 		throw new Exception(amigo.getNome() + " nao lhe enviou solicitacoes de amizade.");
 	}
-
+	//TODO: exc
 	public Postagem getPostagemAmigo(String emailAmigo, int indicePost) {
 		Postagem postagemRequerida = null;
 
@@ -131,30 +124,13 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 			throw new Exception("Nao eh possivel criar o post. O limite maximo da mensagem sao 200 caracteres.");
 		Postagem novaPostagem = new Postagem(msg, hashtags, data);
 		mural.add(novaPostagem);
-		// adicionaFeedDosAmigos(novaPostagem);
-	}
-
-	// private void adicionaFeedDosAmigos(Postagem novaPostagem) {
-	// for (Usuario usuario : this.amigos) {
-	// usuario.adicionaAoFeed(novaPostagem, this.tiposStrategy);
-	// }
-	// }
-
-	// private void adicionaAoFeed(Postagem novaPostagem, ITipoDeUsuario
-	// tipoDeUsuario) {
-	// this.feedNoticias.adicionaPostagem(novaPostagem, tipoDeUsuario);
-	// }
-
-	public void postagemEmHistorico(Postagem postagem) {
-		// vai pegar a postagem transformar em historico e adicionala ao
-		// dicionario
 	}
 
 	public String getPost(int indice) throws Exception {
 		return getMural().get(indice).getMensagem() + " " + getMural().get(indice).getTagsEspaco() + " ("
 				+ getMural().get(indice).getData() + ")";
 	}
-
+	//TODO: Exc
 	public String getPost(String atributo, int indice) throws Exception {
 		String mensagemRequerida = "";
 
@@ -195,6 +171,68 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		return this.getMural().get(indice);
 	}
 
+	public void exportaPostagem() throws Exception {
+		File destFile = new File("arquivos/");
+		if (!destFile.exists()) {
+			destFile.mkdir();
+		}
+
+		if (this.mural.size() == 0) {
+			throw new Exception("Erro ao baixar posts. O usuario nao possui posts.");
+		}
+		String export = "";
+		export = formataSaidaDoBaixarPost(export);
+		String arquivo = "arquivos/posts_" + this.email + ".txt";
+		FileWriter fw = new FileWriter(arquivo, false);
+		BufferedWriter out = new BufferedWriter(fw);
+		try {
+			out.write(export);
+		} finally {
+			out.close();
+		}
+
+	}
+
+	private String formataSaidaDoBaixarPost(String export) throws Exception {
+		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
+
+			Postagem postagem = getMural().get(indiceDoPost);
+			export += (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getDataOutroFormato()));
+			export += "Conteudo:\n";
+			if (postagem.getMensagem().contains("</")) {
+				export += String.format("%s\n",
+						postagem.getMensagem().substring(0, postagem.getMensagem().indexOf("<")));
+			} else {
+				export += String.format("%s\n", postagem.getMensagem());
+			}
+			if (!postagem.getConteudo().isEmpty()) {
+				String conteudo = postagem.getMensagem().substring(postagem.getMensagem().indexOf("<"),
+						postagem.getMensagem().lastIndexOf(">") + 1);
+
+				for (String string : conteudo.split(" ")) {
+					export += String.format("%s\n", string);
+				}
+
+			}
+
+			for (String tag : postagem.getArrayTags()) {
+				export += tag;
+				export += " ";
+			}
+
+			if (!postagem.getArrayTags().isEmpty())
+				export += "\n";
+
+			if (indiceDoPost == this.mural.size() - 1) {
+				export += String.format("+Pop: %d", postagem.getPops());
+			} else {
+				export += String.format("+Pop: %d\n\n\n", postagem.getPops());
+			}
+
+		}
+		return export;
+	}
+
 	@Override
 	public int compareTo(Usuario outroUsuario) {
 		if (outroUsuario.getPops() < this.getPops()) {
@@ -208,6 +246,16 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		} else {
 			return 0;
 		}
+	}
+
+	public int getTotalPosts() {
+		int totalPosts = mural.size();
+		return totalPosts;
+	}
+	
+	public void atribuirPontos(int valor) {
+		pops += valor;
+		this.tiposStrategy = TipoDeUsuarioFactory.getInstance().createTipoDeUsuarioStrategy(getPops());
 	}
 
 	public int getQtdAmigos() {
@@ -290,71 +338,10 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		return amigos.get(indice);
 	}
 
-	public void exportaPostagem() throws Exception {
-		File destFile = new File("arquivos/");
-		if (!destFile.exists()) {
-			destFile.mkdir();
-		}
-
-		if (this.mural.size() == 0) {
-			throw new Exception("Erro ao baixar posts. O usuario nao possui posts.");
-		}
-		String export = "";
-		for (int indiceDoPost = 0; indiceDoPost < this.mural.size(); indiceDoPost++) {
-
-			Postagem postagem = getMural().get(indiceDoPost);
-			export += (String.format("Post #%d - %s \n", indiceDoPost + 1, postagem.getData2()));
-			export += "Conteudo:\n";
-			if (postagem.getMensagem().contains("</")) {
-				export += String.format("%s\n",
-						postagem.getMensagem().substring(0, postagem.getMensagem().indexOf("<")));
-			} else {
-				export += String.format("%s\n", postagem.getMensagem());
-			}
-			if (!postagem.getConteudo().isEmpty()) {
-				String conteudo = postagem.getMensagem().substring(postagem.getMensagem().indexOf("<"),
-						postagem.getMensagem().lastIndexOf(">") + 1);
-
-				for (String string : conteudo.split(" ")) {
-					export += String.format("%s\n", string);
-				}
-
-			}
-
-			for (String tag : postagem.getArrayTags()) {
-				export += tag;
-				export += " ";
-			}
-
-			if (!postagem.getArrayTags().isEmpty())
-				export += "\n";
-			
-			if (indiceDoPost == this.mural.size()-1) {
-				export += String.format("+Pop: %d", postagem.getPops());
-			}else{
-				export += String.format("+Pop: %d\n\n\n", postagem.getPops());				
-			}
-
-			
-		}
-		String arquivo = "arquivos/posts_" + this.email + ".txt";
-		FileWriter fw = new FileWriter(arquivo, false);
-		BufferedWriter out = new BufferedWriter(fw);
-		try {
-			out.write(export);
-		} finally {
-			out.close();
-		}
-
-	}
-
 	public void atualizaFeed() {
 		this.feedNoticias.atualizaFeed(this.amigos);
 	}
 
-	public int getTotalPosts() {
-		int totalPosts = mural.size();
-		return totalPosts;
-	}
+
 
 }
